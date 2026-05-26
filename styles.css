@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. RESET MODERNO Y OPTIMIZACIONES TIPOGRÁFICAS
+   1. RESET
    ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -17,9 +17,7 @@ body {
     color: var(--text-main);
     font-family: var(--font-base);
     line-height: 1.6;
-    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     padding-top: var(--header-height);
     overflow-x: hidden;
 }
@@ -30,9 +28,6 @@ img {
     height: auto;
 }
 
-/* ==========================================================================
-   2. VARIABLES DE DISEÑO
-   ========================================================================== */
 :root {
     --bg-primary: #0a0a0a;
     --bg-surface: #121212;
@@ -47,9 +42,7 @@ img {
     --transition-smooth: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* ==========================================================================
-   3. NAVEGACIÓN Y CABECERA
-   ========================================================================== */
+/* ========== NAVBAR ========== */
 .navbar {
     position: fixed;
     top: 0;
@@ -58,7 +51,6 @@ img {
     height: var(--header-height);
     background-color: rgba(10, 10, 10, 0.85);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
 }
@@ -100,7 +92,6 @@ img {
     opacity: 0.6;
 }
 
-/* Menú Hamburguesa */
 .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -134,9 +125,7 @@ img {
     transform: rotate(-45deg) translateY(2px);
 }
 
-/* ==========================================================================
-   4. MENÚ LATERAL
-   ========================================================================== */
+/* ========== SIDEBAR ========== */
 .sidebar-menu {
     position: fixed;
     top: 0;
@@ -148,7 +137,6 @@ img {
     transition: transform var(--transition-smooth);
     z-index: 1050;
     padding-top: 110px;
-    will-change: transform;
 }
 
 .sidebar-menu.active {
@@ -177,17 +165,14 @@ img {
     border-left-color: var(--accent);
 }
 
+/* Línea divisoria: más corta y alineada a la izquierda */
 .sidebar-divider {
     height: 1px;
     background-color: #2a2a2a;
     width: 40%;
     margin: 12px 0 12px 40px;
 }
-@media (max-width: 768px) {
-    .sidebar-divider {
-        margin-left: 30px;
-    }
-}
+
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -200,7 +185,6 @@ img {
     transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
     z-index: 1040;
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
 }
 
 .menu-overlay.active {
@@ -208,9 +192,7 @@ img {
     visibility: visible;
 }
 
-/* ==========================================================================
-   5. CONTENEDOR PRINCIPAL Y GRID
-   ========================================================================== */
+/* ========== PORTFOLIO GRID ========== */
 .portfolio-container {
     max-width: var(--max-width);
     margin: 0 auto;
@@ -237,7 +219,6 @@ img {
     gap: 40px 30px;
 }
 
-/* Tarjetas */
 .project-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -266,14 +247,12 @@ img {
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
 }
 
 .image-wrapper:hover img {
     transform: scale(1.04);
 }
 
-/* Overlay con iconos (aparece solo al hover) */
 .play-overlay {
     position: absolute;
     top: 0;
@@ -300,14 +279,8 @@ img {
     border-bottom: 12px solid transparent;
     border-left: 20px solid #ffffff;
     margin-left: 4px;
-    transition: transform var(--transition-smooth);
 }
 
-.image-wrapper:hover .play-overlay::after {
-    transform: scale(1.1);
-}
-
-/* Icono enlace externo: centrado, blanco puro, sin gradiente */
 .image-wrapper.link-externo .play-overlay::after {
     content: '🔗';
     border: none;
@@ -315,21 +288,15 @@ img {
     background: none;
     margin: 0;
     line-height: 1;
-    color: #ffffff !important;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: auto;
-    height: auto;
-    filter: none;
-    text-shadow: none;
-    opacity: 1;
 }
 
 .project-title {
     font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
     padding: 20px 20px 6px 20px;
     line-height: 1.4;
 }
@@ -350,9 +317,7 @@ img {
     margin-bottom: 3px;
 }
 
-/* ==========================================================================
-   6. MODAL DE VIDEO - FLECHAS SIN RECTÁNGULO
-   ========================================================================== */
+/* ========== MODAL ========== */
 .video-modal {
     position: fixed;
     top: 0;
@@ -383,7 +348,6 @@ img {
 
 .modal-content {
     width: 100%;
-    position: relative;
     box-shadow: 0 20px 50px rgba(0,0,0,0.8);
 }
 
@@ -424,7 +388,6 @@ img {
     color: var(--text-main);
 }
 
-/* Botones de navegación: solo flechas, sin rectángulo */
 .nav-btn {
     position: absolute;
     top: 50%;
@@ -436,14 +399,7 @@ img {
     font-weight: 300;
     cursor: pointer;
     z-index: 2100;
-    padding: 0;
-    margin: 0;
     transition: color var(--transition-smooth), transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: auto;
-    height: auto;
 }
 
 .nav-btn:hover {
@@ -467,9 +423,7 @@ img {
     content: '›';
 }
 
-/* ==========================================================================
-   7. CONTACTO
-   ========================================================================== */
+/* ========== CONTACTO ========== */
 .contact-section {
     border-top: 1px solid var(--border-color);
     padding: 80px 30px;
@@ -489,80 +443,29 @@ img {
     color: var(--text-main);
 }
 
-/* ==========================================================================
-   8. RESPONSIVE
-   ========================================================================== */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 1200px) {
-    .modal-container {
-        padding: 0 20px;
-    }
-    .prev {
-        left: 0;
-    }
-    .next {
-        right: 0;
-    }
-    .modal-close {
-        top: -45px;
-        right: 0;
-    }
+    .modal-container { padding: 0 20px; }
+    .prev { left: 0; }
+    .next { right: 0; }
+    .modal-close { top: -45px; right: 0; }
 }
 
 @media (max-width: 768px) {
-    :root {
-        --header-height: 70px;
-    }
-    .portfolio-container {
-        padding: 40px 20px;
-    }
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    .brand-title {
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-    }
-    .nav-links {
-        display: none;
-    }
-    .sidebar-menu {
-        width: 280px;
-        left: -280px;
-    }
-    .sidebar-menu.active {
-        transform: translateX(280px);
-    }
-    .sidebar-link {
-        padding: 16px 30px;
-    }
-    .sidebar-divider {
-        width: 50%;
-    }
-    .modal-container {
-        padding: 0 10px;
-    }
-    .nav-btn {
-        font-size: 40px;
-    }
-    .modal-close {
-        top: -40px;
-        right: 0;
-        font-size: 28px;
-    }
+    :root { --header-height: 70px; }
+    .portfolio-container { padding: 40px 20px; }
+    .projects-grid { grid-template-columns: 1fr; gap: 30px; }
+    .brand-title { font-size: 0.85rem; letter-spacing: 1px; }
+    .nav-links { display: none; }
+    .sidebar-menu { width: 280px; left: -280px; }
+    .sidebar-menu.active { transform: translateX(280px); }
+    .sidebar-link { padding: 16px 30px; }
+    .sidebar-divider { margin-left: 30px; }
+    .modal-container { padding: 0 10px; }
+    .nav-btn { font-size: 40px; }
+    .modal-close { top: -40px; font-size: 28px; }
 }
 
 @media (max-width: 480px) {
-    .modal-container {
-        padding: 0 5px;
-    }
-    .nav-btn {
-        font-size: 36px;
-    }
-    .prev {
-        left: -5px;
-    }
-    .next {
-        right: -5px;
-    }
+    .nav-btn { font-size: 36px; }
 }
