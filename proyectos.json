@@ -10,8 +10,8 @@
     "Prod.: AONEK Cine / Canal Encuentro"
   ],
   "img": "assets/img/portadas/el-farmer-documentales.jpg",
-  "tipo_enlace": "externo",
-  "url_externa": "https://www.youtube.com/watch?v=glywlNkOWK4"
+ "tipo_enlace": "externo",
+"url_externa": "redirect.html"
 },
   {
     "id": "equilibrios",
