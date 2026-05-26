@@ -1,5 +1,18 @@
 /* ==========================================================================
-   1. RESET MODERNO Y OPTIMIZACIONES TIPOGRÁFICAS
+   1. VARIABLES DE SISTEMA Y MODO OSCURO
+   ========================================================================== */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-surface: #121212;
+    --bg-card: #1c1c1e;
+    --text-main: #ffffff;
+    --text-muted: #8e8e93;
+    --header-height: 70px;
+    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ==========================================================================
+   2. CONFIGURACIÓN GENERAL / RESET
    ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -10,45 +23,21 @@
 html {
     scroll-behavior: smooth;
     text-size-adjust: 100%;
+    background-color: var(--bg-primary);
 }
 
 body {
     background-color: var(--bg-primary);
     color: var(--text-main);
     font-family: var(--font-base);
-    line-height: 1.6;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
     padding-top: var(--header-height);
     overflow-x: hidden;
-}
-
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* ==========================================================================
-   2. VARIABLES DE DISEÑO (SISTEMA DE DISEÑO)
-   ========================================================================== */
-:root {
-    --bg-primary: #0a0a0a;
-    --bg-surface: #121212;
-    --bg-card: #181818;
-    --text-main: #ffffff;
-    --text-muted: #8e8e93;
-    --accent: #ffffff;
-    --border-color: #222222;
-    --font-base: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --max-width: 1240px;
-    --header-height: 80px;
-    --transition-smooth: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* ==========================================================================
-   3. NAVEGACIÓN Y CABECERA (NAVBAR)
+   3. ENCABEZADO / NAVBAR
    ========================================================================== */
 .navbar {
     position: fixed;
@@ -56,15 +45,14 @@ img {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-color);
+    background-color: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
     z-index: 1000;
+    border-bottom: 1px solid #1a1a1a;
 }
 
 .navbar-container {
-    max-width: var(--max-width);
+    max-width: 1400px;
     height: 100%;
     margin: 0 auto;
     padding: 0 30px;
@@ -74,10 +62,12 @@ img {
 }
 
 .brand-title {
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 2.5px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    margin-left: 15px;
+    flex-grow: 1;
 }
 
 .nav-links {
@@ -88,92 +78,66 @@ img {
 .nav-links a {
     color: var(--text-main);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    transition: opacity var(--transition-smooth);
+    transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    opacity: 0.6;
+    color: var(--text-muted);
 }
 
-/* Botón Menú Hamburguesa */
+/* BOTÓN DE MENÚ HAMBURGUESA */
 .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 22px;
-    height: 14px;
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 24px;
+    z-index: 1200;
 }
 
 .menu-toggle .bar {
     width: 100%;
-    height: 1.5px;
+    height: 2px;
     background-color: var(--text-main);
-    transition: transform var(--transition-smooth), opacity var(--transition-smooth);
-    transform-origin: left center;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .menu-toggle.open .bar:nth-child(1) {
-    transform: rotate(45deg) translateY(-2px);
+    transform: translateY(8px) rotate(45deg);
 }
 
 .menu-toggle.open .bar:nth-child(2) {
     opacity: 0;
-    transform: scaleX(0);
 }
 
 .menu-toggle.open .bar:nth-child(3) {
-    transform: rotate(-45deg) translateY(2px);
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ==========================================================================
-   4. MENÚ LATERAL DESPLEGABLE (SIDEBAR)
+   4. MENU LATERAL (SIDEBAR)
    ========================================================================== */
 .sidebar-menu {
     position: fixed;
     top: 0;
-    left: -320px;
-    width: 320px;
-    height: 100%;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
     background-color: var(--bg-surface);
-    border-right: 1px solid var(--border-color);
-    transition: transform var(--transition-smooth);
-    z-index: 1050;
-    padding-top: 110px;
-    will-change: transform;
+    z-index: 1100;
+    padding: 100px 40px 40px 40px;
+    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border-right: 1px solid #1a1a1a;
 }
 
 .sidebar-menu.active {
-    transform: translateX(320px);
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-link {
-    color: var(--text-muted);
-    text-decoration: none;
-    padding: 16px 40px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    border-left: 2px solid transparent;
-    transition: color var(--transition-smooth), background-color var(--transition-smooth), border-color var(--transition-smooth);
-}
-
-.sidebar-link:hover {
-    color: var(--text-main);
-    background-color: rgba(255, 255, 255, 0.03);
-    border-left-color: var(--accent);
+    left: 0;
 }
 
 .menu-overlay {
@@ -182,149 +146,179 @@ img {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1050;
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Asegura que no bloquee clics */
-    transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
-    z-index: 1040;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .menu-overlay.active {
     opacity: 1;
-    visibility: visible;
-    pointer-events: auto; /* Permite clics solo cuando está abierto */
+    pointer-events: auto;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sidebar-link {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.sidebar-link:hover {
+    color: var(--text-muted);
 }
 
 /* ==========================================================================
-   5. CONTENEDOR PRINCIPAL Y MATRIZ DE PROYECTOS (GRID)
+   5. SECCIONES Y REJILLA DE PROYECTOS
    ========================================================================== */
 .portfolio-container {
-    max-width: var(--max-width);
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 50px 30px;
+    padding: 20px 30px;
 }
 
-.category-section {
-    margin-bottom: 80px;
-    scroll-margin-top: calc(var(--header-height) + 20px);
+.portfolio-section {
+    padding: 60px 0 40px 0;
+    border-bottom: 1px solid #161616;
+    scroll-margin-top: var(--header-height);
 }
 
-.category-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    letter-spacing: 4px;
+.section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 3px;
     margin-bottom: 35px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 12px;
+    text-transform: uppercase;
+    color: var(--text-main);
 }
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px 30px;
+    gap: 40px;
 }
 
-/* Tarjetas de Contenido */
+/* TARJETAS DE PORTADA */
 .project-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: border-color var(--transition-smooth);
+    background-color: transparent;
 }
 
-.project-card:hover {
-    border-color: #444444;
-}
-
-.image-wrapper {
+.project-img-container {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     background-color: #000;
-    cursor: pointer;
     overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
 }
 
-.image-wrapper img {
+.project-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
+    transition: transform 0.4s ease;
 }
 
-.image-wrapper:hover img {
-    transform: scale(1.04);
+.project-card:hover .project-img {
+    transform: scale(1.02);
 }
 
-/* Capa de Reproducción Avanzada */
-.play-overlay {
+/* CAPA SUPERPUESTA SÓLO EN HOVER */
+.project-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color var(--transition-smooth);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
 }
 
-.image-wrapper:hover .play-overlay {
-    background-color: rgba(0, 0, 0, 0.4);
+.project-card:hover .project-overlay {
+    opacity: 1;
 }
 
-.play-overlay::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 20px solid rgba(255, 255, 255, 0.9);
-    margin-left: 4px;
-    transition: transform var(--transition-smooth);
+.overlay-icon {
+    width: 48px;
+    height: 48px;
+    fill: #ffffff;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
 }
 
-.image-wrapper:hover .play-overlay::after {
-    transform: scale(1.1);
+/* BLOQUE DE TEXTO DEL PROYECTO */
+.project-info {
+    padding: 15px 0 5px 0;
 }
 
 .project-title {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    padding: 20px 20px 6px 20px;
-    line-height: 1.4;
+    margin-bottom: 6px;
+    text-transform: uppercase;
 }
 
-.project-details {
-    padding: 0 20px 20px 20px;
-    flex-grow: 1;
-}
-
-.project-detail-line {
-    font-size: 0.78rem;
+.project-desc {
+    list-style: none;
+    font-size: 0.82rem;
     color: var(--text-muted);
+}
+
+.project-desc li {
     margin-bottom: 3px;
 }
 
-/* Modificadores estéticos específicos */
-.title-shorten .project-title {
-    display: none;
+/* ==========================================================================
+   6. SECCIÓN DE CONTACTO
+   ========================================================================== */
+.contact-section {
+    background-color: var(--bg-surface);
+    padding: 90px 30px;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
 }
-.title-shorten .project-details {
-    padding-top: 20px;
+
+.contact-content h2 {
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+.contact-email, .contact-phone {
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.contact-email {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.contact-phone {
+    color: var(--text-muted);
 }
 
 /* ==========================================================================
-   6. INTERFAZ MODAL Y CONTENEDORES DE VIDEO
+   7. REPRODUCTOR POPUP (MODAL)
    ========================================================================== */
 .video-modal {
     position: fixed;
@@ -332,210 +326,104 @@ img {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(5, 5, 5, 0.98);
+    background-color: rgba(0, 0, 0, 0.96);
+    z-index: 2000;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Asegura que no bloquee clics cuando está cerrado */
-    transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
-    z-index: 2000;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .video-modal.active {
     opacity: 1;
-    visibility: visible;
-    pointer-events: auto; /* Permite interacción solo cuando está visible */
+    pointer-events: auto;
 }
 
-.modal-content {
-    width: 92%;
-    max-width: 1000px;
-    position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-}
-
-.iframe-container {
-    position: relative;
-    width: 100%;
+.modal-content-wrapper {
+    width: 85%;
+    max-width: 960px;
     aspect-ratio: 16 / 9;
-    padding-bottom: 56.25%; /* Garantiza mantener 16:9 si aspect-ratio falla */
-    height: 0;
-    overflow: hidden;
+    position: relative;
+    background-color: #000;
 }
 
-.iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+.modal-media-content {
     width: 100%;
     height: 100%;
-    border: 0;
 }
 
-/* Contenedor diferido con miniatura previa */
-.video-trigger-container {
+.modal-media-content iframe {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    cursor: pointer;
+    height: 100%;
+    border: none;
 }
 
-.modal-play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 76px;
-    height: 76px;
-    background-color: rgba(10, 10, 10, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform var(--transition-smooth), background-color var(--transition-smooth), border-color var(--transition-smooth);
-}
-
-.video-trigger-container:hover .modal-play-btn {
-    transform: translate(-50%, -50%) scale(1.05);
-    background-color: #000000;
-    border-color: #ffffff;
-}
-
-.modal-play-btn::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 18px solid #fff;
-    margin-left: 5px;
-}
-
-/* Interfaz de Control Modal */
+/* BOTÓN X CERRAR */
 .modal-close {
     position: absolute;
-    top: -45px;
-    right: 0;
+    top: 30px;
+    right: 40px;
     background: none;
     border: none;
-    color: var(--text-muted);
-    font-size: 32px;
-    line-height: 1;
+    color: #ffffff;
+    font-size: 38px;
     cursor: pointer;
-    transition: color var(--transition-smooth);
+    line-height: 1;
+    z-index: 2200;
+    opacity: 0.6;
+    transition: opacity 0.2s, color 0.2s;
 }
 
 .modal-close:hover {
-    color: var(--text-main);
+    color: #ff4a4a;
+    opacity: 1;
 }
 
-.nav-arrow {
+/* CONTROLES MULTI-VIDEO (FLECHAS) */
+.nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(20, 20, 20, 0.6);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #fff;
+    background: rgba(20, 20, 20, 0.7);
+    border: 1px solid #333;
+    color: #ffffff;
     font-size: 20px;
-    padding: 16px 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     cursor: pointer;
+    display: none; /* Inyectado condicionalmente por JS */
+    align-items: center;
+    justify-content: center;
     z-index: 2100;
-    display: none;
-    border-radius: 6px;
-    transition: background var(--transition-smooth), border-color var(--transition-smooth);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.2s, color 0.2s;
 }
 
-.nav-arrow:hover {
-    background: rgba(0, 0, 0, 0.9);
-    border-color: rgba(255,255,255,0.3);
+.nav-btn:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
-.prev { left: -80px; }
-.next { right: -80px; }
+.nav-btn.prev { left: 40px; }
+.nav-btn.next { right: 40px; }
 
 /* ==========================================================================
-   7. SECCIÓN DE CONTACTO (FOOTER)
+   8. AJUSTES DISPOSITIVOS MÓVILES
    ========================================================================== */
-.contact-section {
-    border-top: 1px solid var(--border-color);
-    padding: 80px 30px;
-    text-align: center;
-    background-color: var(--bg-surface);
-}
-
-.contact-content p {
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
-    color: var(--text-muted);
-}
-
-.contact-content p:first-child {
-    color: var(--text-main);
-}
-
-/* ==========================================================================
-   8. RESPONSIVE DESIGN (BREAKPOINTS)
-   ========================================================================== */
-@media (max-width: 1200px) {
-    .prev { left: 20px; }
-    .next { right: 20px; }
-    .modal-close {
-        top: 20px;
-        right: 20px;
-        z-index: 2200;
-        background: rgba(0,0,0,0.5);
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-    }
-}
-
 @media (max-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .nav-btn.prev { left: 15px; }
+    .nav-btn.next { right: 15px; }
+    .modal-close { top: 20px; right: 20px; }
 }
 
-@media (max-width: 768px) {
-    :root {
-        --header-height: 70px;
-    }
-    .portfolio-container {
-        padding: 40px 20px;
-    }
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    .brand-title {
-        font-size: 0.9rem;
-        letter-spacing: 1.5px;
-    }
-    .nav-links {
-        display: none;
-    }
-    .sidebar-menu {
-        width: 280px;
-        left: -280px;
-    }
-    .sidebar-menu.active {
-        transform: translateX(280px);
-    }
-    .sidebar-link {
-        padding: 16px 30px;
-    }
-    .nav-arrow {
-        padding: 12px 16px;
-        font-size: 16px;
-    }
+@media (max-width: 680px) {
+    .projects-grid { grid-template-columns: 1fr; gap: 30px; }
+    .brand-title { font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links { gap: 15px; }
+    .nav-links a { font-size: 0.8rem; }
+    .modal-close { top: 15px; right: 15px; font-size: 32px; }
+    .modal-content-wrapper { width: 95%; }
 }
