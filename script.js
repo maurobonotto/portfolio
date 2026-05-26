@@ -1,48 +1,254 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('projects-grid');
-    const modal = document.getElementById('video-modal');
-    const modalClose = document.getElementById('modal-close');
+    let todosLosProyectos = [];
 
+    // Elementos DOM
+    const portfolioContainer = document.getElementById('portfolio');
+    const modal = document.getElementById('video-modal');
+    const modalContent = document.getElementById('modal-media-content');
+    const btnClose = document.getElementById('modal-close');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar-menu');
+    const overlay = document.getElementById('menu-overlay');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const btnReel = document.getElementById('btnReel');
+
+    // Variables para el modal actual
+    let proyectoActual = null;
+    let indiceVideoActual = 0;
+
+    // Proyecto especial para Reel (no se muestra en el grid)
+    const reelProyecto = {
+        tipo_enlace: 'popup',
+        videos: ['glywlNkOWK4']
+    };
+
+    // Cargar datos
     async function cargarProyectos() {
-        const respuesta = await fetch('proyectos.json');
-        const proyectos = await respuesta.json();
-        renderizar(proyectos);
+        try {
+            const respuesta = await fetch('proyectos.json');
+            if (!respuesta.ok) throw new Error('Error al cargar proyectos.json');
+            todosLosProyectos = await respuesta.json();
+            generarSecciones();
+        } catch (error) {
+            console.error('Error:', error);
+            portfolioContainer.innerHTML = '<p>Error al cargar los proyectos. Verifica la consola.</p>';
+        }
     }
 
-    function renderizar(proyectos) {
-        grid.innerHTML = '';
-        proyectos.forEach(p => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
+    // Generar secciones por categoría
+    function generarSecciones() {
+        // Obtener categorías únicas en orden definido
+        const ordenCategorias = ['documentales', 'ficcion', 'trailers', 'comerciales', 'asistencia', 'videoclips'];
+        const categoriasExistentes = [...new Set(todosLosProyectos.map(p => p.categoria))];
+        const categoriasOrdenadas = ordenCategorias.filter(cat => categoriasExistentes.includes(cat));
+        
+        portfolioContainer.innerHTML = '';
+        
+        categoriasOrdenadas.forEach(categoria => {
+            const proyectosCat = todosLosProyectos.filter(p => p.categoria === categoria);
+            if (proyectosCat.length === 0) return;
             
-            const tieneVideo = p.videos && p.videos.length > 0;
-            const icono = tieneVideo ? '▶' : '🔗';
-
-            card.innerHTML = `
-                <img src="${p.img}" alt="${p.titulo}">
-                <div class="overlay">
-                    <span class="icon">${icono}</span>
-                </div>
-            `;
+            const section = document.createElement('section');
+            section.id = categoria;
+            section.className = 'category-section';
             
-            card.addEventListener('click', () => abrirModal(p));
-            grid.appendChild(card);
+            const titulo = document.createElement('h2');
+            titulo.className = 'category-title';
+            titulo.textContent = categoria.toUpperCase();
+            section.appendChild(titulo);
+            
+            const grid = document.createElement('div');
+            grid.className = 'projects-grid';
+            
+            proyectosCat.forEach(proyecto => {
+                const card = crearCard(proyecto);
+                grid.appendChild(card);
+            });
+            
+            section.appendChild(grid);
+            portfolioContainer.appendChild(section);
         });
     }
 
-    function abrirModal(p) {
-        modal.classList.add('active');
-        // Lógica de carga de video o enlace externo
+    // Crear tarjeta de proyecto
+    function crearCard(proyecto) {
+        const card = document.createElement('div');
+        card.className = `project-card ${proyecto.categoria === 'asistencia' ? 'title-shorten' : ''}`;
+        
+        const lineasDetalle = proyecto.detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
+        
+        const imageWrapper = document.createElement('div');
+        imageWrapper.className = 'image-wrapper';
+        imageWrapper.setAttribute('data-id', proyecto.id);
+        
+        const img = document.createElement('img');
+        img.src = proyecto.img;
+        img.alt = proyecto.titulo;
+        img.loading = 'lazy';
+        
+        imageWrapper.appendChild(img);
+        
+        // Overlay de play o enlace externo
+        if (proyecto.tipo_enlace !== 'estatico') {
+            const overlayPlay = document.createElement('div');
+            overlayPlay.className = 'play-overlay';
+            imageWrapper.appendChild(overlayPlay);
+            
+            if (proyecto.tipo_enlace === 'externo') {
+                imageWrapper.classList.add('link-externo');
+            }
+            
+            imageWrapper.addEventListener('click', () => {
+                ejecutarAccion(proyecto);
+            });
+        } else {
+            imageWrapper.style.cursor = 'default';
+        }
+        
+        const title = document.createElement('h3');
+        title.className = 'project-title';
+        title.textContent = proyecto.titulo;
+        
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'project-details';
+        detailsDiv.innerHTML = lineasDetalle;
+        
+        card.appendChild(imageWrapper);
+        card.appendChild(title);
+        card.appendChild(detailsDiv);
+        
+        return card;
     }
 
-    modalClose.addEventListener('click', () => {
+    function ejecutarAccion(proyecto) {
+        if (proyecto.tipo_enlace === 'externo') {
+            window.open(proyecto.url_externa, '_blank');
+        } else if (proyecto.tipo_enlace === 'popup' || proyecto.tipo_enlace === 'carrusel') {
+            proyectoActual = proyecto;
+            indiceVideoActual = 0;
+            abrirModal();
+        }
+    }
+
+    function abrirModal() {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        actualizarModal();
+    }
+
+    function cerrarModal() {
         modal.classList.remove('active');
-    });
+        document.body.style.overflow = '';
+        modalContent.innerHTML = '';
+        proyectoActual = null;
+        indiceVideoActual = 0;
+    }
 
-    // Cerrar al hacer clic fuera del contenido
+    function actualizarModal() {
+        if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
+        
+        const videos = proyectoActual.videos;
+        const videoId = videos[indiceVideoActual];
+        
+        modalContent.innerHTML = `
+            <div class="iframe-container">
+                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        `;
+        
+        // Mostrar flechas solo si hay más de un video en ESTE proyecto
+        if (videos.length > 1) {
+            btnPrev.style.display = 'block';
+            btnNext.style.display = 'block';
+        } else {
+            btnPrev.style.display = 'none';
+            btnNext.style.display = 'none';
+        }
+    }
+
+    function navegarVideo(direccion) {
+        if (!proyectoActual || !proyectoActual.videos) return;
+        const videos = proyectoActual.videos;
+        if (videos.length <= 1) return;
+        
+        if (direccion === 'next') {
+            indiceVideoActual = (indiceVideoActual + 1) % videos.length;
+        } else if (direccion === 'prev') {
+            indiceVideoActual = (indiceVideoActual - 1 + videos.length) % videos.length;
+        }
+        actualizarModal();
+    }
+
+    // Reel: abre el modal con el proyecto especial
+    function abrirReel() {
+        proyectoActual = reelProyecto;
+        indiceVideoActual = 0;
+        abrirModal();
+    }
+
+    // Navegación por secciones (scroll suave)
+    function scrollASeccion(id) {
+        const elemento = document.getElementById(id);
+        if (elemento) {
+            elemento.scrollIntoView({ behavior: 'smooth' });
+            cerrarMenu();
+        }
+    }
+
+    // Menú hamburguesa
+    function alternarMenu() {
+        menuToggle.classList.toggle('open');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+    
+    function cerrarMenu() {
+        menuToggle.classList.remove('open');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+
+    // Eventos
+    btnClose.addEventListener('click', cerrarModal);
+    btnPrev.addEventListener('click', () => navegarVideo('prev'));
+    btnNext.addEventListener('click', () => navegarVideo('next'));
+    
+    // Cerrar modal al hacer clic fuera del contenido
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
+        if (e.target === modal) cerrarModal();
     });
-
+    
+    // Tecla Escape
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal();
+    });
+    
+    menuToggle.addEventListener('click', alternarMenu);
+    if (overlay) overlay.addEventListener('click', cerrarMenu);
+    
+    // Links del menú lateral
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetId = href.substring(1);
+                scrollASeccion(targetId);
+            }
+        });
+    });
+    
+    // Botón Reel
+    if (btnReel) {
+        btnReel.addEventListener('click', (e) => {
+            e.preventDefault();
+            abrirReel();
+        });
+    }
+    
+    // Iniciar
     cargarProyectos();
 });
