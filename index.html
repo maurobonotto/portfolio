@@ -14,7 +14,7 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
-            <h1 class="brand-title">MAURO BONOTTO / Edición</h1>
+            <h1 class="brand-title">MAURO BONOTTO / Editor</h1>
             <nav class="nav-links">
                 <a href="#" id="btnReel">Reel</a>
                 <a href="#contacto">Contacto</a>
@@ -36,58 +36,55 @@
     </div>
 
     <main id="portfolio" class="portfolio-container">
-        
-        <section id="documentales" class="portfolio-section">
-            <h2 class="section-title">DOCUMENTALES</h2>
+        <section id="documentales" class="category-section">
+            <h2 class="category-title">DOCUMENTALES</h2>
             <div class="projects-grid" id="grid-documentales"></div>
         </section>
 
-        <section id="ficcion" class="portfolio-section">
-            <h2 class="section-title">FICCIÓN</h2>
+        <section id="ficcion" class="category-section">
+            <h2 class="category-title">FICCIÓN</h2>
             <div class="projects-grid" id="grid-ficcion"></div>
         </section>
 
-        <section id="trailers" class="portfolio-section">
-            <h2 class="section-title">TRAILERS</h2>
+        <section id="trailers" class="category-section">
+            <h2 class="category-title">TRAILERS</h2>
             <div class="projects-grid" id="grid-trailers"></div>
         </section>
 
-        <section id="comerciales" class="portfolio-section">
-            <h2 class="section-title">COMERCIALES</h2>
+        <section id="comerciales" class="category-section">
+            <h2 class="category-title">COMERCIALES</h2>
             <div class="projects-grid" id="grid-comerciales"></div>
         </section>
 
-        <section id="asistencia" class="portfolio-section">
-            <h2 class="section-title">ASISTENCIA DE EDICIÓN</h2>
+        <section id="asistencia" class="category-section">
+            <h2 class="category-title">ASISTENCIA DE EDICIÓN</h2>
             <div class="projects-grid" id="grid-asistencia"></div>
         </section>
 
-        <section id="videoclips" class="portfolio-section">
-            <h2 class="section-title">VIDEOCLIPS</h2>
+        <section id="videoclips" class="category-section">
+            <h2 class="category-title">VIDEOCLIPS</h2>
             <div class="projects-grid" id="grid-videoclips"></div>
         </section>
-
     </main>
 
     <footer id="contacto" class="contact-section">
         <div class="contact-content">
-            <h2>CONTACTO</h2>
-            <p class="contact-email">maurobonotto@gmail.com</p>
-            <p class="contact-phone">(+54) 11 4090 8258</p>
+            <p>CONTACTO</p>
+            <p>maurobonotto@gmail.com</p>
+            <p>(+54) 11 4090 8258</p>
         </div>
     </footer>
 
     <div class="video-modal" id="video-modal">
-        <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
-        
-        <button class="nav-btn prev" id="btn-prev" aria-label="Video anterior">&#10094;</button>
-        
-        <div class="modal-content-wrapper">
-            <div class="modal-media-content" id="modal-media-content">
-                </div>
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-wrapper">
+            <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
+            <div class="modal-media-container">
+                <button class="nav-btn prev" id="btn-prev" aria-label="Anterior">&lsaquo;</button>
+                <div class="modal-media-content" id="modal-media-content"></div>
+                <button class="nav-btn next" id="btn-next" aria-label="Siguiente">&rsaquo;</button>
+            </div>
         </div>
-        
-        <button class="nav-btn next" id="btn-next" aria-label="Siguiente video">&#10095;</button>
     </div>
 
     <script src="script.js"></script>
