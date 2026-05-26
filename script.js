@@ -132,7 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function ejecutarAccion(proyecto) {
         if (proyecto.tipo_enlace === 'externo') {
-            window.open(proyecto.url_externa, '_blank');
+          const a = document.createElement('a');
+a.href = proyecto.url_externa;
+a.target = '_blank';
+a.rel = 'noopener noreferrer';
+a.click();
         } else if (proyecto.tipo_enlace === 'popup' || proyecto.tipo_enlace === 'carrusel') {
             proyectoActual = proyecto;
             indiceVideoActual = 0;
