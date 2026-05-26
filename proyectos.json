@@ -3,371 +3,50 @@
     "id": "el-farmer",
     "categoria": "documentales",
     "titulo": "EL FARMER (2016)",
-    "detalles": [
-      "Película para televisión - 56 min.",
-      "Editor principal",
-      "Dir.: Leandro Ipiña",
-      "Prod.: AONEK Cine / Canal Encuentro"
-    ],
     "img": "assets/img/portadas/el-farmer-documentales.jpg",
-    "tipo_enlace": "popup",
     "videos": ["glywlnkOWK4"]
   },
   {
-    "id": "equilibrios",
-    "categoria": "documentales",
-    "titulo": "EQUILIBRIOS (2015) - Co-editor",
-    "detalles": [
-      "Serie - 13 caps. x 30 min.",
-      "Dir.: Leandro Ipiña - Martín Subirá",
-      "Prod.: AONEK Cine / Canal Encuentro"
-    ],
-    "img": "assets/img/portadas/equilibrios-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["tnhR2NZowRQ"]
-  },
-  {
-    "id": "una-de-amor",
-    "categoria": "documentales",
-    "titulo": "UNA DE AMOR (2014) - Co-editor",
-    "detalles": [
-      "Serie - 13 caps. x 30 min.",
-      "Dir.: Leandro Ipiña - Martín Subirá",
-      "Prod.: AONEK Cine / Canal ACUA Mayor"
-    ],
-    "img": "assets/img/portadas/una-de-amor-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["JhRz7wJUsHI"]
-  },
-  {
-    "id": "cuatro-dias-en-berlin",
-    "categoria": "documentales",
-    "titulo": "CUATRO DÍAS EN BERLÍN (2019)",
-    "detalles": [
-      "Cortometraje - 15 min.",
-      "Dir.: Andrea Schellemberg"
-    ],
-    "img": "assets/img/portadas/cuatro-dias-en-berlin-comerciales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["9OBnG-P4RD8"]
-  },
-  {
-    "id": "homenaje-leonardo-favio",
-    "categoria": "documentales",
-    "titulo": "HOMENAJE A LEONARDO FAVIO (2022)",
-    "detalles": [
-      "Proyecto 360° - 10 min.",
-      "Sala Inmersiva del CCK"
-    ],
-    "img": "assets/img/portadas/sala-inmersiva-cck-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["XGBi5hHS_TQ"]
-  },
-  {
-    "id": "informes-periodisticos",
-    "categoria": "documentales",
-    "titulo": "INFORMES PERIODÍSTICOS",
-    "detalles": [
-      "Notas e informes especiales para:",
-      "Telefe Noticias (Telefe - 2018 a 2022)",
-      "La Divina Noche de Dante (Canal 9 - 2022)",
-      "Duro de domar (C5N - 2023 a 2025)"
-    ],
-    "img": "assets/img/portadas/informes-periodisticos-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["ZUfHmM2n7bQ"]
-  },
-  {
-    "id": "anda-calabaza-ficcion",
+    "id": "ejemplo-ficcion",
     "categoria": "ficcion",
-    "titulo": "ANDA CALABAZA Y EL SHOW DE LO NUEVO (2018)",
-    "detalles": [
-      "Serie web infantil - 8 caps. x 5-10 min.",
-      "Dir.: Leandro Ipiña",
-      "Prod.: AONEK Cine / INCAA"
-    ],
-    "img": "assets/img/portadas/anda-calabaza-ficcion.jpg",
-    "tipo_enlace": "externo",
-    "link_externo": "https://play.cine.ar/INCAA/produccion/4801"
+    "titulo": "PROYECTO FICCIÓN 1",
+    "img": "assets/img/portadas/ejemplo.jpg",
+    "videos": ["tu_id_de_video_ficcion"]
   },
   {
-    "id": "unos-dias-ficcion",
+    "id": "proyecto-externo",
     "categoria": "ficcion",
-    "titulo": "UNOS DÍAS (2025)",
-    "detalles": [
-      "Cortometraje",
-      "Dir.: Brenda y Mauro Bonotto"
-    ],
-    "img": "assets/img/portadas/unos-dias-ficcion.jpg",
-    "tipo_enlace": "externo",
-    "link_externo": "https://bafilma.gba.gob.ar/audiovisuales/cortometrajes/unos-dias"
+    "titulo": "PROYECTO EXTERNO",
+    "img": "assets/img/portadas/ejemplo.jpg",
+    "videos": [],
+    "link": "https://www.imdb.com"
   },
   {
-    "id": "el-principe-de-nanawa-trailer",
+    "id": "trailers-1",
     "categoria": "trailers",
-    "titulo": "EL PRÍNCIPE DE NANAWA (2025)",
-    "detalles": [
-      "Trailer para largometraje documental",
-      "Dir.: Clarisa Navas",
-      "Prod.: Gentil Cine"
-    ],
-    "img": "assets/img/portadas/el-principe-de-nanawa-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["vMoBiG80xXk"]
+    "titulo": "TRAILER EJEMPLO",
+    "img": "assets/img/portadas/ejemplo.jpg",
+    "videos": ["tu_id_de_video"]
   },
   {
-    "id": "el-siervo-inutil",
-    "categoria": "trailers",
-    "titulo": "EL SIERVO INÚTIL (2023)",
-    "detalles": [
-      "Trailer para largometraje de ficción",
-      "Dir.: Fernando Lacolla",
-      "Prod.: Punto de Fuga Cine"
-    ],
-    "img": "assets/img/portadas/siervo-inutil-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["SGHunk2v0bA"]
-  },
-  {
-    "id": "variaciones-en-blanco",
-    "categoria": "trailers",
-    "titulo": "VARIACIONES EN BLANCO (2018)",
-    "detalles": [
-      "Trailer para largometraje documental",
-      "Dir.: Martín Subirá"
-    ],
-    "img": "assets/img/portadas/variaciones-en-blanco-trailer.jpg",
-    "tipo_enlace": "estatico"
-  },
-  {
-    "id": "una-de-amor-trailer",
-    "categoria": "trailers",
-    "titulo": "UNA DE AMOR (2014)",
-    "detalles": [
-      "Trailer para serie documental",
-      "Dir.: Leandro Ipiña - Martín Subirá",
-      "Prod.: AONEK Cine"
-    ],
-    "img": "assets/img/portadas/una-de-amor-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["9T4-rz6Y13Q"]
-  },
-  {
-    "id": "unos-dias-trailer",
-    "categoria": "trailers",
-    "titulo": "UNOS DÍAS (2025)",
-    "detalles": [
-      "Trailer para cortometraje",
-      "Dir.: Brenda y Mauro Bonotto"
-    ],
-    "img": "assets/img/portadas/unos-dias-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["JOzs5oVgT7w"]
-  },
-  {
-    "id": "anda-calabaza-trailer",
-    "categoria": "trailers",
-    "titulo": "ANDA CALABAZA Y EL SHOW DE LO NUEVO (2018)",
-    "detalles": [
-      "Trailer para serie web infantil",
-      "Dir.: Leandro Ipiña",
-      "Prod.: AONEK Cine / INCAA"
-    ],
-    "img": "assets/img/portadas/anda-calabaza-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["ClUBdkLF13g"]
-  },
-  {
-    "id": "la-terminal",
-    "categoria": "trailers",
-    "titulo": "LA TERMINAL (2023)",
-    "detalles": [
-      "Trailer para película documental",
-      "Dir.: Gustavo Fontán",
-      "Prod.: Punto de Fuga Cine"
-    ],
-    "img": "assets/img/portadas/la-terminal-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["dsOLcx9U4yg"]
-  },
-  {
-    "id": "dinamogramas",
-    "categoria": "trailers",
-    "titulo": "DINAMOGRAMAS (2025)",
-    "detalles": [
-      "Trailer para película documental",
-      "Dir.: Andrea Schellemberg"
-    ],
-    "img": "assets/img/portadas/dinamogramas-trailer.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["qu_BEk0JnIg"]
-  },
-  {
-    "id": "bruha",
+    "id": "comerciales-1",
     "categoria": "comerciales",
-    "titulo": "BRUHA - ART COLLECTION (2024)",
-    "detalles": [
-      "Documental Web - 3 caps. x 4min",
-      "Dir.: Pascui Rivas"
-    ],
-    "img": "assets/img/portadas/bruha-comerciales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["qjsjeU0kOPY", "sUpLVuaQ-xE"]
+    "titulo": "COMERCIAL EJEMPLO",
+    "img": "assets/img/portadas/ejemplo.jpg",
+    "videos": ["tu_id_de_video"]
   },
   {
-    "id": "propymes",
-    "categoria": "comerciales",
-    "titulo": "PROPYMES (2024)",
-    "detalles": [
-      "Institucional para proyección en evento",
-      "Dir.: Leandro Ipiña",
-      "Prod.: NOS"
-    ],
-    "img": "assets/img/portadas/propymes-comercial.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["OefmEHzl0q4"]
-  },
-  {
-    "id": "surmax",
-    "categoria": "comerciales",
-    "titulo": "SURMAX (2022)",
-    "detalles": [
-      "Serie Web - 2 caps. x 15 min.",
-      "Dir.: Mariano García"
-    ],
-    "img": "assets/img/portadas/surmax-comerciales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["m85t1YsjNQc", "h_zExxf9Ahg"]
-  },
-  {
-    "id": "ba-lgtb",
-    "categoria": "comerciales",
-    "titulo": "BA LGTB (2017)",
-    "detalles": [
-      "Documental publicitario - 7 min.",
-      "Prod.: AONEK Cine / Turismo - Ciudad de Buenos Aires"
-    ],
-    "img": "assets/img/portadas/ba-lgtb-comerciales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["n6lu2ohpW2c"]
-  },
-  {
-    "id": "fundacion-la-base",
-    "categoria": "comerciales",
-    "titulo": "FUNDACIÓN LA BASE (2014)",
-    "detalles": [
-      "Instructivos - 2 videos x 10min."
-    ],
-    "img": "assets/img/portadas/fundacion-la-base-comerciales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["nqgFi4pGKak"]
-  },
-  {
-    "id": "la-virgen-de-la-tosquera",
+    "id": "asistencia-1",
     "categoria": "asistencia",
-    "titulo": "LA VÍRGEN DE LA TOSQUERA (2025)",
-    "detalles": [
-      "Asistente de edición",
-      "Largometraje de ficción",
-      "Dir.: Laura Casabé",
-      "Prod.: Mostra Cine"
-    ],
-    "img": "assets/img/portadas/virgen-tosquera-trailer.jpg",
-    "tipo_enlace": "externo",
-    "link_externo": "https://www.imdb.com/es/title/tt15460036/"
+    "titulo": "ASISTENCIA EJEMPLO",
+    "img": "assets/img/portadas/ejemplo.jpg",
+    "videos": ["tu_id_de_video"]
   },
   {
-    "id": "el-principe-de-nanawa-asistencia",
-    "categoria": "asistencia",
-    "titulo": "EL PRÍNCIPE DE NANAWA (2025)",
-    "detalles": [
-      "Asistente de edición",
-      "Largometraje documental",
-      "Dir.: Clarisa Navas",
-      "Prod.: Gentil Cine"
-    ],
-    "img": "assets/img/portadas/el-principe-de-nanawa-asistencia.jpg",
-    "tipo_enlace": "externo",
-    "link_externo": "https://www.imdb.com/es/title/tt30006845/?ref_=fn_t_1"
-  },
-  {
-    "id": "fumando-mi-musica",
+    "id": "videoclips-1",
     "categoria": "videoclips",
-    "titulo": "FUMANDO MI MÚSICA (...) (2023)",
-    "detalles": [
-      "Visualizador - DJ Sustancia"
-    ],
-    "img": "assets/img/portadas/fumando-videoclips.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["lhL_RIbqMEU"]
-  },
-  {
-    "id": "jean-con-jean",
-    "categoria": "videoclips",
-    "titulo": "JEAN CON JEAN (2022)",
-    "detalles": [
-      "Videoclip - Spivi"
-    ],
-    "img": "assets/img/portadas/jean-con-jean-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["sRXkiASt35M"]
-  },
-  {
-    "id": "planificacion-estatal",
-    "categoria": "videoclips",
-    "titulo": "PLANIFICACIÓN ESTATAL (2018)",
-    "detalles": [
-      "Videoclip - VBV (Varias Bandas a la Vez)"
-    ],
-    "img": "assets/img/portadas/planificacion-estatal-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["RiTcFBSvPCc"]
-  },
-  {
-    "id": "dona-y-las-sombras",
-    "categoria": "videoclips",
-    "titulo": "DOÑA Y LAS SOMBRAS (2018)",
-    "detalles": [
-      "Edición + animación",
-      "Videoclip - Anda Calabaza"
-    ],
-    "img": "assets/img/portadas/dona-y-las-sombras-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["vH29fX3i2j4"]
-  },
-  {
-    "id": "el-monstruo-sos-vos",
-    "categoria": "videoclips",
-    "titulo": "EL MONSTRUO SOS VOS (2018)",
-    "detalles": [
-      "Videoclip - Anda Calabaza"
-    ],
-    "img": "assets/img/portadas/el-monstruo-sos-vos-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["zXbc-fPHNug"]
-  },
-  {
-    "id": "soy",
-    "categoria": "videoclips",
-    "titulo": "SOY (2018)",
-    "detalles": [
-      "Edición + animación",
-      "Videoclip - Anda Calabaza"
-    ],
-    "img": "assets/img/portadas/soy-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["51lLWtdAVDE"]
-  },
-  {
-    "id": "ruedan",
-    "categoria": "videoclips",
-    "titulo": "RUEDAN (2018)",
-    "detalles": [
-      "Edición + animación",
-      "Videoclip - Anda Calabaza"
-    ],
-    "img": "assets/img/portadas/ruedan-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["VwwmhywuuZk"]
+    "titulo": "VIDEOCLIP EJEMPLO",
+    "img": "assets/img/portadas/ejemplo.jpg",
+    "videos": ["tu_id_de_video"]
   }
 ]
