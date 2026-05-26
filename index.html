@@ -2,39 +2,57 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAURO BONOTTO / Editor</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <header>
-        <h1>MAURO BONOTTO / Editor</h1>
-        <nav>
-            <a href="#reel">Reel</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <h1 class="brand-title">MAURO BONOTTO / Editor</h1>
+            <nav class="nav-links">
+                <a href="#" id="btnReel">Reel</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <section id="documentales">
-            <h2>Documentales</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <img src="assets/img/portadas/el-farmer-documentales.jpg" alt="El Farmer">
-                    <div class="project-info">
-                        <p class="project-title">EL FARMER (2016)</p>
-                        <p class="project-desc">Película para televisión - 56 min.</p>
-                    </div>
-                </div>
-                </div>
-        </section>
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="sidebar-menu" id="sidebar-menu">
+        <nav class="sidebar-nav">
+            <a href="#documentales" class="sidebar-link">DOCUMENTALES</a>
+            <a href="#ficcion" class="sidebar-link">FICCIÓN</a>
+            <a href="#trailers" class="sidebar-link">TRAILERS</a>
+            <a href="#comerciales" class="sidebar-link">COMERCIALES</a>
+            <a href="#asistencia" class="sidebar-link">ASISTENCIA DE EDICIÓN</a>
+            <a href="#videoclips" class="sidebar-link">VIDEOCLIPS</a>
+        </nav>
+    </div>
+
+    <main id="portfolio" class="portfolio-container">
+        <!-- Las secciones se generarán dinámicamente con JavaScript -->
     </main>
 
-    <footer id="contacto">
-        <p>CONTACTO</p>
-        <p>maurobonotto@gmail.com</p>
-        <p>(+54) 11 4090 8258</p>
+    <footer id="contacto" class="contact-section">
+        <div class="contact-content">
+            <p>CONTACTO</p>
+            <p>maurobonotto@gmail.com</p>
+            <p>(+54) 11 4090 8258</p>
+        </div>
     </footer>
 
+    <div class="video-modal" id="video-modal">
+        <button class="modal-close" id="modal-close" aria-label="Cerrar modal"></button>
+        <button class="nav-btn prev" id="btn-prev" aria-label="Anterior"></button>
+        <button class="nav-btn next" id="btn-next" aria-label="Siguiente"></button>
+        <div class="modal-content" id="modal-media-content"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
