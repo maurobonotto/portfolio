@@ -11,8 +11,7 @@
     ],
     "img": "assets/img/portadas/el-farmer-documentales.jpg",
     "tipo_enlace": "popup",
-    "videos": ["glywlnkOWK4"],
-    "link_externo": ""
+    "videos": ["glywlnkOWK4"]
   },
   {
     "id": "equilibrios",
@@ -25,36 +24,82 @@
     ],
     "img": "assets/img/portadas/equilibrios-documentales.jpg",
     "tipo_enlace": "popup",
-    "videos": ["tnhR2NZowRQ"],
-    "link_externo": ""
+    "videos": ["tnhR2NZowRQ"]
+  },
+  {
+    "id": "una-de-amor",
+    "categoria": "documentales",
+    "titulo": "UNA DE AMOR (2014) - Co-editor",
+    "detalles": [
+      "Serie - 13 caps. x 30 min.",
+      "Dir.: Leandro Ipiña - Martín Subirá",
+      "Prod.: AONEK Cine / Canal ACUA Mayor"
+    ],
+    "img": "assets/img/portadas/una-de-amor-documentales.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["JhRz7wJUsHI"]
+  },
+  {
+    "id": "cuatro-dias-en-berlin",
+    "categoria": "documentales",
+    "titulo": "CUATRO DÍAS EN BERLÍN (2019)",
+    "detalles": [
+      "Cortometraje - 15 min.",
+      "Dir.: Andrea Schellemberg"
+    ],
+    "img": "assets/img/portadas/cuatro-dias-en-berlin-documentales.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["nqgFi4pGKak"]
   },
   {
     "id": "la-virgen-de-la-tosquera",
     "categoria": "asistencia",
-    "titulo": "LA VÍRGEN DE LA TOSQUERA (2025) - Asistente de edición",
+    "titulo": "LA VÍRGEN DE LA TOSQUERA (2025)",
     "detalles": [
-      "Largometraje de ficción",
+      "Largometraje de ficción - Asistente de edición",
       "Dir.: Laura Casabé",
       "Prod.: Mostra Cine"
     ],
     "img": "assets/img/portadas/la-virgen-de-la-tosquera-asistencia.jpg",
     "tipo_enlace": "externo",
-    "videos": [],
-    "link_externo": "https://www.imdb.com/es/title/tt15460036/"
+    "link_externo": "https://www.imdb.com/es/title/tt15460036/",
+    "videos": []
   },
   {
     "id": "el-principe-de-nanawa",
     "categoria": "asistencia",
-    "titulo": "EL PRÍNCIPE DE NANAWA (2025) - Asistente de edición",
+    "titulo": "EL PRÍNCIPE DE NANAWA (2025)",
     "detalles": [
-      "Largometraje documental",
+      "Largometraje documental - Asistente de edición",
       "Dir.: Clarisa Navas",
       "Prod.: Gentil Cine"
     ],
     "img": "assets/img/portadas/el-principe-de-nanawa-asistencia.jpg",
     "tipo_enlace": "externo",
-    "videos": [],
-    "link_externo": "https://www.imdb.com/es/title/tt30006845/?ref_=fn_t_1"
+    "link_externo": "https://www.imdb.com/es/title/tt30006845/?ref_=fn_t_1",
+    "videos": []
+  },
+  {
+    "id": "fumando-mi-musica",
+    "categoria": "videoclips",
+    "titulo": "FUMANDO MI MÚSICA (...) (2023)",
+    "detalles": [
+      "Visualizador - DJ Sustancia"
+    ],
+    "img": "assets/img/portadas/fumando-mi-musica-videoclips.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["lhL_RibqMEU"]
+  },
+  {
+    "id": "jean-con-jean",
+    "categoria": "videoclips",
+    "titulo": "JEAN CON JEAN (2022)",
+    "detalles": [
+      "Videoclip - Spivi"
+    ],
+    "img": "assets/img/portadas/jean-con-jean-videoclips.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["sRXkiASt35M"]
   },
   {
     "id": "planificacion-estatal",
@@ -65,20 +110,29 @@
     ],
     "img": "assets/img/portadas/planificacion-estatal-videoclips.jpg",
     "tipo_enlace": "popup",
-    "videos": ["RiTcFBSvPCc"],
-    "link_externo": ""
+    "videos": ["RiTcFBSvPCc"]
   },
   {
-    "id": "ejemplo-multi-video",
+    "id": "dona-y-las-sombras",
     "categoria": "videoclips",
-    "titulo": "PROYECTO MULTI VIDEO DE EJEMPLO",
+    "titulo": "DOÑA Y LAS SOMBRAS (2018)",
     "detalles": [
-      "Muestra de swipe con flechas",
-      "Dos videos de Youtube en la misma tarjeta"
+      "Edición + animación",
+      "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/dona-y-las-sombras-videoclips.jpg",
     "tipo_enlace": "popup",
-    "videos": ["vH29fX3i2j4", "zXbc-fPHNug"],
-    "link_externo": ""
+    "videos": ["vH29fX3i2j4"]
+  },
+  {
+    "id": "el-monstruo-sos-vos",
+    "categoria": "videoclips",
+    "titulo": "EL MONSTRUO SOS VOS (2018)",
+    "detalles": [
+      "Videoclip - Anda Calabaza"
+    ],
+    "img": "assets/img/portadas/el-monstruo-sos-vos-videoclips.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["zXbc-fPHNug"]
   }
 ]
