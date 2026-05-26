@@ -11,7 +11,7 @@
     ],
     "img": "assets/img/portadas/el-farmer-documentales.jpg",
     "tipo_enlace": "externo",
-    "url_externa": "https://www.youtube.com/watch?v=glywlNkOWK4"
+    "url_externa": "https://www.imdb.com/title/tt8289830/"
   },
   {
     "id": "equilibrios",
@@ -48,8 +48,8 @@
       "Dir.: Andrea Schellemberg"
     ],
     "img": "assets/img/portadas/cuatro-dias-en-berlin-comerciales.jpg",
-    "tipo_enlace": "externo",
-    "url_externa": "https://www.youtube.com/watch?v=9OBnG-P4RD8"
+    "tipo_enlace": "popup",
+    "videos": ["9OBnG-P4RD8"]
   },
   {
     "id": "homenaje-leonardo-favio",
@@ -174,8 +174,8 @@
       "Prod.: AONEK Cine / INCAA"
     ],
     "img": "assets/img/portadas/anda-calabaza-trailer.jpg",
-    "tipo_enlace": "externo",
-    "url_externa": "https://www.youtube.com/watch?v=CIUBdkLF13g"
+    "tipo_enlace": "popup",
+    "videos": ["Zp-FVw9vv3k"]
   },
   {
     "id": "la-terminal",
@@ -259,8 +259,9 @@
       "Instructivos - 2 videos x 10min."
     ],
     "img": "assets/img/portadas/fundacion-la-base-comerciales.jpg",
-    "tipo_enlace": "externo",
-    "url_externa": "https://www.youtube.com/watch?v=nggFi4pGKak"
+    "tipo_enlace": "popup",
+    "plataforma": "vimeo",
+    "videos": ["112847100"]
   },
   {
     "id": "la-virgen-de-la-tosquera",
@@ -298,8 +299,8 @@
       "Visualizador - DJ Sustancia"
     ],
     "img": "assets/img/portadas/fumando-videoclips.jpg",
-    "tipo_enlace": "externo",
-    "url_externa": "https://www.youtube.com/watch?v=1hL_RlbqMEU"
+    "tipo_enlace": "popup",
+    "videos": ["TmL5bBedV1w"]
   },
   {
     "id": "jean-con-jean",
@@ -320,8 +321,8 @@
       "Videoclip - VBV (Varias Bandas a la Vez)"
     ],
     "img": "assets/img/portadas/planificacion-estatal-videoclip.jpg",
-    "tipo_enlace": "externo",
-    "url_externa": "https://www.youtube.com/watch?v=RiTcFBSvPCc"
+    "tipo_enlace": "popup",
+    "videos": ["RiTcFBSvPCc"]
   },
   {
     "id": "dona-y-las-sombras",
@@ -355,8 +356,7 @@
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/soy-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["51ILWtdAVDE"]
+    "tipo_enlace": "estatico"
   },
   {
     "id": "ruedan",
@@ -367,7 +367,6 @@
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/ruedan-videoclip.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["VwwmhywuuZk"]
+    "tipo_enlace": "estatico"
   }
 ]
