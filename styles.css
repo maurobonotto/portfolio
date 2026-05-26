@@ -31,7 +31,7 @@ img {
 }
 
 /* ==========================================================================
-   2. VARIABLES DE DISEÑO (SISTEMA DE DISEÑO)
+   2. VARIABLES DE DISEÑO
    ========================================================================== */
 :root {
     --bg-primary: #0a0a0a;
@@ -48,7 +48,7 @@ img {
 }
 
 /* ==========================================================================
-   3. NAVEGACIÓN Y CABECERA (NAVBAR)
+   3. NAVEGACIÓN Y CABECERA
    ========================================================================== */
 .navbar {
     position: fixed;
@@ -70,7 +70,7 @@ img {
     padding: 0 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 20px;
 }
 
 .brand-title {
@@ -83,6 +83,7 @@ img {
 .nav-links {
     display: flex;
     gap: 30px;
+    margin-left: auto;
 }
 
 .nav-links a {
@@ -99,7 +100,7 @@ img {
     opacity: 0.6;
 }
 
-/* Botón Menú Hamburguesa */
+/* Menú Hamburguesa */
 .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -134,7 +135,7 @@ img {
 }
 
 /* ==========================================================================
-   4. MENÚ LATERAL DESPLEGABLE (SIDEBAR)
+   4. MENÚ LATERAL
    ========================================================================== */
 .sidebar-menu {
     position: fixed;
@@ -197,7 +198,7 @@ img {
 }
 
 /* ==========================================================================
-   5. CONTENEDOR PRINCIPAL Y MATRIZ DE PROYECTOS (GRID)
+   5. CONTENEDOR PRINCIPAL Y GRID
    ========================================================================== */
 .portfolio-container {
     max-width: var(--max-width);
@@ -225,7 +226,7 @@ img {
     gap: 40px 30px;
 }
 
-/* Tarjetas de Contenido */
+/* Tarjetas */
 .project-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -261,22 +262,23 @@ img {
     transform: scale(1.04);
 }
 
-/* Capa de Reproducción Avanzada */
+/* Overlay con iconos (aparece solo al hover) */
 .play-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color var(--transition-smooth);
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
 }
 
 .image-wrapper:hover .play-overlay {
-    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
 }
 
 .play-overlay::after {
@@ -285,7 +287,7 @@ img {
     height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-left: 20px solid rgba(255, 255, 255, 0.9);
+    border-left: 20px solid #ffffff;
     margin-left: 4px;
     transition: transform var(--transition-smooth);
 }
@@ -294,13 +296,15 @@ img {
     transform: scale(1.1);
 }
 
-/* Icono para enlace externo */
+/* Icono enlace externo */
 .image-wrapper.link-externo .play-overlay::after {
     content: '🔗';
     border: none;
-    font-size: 28px;
+    font-size: 32px;
     background: none;
-    margin-left: 0;
+    margin: 0;
+    line-height: 1;
+    color: #ffffff;
 }
 
 .project-title {
@@ -309,6 +313,11 @@ img {
     letter-spacing: 0.5px;
     padding: 20px 20px 6px 20px;
     line-height: 1.4;
+}
+
+.coeditor {
+    font-style: italic;
+    font-weight: normal;
 }
 
 .project-details {
@@ -322,16 +331,8 @@ img {
     margin-bottom: 3px;
 }
 
-/* Modificadores estéticos específicos */
-.title-shorten .project-title {
-    display: none;
-}
-.title-shorten .project-details {
-    padding-top: 20px;
-}
-
 /* ==========================================================================
-   6. INTERFAZ MODAL Y CONTENEDORES DE VIDEO
+   6. MODAL DE VIDEO
    ========================================================================== */
 .video-modal {
     position: fixed;
@@ -429,7 +430,7 @@ img {
 }
 
 /* ==========================================================================
-   7. SECCIÓN DE CONTACTO (FOOTER)
+   7. CONTACTO
    ========================================================================== */
 .contact-section {
     border-top: 1px solid var(--border-color);
@@ -451,7 +452,7 @@ img {
 }
 
 /* ==========================================================================
-   8. RESPONSIVE DESIGN (BREAKPOINTS)
+   8. RESPONSIVE
    ========================================================================== */
 @media (max-width: 1200px) {
     .prev { left: 20px; }
