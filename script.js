@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const reelProyecto = {
         tipo_enlace: 'popup',
-        videos: ['glywlNkOWK4']
+        videos: ['i9Gemrs27vk']
     };
 
     async function cargarProyectos() {
