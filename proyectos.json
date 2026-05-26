@@ -11,7 +11,8 @@
     ],
     "img": "assets/img/portadas/el-farmer-documentales.jpg",
     "tipo_enlace": "popup",
-    "videos": ["glywlnkOWK4"]
+    "videos": ["glywlnkOWK4"],
+    "link_externo": ""
   },
   {
     "id": "equilibrios",
@@ -24,18 +25,36 @@
     ],
     "img": "assets/img/portadas/equilibrios-documentales.jpg",
     "tipo_enlace": "popup",
-    "videos": ["tnhR2NZowRQ"]
+    "videos": ["tnhR2NZowRQ"],
+    "link_externo": ""
   },
   {
-    "id": "una-de-amor",
-    "categoria": "documentales",
-    "titulo": "UNA DE AMOR (2014) - Co-editor",
+    "id": "la-virgen-de-la-tosquera",
+    "categoria": "asistencia",
+    "titulo": "LA VÍRGEN DE LA TOSQUERA (2025) - Asistente de edición",
     "detalles": [
-      "Serie - 13 caps. x 30 min."
+      "Largometraje de ficción",
+      "Dir.: Laura Casabé",
+      "Prod.: Mostra Cine"
     ],
-    "img": "assets/img/portadas/una-de-amor-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["glywlnkOWK4"]
+    "img": "assets/img/portadas/la-virgen-de-la-tosquera-asistencia.jpg",
+    "tipo_enlace": "externo",
+    "videos": [],
+    "link_externo": "https://www.imdb.com/es/title/tt15460036/"
+  },
+  {
+    "id": "el-principe-de-nanawa",
+    "categoria": "asistencia",
+    "titulo": "EL PRÍNCIPE DE NANAWA (2025) - Asistente de edición",
+    "detalles": [
+      "Largometraje documental",
+      "Dir.: Clarisa Navas",
+      "Prod.: Gentil Cine"
+    ],
+    "img": "assets/img/portadas/el-principe-de-nanawa-asistencia.jpg",
+    "tipo_enlace": "externo",
+    "videos": [],
+    "link_externo": "https://www.imdb.com/es/title/tt30006845/?ref_=fn_t_1"
   },
   {
     "id": "planificacion-estatal",
@@ -46,29 +65,20 @@
     ],
     "img": "assets/img/portadas/planificacion-estatal-videoclips.jpg",
     "tipo_enlace": "popup",
-    "videos": ["RiTcFBSvPCc"]
+    "videos": ["RiTcFBSvPCc"],
+    "link_externo": ""
   },
   {
-    "id": "dona-y-las-sombras",
+    "id": "ejemplo-multi-video",
     "categoria": "videoclips",
-    "titulo": "DOÑA Y LAS SOMBRAS (2018)",
+    "titulo": "PROYECTO MULTI VIDEO DE EJEMPLO",
     "detalles": [
-      "Edición + animación",
-      "Videoclip - Anda Calabaza"
+      "Muestra de swipe con flechas",
+      "Dos videos de Youtube en la misma tarjeta"
     ],
     "img": "assets/img/portadas/dona-y-las-sombras-videoclips.jpg",
     "tipo_enlace": "popup",
-    "videos": ["vH29fX3i2j4"]
-  },
-  {
-    "id": "el-monstruo-sos-vos",
-    "categoria": "videoclips",
-    "titulo": "EL MONSTRUO SOS VOS (2018)",
-    "detalles": [
-      "Videoclip - Anda Calabaza"
-    ],
-    "img": "assets/img/portadas/el-monstruo-sos-vos-videoclips.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["zXbc-fPHNug"]
+    "videos": ["vH29fX3i2j4", "zXbc-fPHNug"],
+    "link_externo": ""
   }
 ]
