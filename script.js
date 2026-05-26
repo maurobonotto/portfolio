@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let todosLosProyectos = [];
 
-    // Elementos DOM
     const portfolioContainer = document.getElementById('portfolio');
     const modal = document.getElementById('video-modal');
     const modalContent = document.getElementById('modal-media-content');
@@ -14,17 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
     const btnReel = document.getElementById('btnReel');
 
-    // Variables para el modal actual
     let proyectoActual = null;
     let indiceVideoActual = 0;
 
-    // Proyecto especial para Reel (no se muestra en el grid)
     const reelProyecto = {
         tipo_enlace: 'popup',
         videos: ['glywlNkOWK4']
     };
 
-    // Cargar datos
     async function cargarProyectos() {
         try {
             const respuesta = await fetch('proyectos.json');
@@ -37,9 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Generar secciones por categoría
     function generarSecciones() {
-        // Obtener categorías únicas en orden definido
         const ordenCategorias = ['documentales', 'ficcion', 'trailers', 'comerciales', 'asistencia', 'videoclips'];
         const categoriasExistentes = [...new Set(todosLosProyectos.map(p => p.categoria))];
         const categoriasOrdenadas = ordenCategorias.filter(cat => categoriasExistentes.includes(cat));
@@ -56,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const titulo = document.createElement('h2');
             titulo.className = 'category-title';
-            titulo.textContent = categoria.toUpperCase();
+            let nombreCategoria = categoria.toUpperCase();
+            if (categoria === 'asistencia') nombreCategoria = 'ASISTENCIA DE EDICIÓN';
+            titulo.textContent = nombreCategoria;
             section.appendChild(titulo);
             
             const grid = document.createElement('div');
@@ -72,12 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Crear tarjeta de proyecto
     function crearCard(proyecto) {
         const card = document.createElement('div');
-        card.className = `project-card ${proyecto.categoria === 'asistencia' ? 'title-shorten' : ''}`;
+        card.className = 'project-card';
         
-        const lineasDetalle = proyecto.detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
+        let detalles = [...proyecto.detalles];
+        let tituloHTML = proyecto.titulo;
+        
+        // Reemplazar " - Co-editor" por span con cursiva
+        tituloHTML = tituloHTML.replace(/ - Co-editor/g, '<span class="coeditor"> - Co-editor</span>');
+        
+        // Mover "Edición + animación" desde detalles al título
+        const indexEdicion = detalles.findIndex(d => d.includes("Edición + animación"));
+        if (indexEdicion !== -1) {
+            detalles.splice(indexEdicion, 1);
+            tituloHTML += '<span class="coeditor"> - Edición + animación</span>';
+        }
+        
+        const lineasDetalle = detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
         
         const imageWrapper = document.createElement('div');
         imageWrapper.className = 'image-wrapper';
@@ -87,10 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = proyecto.img;
         img.alt = proyecto.titulo;
         img.loading = 'lazy';
-        
         imageWrapper.appendChild(img);
         
-        // Overlay de play o enlace externo
         if (proyecto.tipo_enlace !== 'estatico') {
             const overlayPlay = document.createElement('div');
             overlayPlay.className = 'play-overlay';
@@ -109,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const title = document.createElement('h3');
         title.className = 'project-title';
-        title.textContent = proyecto.titulo;
+        title.innerHTML = tituloHTML;
         
         const detailsDiv = document.createElement('div');
         detailsDiv.className = 'project-details';
@@ -159,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         
-        // Mostrar flechas solo si hay más de un video en ESTE proyecto
         if (videos.length > 1) {
             btnPrev.style.display = 'block';
             btnNext.style.display = 'block';
@@ -182,14 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarModal();
     }
 
-    // Reel: abre el modal con el proyecto especial
     function abrirReel() {
         proyectoActual = reelProyecto;
         indiceVideoActual = 0;
         abrirModal();
     }
 
-    // Navegación por secciones (scroll suave)
     function scrollASeccion(id) {
         const elemento = document.getElementById(id);
         if (elemento) {
@@ -198,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Menú hamburguesa
     function alternarMenu() {
         menuToggle.classList.toggle('open');
         sidebar.classList.toggle('active');
@@ -211,17 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.classList.remove('active');
     }
 
-    // Eventos
     btnClose.addEventListener('click', cerrarModal);
     btnPrev.addEventListener('click', () => navegarVideo('prev'));
     btnNext.addEventListener('click', () => navegarVideo('next'));
     
-    // Cerrar modal al hacer clic fuera del contenido
     modal.addEventListener('click', (e) => {
         if (e.target === modal) cerrarModal();
     });
     
-    // Tecla Escape
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal();
     });
@@ -229,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.addEventListener('click', alternarMenu);
     if (overlay) overlay.addEventListener('click', cerrarMenu);
     
-    // Links del menú lateral
     sidebarLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -241,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Botón Reel
     if (btnReel) {
         btnReel.addEventListener('click', (e) => {
             e.preventDefault();
@@ -249,6 +246,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Iniciar
     cargarProyectos();
 });
