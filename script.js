@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const reelProyecto = {
         tipo_enlace: 'popup',
-        videos: ['i9Gemrs27vk']   // ← ID CORRECTO del REEL
+        videos: ['i9Gemrs27vk']
     };
 
     async function cargarProyectos() {
@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function ejecutarAccion(proyecto) {
         if (proyecto.tipo_enlace === 'externo') {
-            // Enlace externo sin proxy, se abre en nueva pestaña
             window.open(proyecto.url_externa, '_blank');
         } else if (proyecto.tipo_enlace === 'popup' || proyecto.tipo_enlace === 'carrusel') {
             proyectoActual = proyecto;
@@ -157,10 +156,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const videos = proyectoActual.videos;
         const videoId = videos[indiceVideoActual];
+        const plataforma = proyectoActual.plataforma || 'youtube';
+        
+        let iframeSrc = '';
+        if (plataforma === 'vimeo') {
+            iframeSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        } else {
+            iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        }
         
         modalContent.innerHTML = `
             <div class="iframe-container">
-                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                <iframe src="${iframeSrc}" 
                         allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
             </div>
         `;
