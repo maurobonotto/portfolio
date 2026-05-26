@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reemplazar " - Co-editor" por span con cursiva
         tituloHTML = tituloHTML.replace(/ - Co-editor/g, '<span class="coeditor"> - Co-editor</span>');
         
-        // Mover "Edición + animación" desde detalles al título
+        // Buscar "Edición + animación" en detalles y mover al título con cursiva
         const indexEdicion = detalles.findIndex(d => d.includes("Edición + animación"));
         if (indexEdicion !== -1) {
             detalles.splice(indexEdicion, 1);
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.addEventListener('click', alternarMenu);
     if (overlay) overlay.addEventListener('click', cerrarMenu);
     
-    // Links del menú lateral (categorías, excluyendo los dos últimos que son Reel y Contacto)
+    // Links del menú lateral (categorías)
     sidebarLinks.forEach(link => {
         if (link.id === 'sidebarReel' || link.id === 'sidebarContacto') return;
         link.addEventListener('click', (e) => {
