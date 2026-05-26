@@ -180,8 +180,8 @@ img {
 .sidebar-divider {
     height: 1px;
     background-color: #2a2a2a;
-    margin: 12px 30px;
-    width: auto;
+    width: 40%;
+    margin: 12px auto;
 }
 
 .menu-overlay {
@@ -347,7 +347,7 @@ img {
 }
 
 /* ==========================================================================
-   6. MODAL DE VIDEO
+   6. MODAL DE VIDEO - FLECHAS SIN RECTÁNGULO
    ========================================================================== */
 .video-modal {
     position: fixed;
@@ -420,31 +420,31 @@ img {
     color: var(--text-main);
 }
 
+/* Botones de navegación: solo flechas, sin rectángulo */
 .nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #fff;
-    font-size: 32px;
-    font-weight: bold;
-    width: 50px;
-    height: 80px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 48px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 2100;
+    padding: 0;
+    margin: 0;
+    transition: color var(--transition-smooth), transform 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    z-index: 2100;
-    border-radius: 8px;
-    transition: background var(--transition-smooth), border-color var(--transition-smooth);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    width: auto;
+    height: auto;
 }
 
 .nav-btn:hover {
-    background: rgba(0, 0, 0, 0.95);
-    border-color: rgba(255,255,255,0.5);
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.1);
 }
 
 .prev {
@@ -453,7 +453,6 @@ img {
 
 .prev::before {
     content: '‹';
-    font-size: 40px;
 }
 
 .next {
@@ -462,7 +461,6 @@ img {
 
 .next::before {
     content: '›';
-    font-size: 40px;
 }
 
 /* ==========================================================================
@@ -535,18 +533,13 @@ img {
         padding: 16px 30px;
     }
     .sidebar-divider {
-        margin: 12px 20px;
+        width: 50%;
     }
     .modal-container {
         padding: 0 10px;
     }
     .nav-btn {
-        width: 40px;
-        height: 60px;
-        font-size: 28px;
-    }
-    .prev::before, .next::before {
-        font-size: 32px;
+        font-size: 40px;
     }
     .modal-close {
         top: -40px;
@@ -560,10 +553,12 @@ img {
         padding: 0 5px;
     }
     .nav-btn {
-        width: 32px;
-        height: 50px;
+        font-size: 36px;
     }
-    .prev::before, .next::before {
-        font-size: 28px;
+    .prev {
+        left: -5px;
+    }
+    .next {
+        right: -5px;
     }
 }
