@@ -178,10 +178,10 @@ img {
 }
 
 .sidebar-divider {
-    margin: 12px 20px;
-    border: 0;
     height: 1px;
-    background-color: var(--border-color);
+    background-color: #2a2a2a;
+    margin: 12px 30px;
+    width: auto;
 }
 
 .menu-overlay {
@@ -303,7 +303,7 @@ img {
     transform: scale(1.1);
 }
 
-/* Icono enlace externo: centrado, blanco puro */
+/* Icono enlace externo: centrado, blanco puro, sin gradiente */
 .image-wrapper.link-externo .play-overlay::after {
     content: '🔗';
     border: none;
@@ -311,13 +311,15 @@ img {
     background: none;
     margin: 0;
     line-height: 1;
-    color: #ffffff;
+    color: #ffffff !important;
     display: flex;
     align-items: center;
     justify-content: center;
     width: auto;
     height: auto;
     filter: none;
+    text-shadow: none;
+    opacity: 1;
 }
 
 .project-title {
@@ -345,7 +347,7 @@ img {
 }
 
 /* ==========================================================================
-   6. MODAL DE VIDEO (con padding para que las flechas y la X no pisen el video)
+   6. MODAL DE VIDEO
    ========================================================================== */
 .video-modal {
     position: fixed;
@@ -450,7 +452,8 @@ img {
 }
 
 .prev::before {
-    content: '❮';
+    content: '‹';
+    font-size: 40px;
 }
 
 .next {
@@ -458,7 +461,8 @@ img {
 }
 
 .next::before {
-    content: '❯';
+    content: '›';
+    font-size: 40px;
 }
 
 /* ==========================================================================
@@ -530,6 +534,9 @@ img {
     .sidebar-link {
         padding: 16px 30px;
     }
+    .sidebar-divider {
+        margin: 12px 20px;
+    }
     .modal-container {
         padding: 0 10px;
     }
@@ -537,6 +544,9 @@ img {
         width: 40px;
         height: 60px;
         font-size: 28px;
+    }
+    .prev::before, .next::before {
+        font-size: 32px;
     }
     .modal-close {
         top: -40px;
@@ -552,6 +562,8 @@ img {
     .nav-btn {
         width: 32px;
         height: 50px;
-        font-size: 24px;
+    }
+    .prev::before, .next::before {
+        font-size: 28px;
     }
 }
