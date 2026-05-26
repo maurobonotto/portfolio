@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let proyectoActual = null;
     let indiceVideoActual = 0;
-    let currentYouTubePlayer = null;
+    let currentPlayer = null;
     let progressInterval = null;
 
     const reelProyecto = {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             generarSecciones();
         } catch (error) {
             console.error('Error:', error);
-            portfolioContainer.innerHTML = '<p>Error al cargar los proyectos. Verifica la consola.</p>';
+            portfolioContainer.innerHTML = '<p>Error al cargar proyectos.</p>';
         }
     }
 
@@ -149,14 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         modalContent.innerHTML = '';
-        if (currentYouTubePlayer) {
-            currentYouTubePlayer.destroy();
-            currentYouTubePlayer = null;
-        }
-        if (progressInterval) {
-            clearInterval(progressInterval);
-            progressInterval = null;
-        }
+        if (currentPlayer && currentPlayer.destroy) currentPlayer.destroy();
+        if (progressInterval) clearInterval(progressInterval);
+        currentPlayer = null;
         proyectoActual = null;
         indiceVideoActual = 0;
     }
@@ -168,9 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const videoId = videos[indiceVideoActual];
         const plataforma = proyectoActual.plataforma || 'youtube';
         
+        // Construir estructura con controles personalizados
         modalContent.innerHTML = `
             <div class="iframe-container">
-                <div id="player-container"></div>
+                <div class="video-wrapper" id="video-wrapper"></div>
                 <div class="custom-controls">
                     <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
                     <div class="progress-bar-container" id="progress-bar-container">
@@ -180,36 +176,47 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         
+        const wrapper = document.getElementById('video-wrapper');
+        
         if (plataforma === 'vimeo') {
-            // Vimeo: usar iframe simple con controles desactivados
-            const container = document.getElementById('player-container');
+            // Vimeo: iframe simple sin controles
             const iframe = document.createElement('iframe');
             iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&controls=0&title=0&byline=0&portrait=0`;
             iframe.allow = 'autoplay; fullscreen; picture-in-picture';
             iframe.allowFullscreen = true;
             iframe.style.width = '100%';
-            iframe.style.aspectRatio = '16/9';
-            container.appendChild(iframe);
+            iframe.style.height = '100%';
+            wrapper.appendChild(iframe);
             
-            // Botón personalizado para Vimeo (simulación simple: recargar con play)
+            // Botón personalizado para Vimeo (sin barra de progreso)
             const playPauseBtn = document.getElementById('custom-play-pause');
+            document.getElementById('progress-bar-container').style.display = 'none';
             playPauseBtn.addEventListener('click', () => {
-                // Vimeo no permite control programático fácil sin API, así que recargamos con parámetro play
+                // Vimeo no permite control directo sin API, recargamos con play
                 iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&controls=0&title=0&byline=0&portrait=0`;
             });
-            // Ocultar barra de progreso para Vimeo (opcional)
-            document.getElementById('progress-bar-container').style.display = 'none';
         } else {
-            // YouTube: API para controles personalizados
+            // YouTube: usar API para controles personalizados y sin botón central
+            // Destruir player anterior si existe
+            if (currentPlayer && currentPlayer.destroy) currentPlayer.destroy();
+            
+            // Crear contenedor para API de YouTube
+            const playerDiv = document.createElement('div');
+            playerDiv.id = 'youtube-api-player';
+            playerDiv.style.width = '100%';
+            playerDiv.style.height = '100%';
+            wrapper.appendChild(playerDiv);
+            
+            // Cargar API si no está
             if (typeof YT === 'undefined') {
                 const tag = document.createElement('script');
                 tag.src = 'https://www.youtube.com/iframe_api';
                 document.head.appendChild(tag);
             }
             
+            // Función de inicialización
             window.onYouTubeIframeAPIReady = () => {
-                if (currentYouTubePlayer) currentYouTubePlayer.destroy();
-                currentYouTubePlayer = new YT.Player('player-container', {
+                currentPlayer = new YT.Player('youtube-api-player', {
                     videoId: videoId,
                     playerVars: {
                         autoplay: 1,
@@ -225,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             };
             
+            // Si ya está cargada, ejecutar directamente
             if (typeof YT !== 'undefined' && YT.loaded) {
                 window.onYouTubeIframeAPIReady();
             }
@@ -236,11 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('progress-bar');
             
             playPauseBtn.addEventListener('click', () => {
-                if (currentYouTubePlayer.getPlayerState() === 1) {
-                    currentYouTubePlayer.pauseVideo();
+                if (currentPlayer.getPlayerState() === 1) {
+                    currentPlayer.pauseVideo();
                     playPauseBtn.textContent = '►';
                 } else {
-                    currentYouTubePlayer.playVideo();
+                    currentPlayer.playVideo();
                     playPauseBtn.textContent = '❚❚';
                 }
             });
@@ -248,10 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
             progressContainer.addEventListener('click', (e) => {
                 const rect = progressContainer.getBoundingClientRect();
                 const clickX = e.clientX - rect.left;
-                const width = rect.width;
-                const percent = clickX / width;
-                const duration = currentYouTubePlayer.getDuration();
-                currentYouTubePlayer.seekTo(percent * duration, true);
+                const percent = clickX / rect.width;
+                const duration = currentPlayer.getDuration();
+                currentPlayer.seekTo(percent * duration, true);
             });
             
             startProgressUpdates();
@@ -276,9 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
         function startProgressUpdates() {
             if (progressInterval) clearInterval(progressInterval);
             progressInterval = setInterval(() => {
-                if (currentYouTubePlayer && currentYouTubePlayer.getCurrentTime) {
-                    const current = currentYouTubePlayer.getCurrentTime();
-                    const duration = currentYouTubePlayer.getDuration();
+                if (currentPlayer && currentPlayer.getCurrentTime) {
+                    const current = currentPlayer.getCurrentTime();
+                    const duration = currentPlayer.getDuration();
                     if (duration && !isNaN(duration)) {
                         const percent = (current / duration) * 100;
                         const progressBar = document.getElementById('progress-bar');
@@ -288,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
         
-        // Flechas de navegación
+        // Mostrar flechas si hay múltiples videos
         if (videos.length > 1) {
             btnPrev.style.display = 'flex';
             btnNext.style.display = 'flex';
@@ -305,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (direccion === 'next') {
             indiceVideoActual = (indiceVideoActual + 1) % videos.length;
-        } else if (direccion === 'prev') {
+        } else {
             indiceVideoActual = (indiceVideoActual - 1 + videos.length) % videos.length;
         }
         actualizarModal();
