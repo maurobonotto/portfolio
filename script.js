@@ -152,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalContent.innerHTML = '';
         proyectoActual = null;
         indiceVideoActual = 0;
-        // Limpiar el iframe para detener reproducción
     }
 
     function actualizarModal() {
@@ -168,10 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         
-        // Mostrar flechas solo si hay más de un video en este proyecto
         if (videos.length > 1) {
-            btnPrev.style.display = 'block';
-            btnNext.style.display = 'block';
+            btnPrev.style.display = 'flex';
+            btnNext.style.display = 'flex';
         } else {
             btnPrev.style.display = 'none';
             btnNext.style.display = 'none';
@@ -217,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.classList.remove('active');
     }
 
-    // Eventos del modal
     btnClose.addEventListener('click', cerrarModal);
     btnPrev.addEventListener('click', () => navegarVideo('prev'));
     btnNext.addEventListener('click', () => navegarVideo('next'));
@@ -230,13 +227,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal();
     });
     
-    // Menú hamburguesa
     menuToggle.addEventListener('click', alternarMenu);
     if (overlay) overlay.addEventListener('click', cerrarMenu);
     
-    // Links del menú lateral (categorías)
+    // Links del menú lateral (categorías, excluyendo los dos últimos que son Reel y Contacto)
     sidebarLinks.forEach(link => {
-        // Excluir los nuevos links de Reel y Contacto para manejo especial
         if (link.id === 'sidebarReel' || link.id === 'sidebarContacto') return;
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -248,7 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Link Reel en sidebar
     if (sidebarReel) {
         sidebarReel.addEventListener('click', (e) => {
             e.preventDefault();
@@ -257,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Link Contacto en sidebar
     if (sidebarContacto) {
         sidebarContacto.addEventListener('click', (e) => {
             e.preventDefault();
@@ -265,7 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Botón Reel en navbar
     if (btnReel) {
         btnReel.addEventListener('click', (e) => {
             e.preventDefault();
