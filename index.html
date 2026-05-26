@@ -6,25 +6,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <header>
-        <button id="menu-toggle">Menu</button>
         <h1>MAURO BONOTTO / Editor</h1>
-        <nav id="sidebar-menu">
-            <a href="#" class="sidebar-link" data-category="todos">TODOS</a>
-            <a href="#" class="sidebar-link" data-category="documentales">DOCUMENTALES</a>
-            <a href="#" class="sidebar-link" data-category="ficcion">FICCIÓN</a>
-            <a href="#" class="sidebar-link" data-category="videoclips">VIDEOCLIPS</a>
+        <nav>
+            <a href="#reel">Reel</a>
+            <a href="#contacto">Contacto</a>
         </nav>
     </header>
 
-    <main id="portfolio">
-        <div class="projects-grid" id="projects-grid"></div>
+    <main>
+        <section id="documentales">
+            <h2>Documentales</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="assets/img/portadas/el-farmer-documentales.jpg" alt="El Farmer">
+                    <div class="project-info">
+                        <p class="project-title">EL FARMER (2016)</p>
+                        <p class="project-desc">Película para televisión - 56 min.</p>
+                    </div>
+                </div>
+                </div>
+        </section>
     </main>
 
-    <div class="video-modal" id="video-modal">
-        <button class="modal-close" id="modal-close">×</button>
-        <div id="modal-media-content"></div>
-    </div>
+    <footer id="contacto">
+        <p>CONTACTO</p>
+        <p>maurobonotto@gmail.com</p>
+        <p>(+54) 11 4090 8258</p>
+    </footer>
+
 </body>
-<script src="script.js"></script>
 </html>
