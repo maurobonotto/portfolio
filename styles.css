@@ -185,6 +185,7 @@ img {
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none; /* Asegura que no bloquee clics */
     transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
     z-index: 1040;
     backdrop-filter: blur(4px);
@@ -194,6 +195,7 @@ img {
 .menu-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Permite clics solo cuando está abierto */
 }
 
 /* ==========================================================================
@@ -324,7 +326,7 @@ img {
 /* ==========================================================================
    6. INTERFAZ MODAL Y CONTENEDORES DE VIDEO
    ========================================================================== */
-.modal {
+.video-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -336,13 +338,15 @@ img {
     justify-content: center;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none; /* Asegura que no bloquee clics cuando está cerrado */
     transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
     z-index: 2000;
 }
 
-.modal.active {
+.video-modal.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Permite interacción solo cuando está visible */
 }
 
 .modal-content {
@@ -356,6 +360,9 @@ img {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
+    padding-bottom: 56.25%; /* Garantiza mantener 16:9 si aspect-ratio falla */
+    height: 0;
+    overflow: hidden;
 }
 
 .iframe-container iframe {
