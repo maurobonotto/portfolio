@@ -9,7 +9,7 @@
       "Dir.: Leandro Ipiña",
       "Prod.: AONEK Cine / Canal Encuentro"
     ],
-    "img": "assets/img/portadas/el-farmer-documentales.png",
+    "img": "assets/img/portadas/el-farmer-documentales.jpg",
     "tipo_enlace": "popup",
     "videos": ["glywlnkOWK4"]
   },
@@ -22,7 +22,7 @@
       "Dir.: Leandro Ipiña - Martín Subirá",
       "Prod.: AONEK Cine / Canal Encuentro"
     ],
-    "img": "assets/img/portadas/equilibrios-documentales.png",
+    "img": "assets/img/portadas/equilibrios-documentales.jpg",
     "tipo_enlace": "popup",
     "videos": ["tnhR2NZowRQ"]
   },
@@ -35,7 +35,7 @@
       "Dir.: Leandro Ipiña - Martín Subirá",
       "Prod.: AONEK Cine / Canal ACUA Mayor"
     ],
-    "img": "assets/img/portadas/una-de-amor-documentales.png",
+    "img": "assets/img/portadas/una-de-amor-documentales.jpg",
     "tipo_enlace": "popup",
     "videos": ["JhRz7wJUsHI"]
   },
@@ -47,7 +47,7 @@
       "Cortometraje - 15 min.",
       "Dir.: Andrea Schellemberg"
     ],
-    "img": "assets/img/portadas/cuatro-dias-en-berlin-documentales.png",
+    "img": "assets/img/portadas/cuatro-dias-en-berlin-documentales.jpg",
     "tipo_enlace": "popup",
     "videos": ["9OBnG-P4RD8"]
   },
@@ -59,7 +59,7 @@
       "Proyecto 360° - 10 min.",
       "Sala Inmersiva del CCK"
     ],
-    "img": "assets/img/portadas/homenaje-leonardo-favio-documentales.png",
+    "img": "assets/img/portadas/homenaje-leonardo-favio-documentales.jpg",
     "tipo_enlace": "popup",
     "videos": ["XGBi5hHS_TQ"]
   },
@@ -73,7 +73,7 @@
       "La Divina Noche de Dante (Canal 9 - 2022)",
       "Duro de domar (C5N - 2023 a 2025)"
     ],
-    "img": "assets/img/portadas/informes-periodisticos-documentales.png",
+    "img": "assets/img/portadas/informes-periodisticos-documentales.jpg",
     "tipo_enlace": "popup",
     "videos": ["ZUfHmM2n7bQ"]
   },
@@ -86,7 +86,7 @@
       "Dir.: Leandro Ipiña",
       "Prod.: AONEK Cine / INCAA"
     ],
-    "img": "assets/img/portadas/anda-calabaza-ficcion.png",
+    "img": "assets/img/portadas/anda-calabaza-ficcion.jpg",
     "tipo_enlace": "externo",
     "url_externa": "https://play.cine.ar/INCAA/produccion/4801"
   },
@@ -98,7 +98,7 @@
       "Cortometraje",
       "Dir.: Brenda y Mauro Bonotto"
     ],
-    "img": "assets/img/portadas/unos-dias-ficcion.png",
+    "img": "assets/img/portadas/unos-dias-ficcion.jpg",
     "tipo_enlace": "externo",
     "url_externa": "https://bafilma.gba.gob.ar/audiovisuales/cortometrajes/unos-dias"
   },
@@ -111,7 +111,7 @@
       "Dir.: Clarisa Navas",
       "Prod.: Gentil Cine"
     ],
-    "img": "assets/img/portadas/el-principe-de-nanawa-trailers.png",
+    "img": "assets/img/portadas/el-principe-de-nanawa-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["vMoBiG80xXk"]
   },
@@ -124,7 +124,7 @@
       "Dir.: Fernando Lacolla",
       "Prod.: Punto de Fuga Cine"
     ],
-    "img": "assets/img/portadas/el-siervo-inutil-trailers.png",
+    "img": "assets/img/portadas/el-siervo-inutil-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["SGHunk2v0bA"]
   },
@@ -136,7 +136,7 @@
       "Trailer para largometraje documental",
       "Dir.: Martín Subirá"
     ],
-    "img": "assets/img/portadas/variaciones-en-blanco-trailers.png",
+    "img": "assets/img/portadas/variaciones-en-blanco-trailers.jpg",
     "tipo_enlace": "estatico"
   },
   {
@@ -148,7 +148,7 @@
       "Dir.: Leandro Ipiña - Martín Subirá",
       "Prod.: AONEK Cine"
     ],
-    "img": "assets/img/portadas/una-de-amor-trailers.png",
+    "img": "assets/img/portadas/una-de-amor-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["9T4-rz6Y13Q"]
   },
@@ -160,7 +160,7 @@
       "Trailer para cortometraje",
       "Dir.: Brenda y Mauro Bonotto"
     ],
-    "img": "assets/img/portadas/unos-dias-trailers.png",
+    "img": "assets/img/portadas/unos-dias-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["JOzs5oVgT7w"]
   },
@@ -173,7 +173,7 @@
       "Dir.: Leandro Ipiña",
       "Prod.: AONEK Cine / INCAA"
     ],
-    "img": "assets/img/portadas/anda-calabaza-trailers.png",
+    "img": "assets/img/portadas/anda-calabaza-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["ClUBdkLF13g"]
   },
@@ -186,7 +186,7 @@
       "Dir.: Gustavo Fontán",
       "Prod.: Punto de Fuga Cine"
     ],
-    "img": "assets/img/portadas/la-terminal-trailers.png",
+    "img": "assets/img/portadas/la-terminal-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["dsOLcx9U4yg"]
   },
@@ -198,7 +198,7 @@
       "Trailer para película documental",
       "Dir.: Andrea Schellemberg"
     ],
-    "img": "assets/img/portadas/dinamogramas-trailers.png",
+    "img": "assets/img/portadas/dinamogramas-trailers.jpg",
     "tipo_enlace": "popup",
     "videos": ["qu_BEk0JnIg"]
   },
@@ -210,7 +210,7 @@
       "Documental Web - 3 caps. x 4min",
       "Dir.: Pascui Rivas"
     ],
-    "img": "assets/img/portadas/bruha-comerciales.png",
+    "img": "assets/img/portadas/bruha-comerciales.jpg",
     "tipo_enlace": "carrusel",
     "videos": ["qjsjeU0kOPY", "sUpLVuaQ-xE"]
   },
@@ -223,7 +223,7 @@
       "Dir.: Leandro Ipiña",
       "Prod.: NOS"
     ],
-    "img": "assets/img/portadas/propymes-comerciales.png",
+    "img": "assets/img/portadas/propymes-comerciales.jpg",
     "tipo_enlace": "popup",
     "videos": ["OefmEHzl0q4"]
   },
@@ -235,7 +235,7 @@
       "Serie Web - 2 caps. x 15 min.",
       "Dir.: Mariano García"
     ],
-    "img": "assets/img/portadas/surmax-comerciales.png",
+    "img": "assets/img/portadas/surmax-comerciales.jpg",
     "tipo_enlace": "carrusel",
     "videos": ["m85t1YsjNQc", "h_zExxf9Ahg"]
   },
@@ -247,7 +247,7 @@
       "Documental publicitario - 7 min.",
       "Prod.: AONEK Cine / Turismo - Ciudad de Buenos Aires"
     ],
-    "img": "assets/img/portadas/ba-lgtb-comerciales.png",
+    "img": "assets/img/portadas/ba-lgtb-comerciales.jpg",
     "tipo_enlace": "popup",
     "videos": ["n6lu2ohpW2c"]
   },
@@ -258,7 +258,7 @@
     "detalles": [
       "Instructivos - 2 videos x 10min."
     ],
-    "img": "assets/img/portadas/fundacion-la-base-comerciales.png",
+    "img": "assets/img/portadas/fundacion-la-base-comerciales.jpg",
     "tipo_enlace": "popup",
     "videos": ["nqgFi4pGKak"]
   },
@@ -272,7 +272,7 @@
       "Dir.: Laura Casabé",
       "Prod.: Mostra Cine"
     ],
-    "img": "assets/img/portadas/la-virgen-de-la-tosquera-asistencia.png",
+    "img": "assets/img/portadas/la-virgen-de-la-tosquera-asistencia.jpg",
     "tipo_enlace": "externo",
     "url_externa": "https://www.imdb.com/es/title/tt15460036/"
   },
@@ -286,7 +286,7 @@
       "Dir.: Clarisa Navas",
       "Prod.: Gentil Cine"
     ],
-    "img": "assets/img/portadas/el-principe-de-nanawa-asistencia.png",
+    "img": "assets/img/portadas/el-principe-de-nanawa-asistencia.jpg",
     "tipo_enlace": "externo",
     "url_externa": "https://www.imdb.com/es/title/tt30006845/?ref_=fn_t_1"
   },
@@ -297,7 +297,7 @@
     "detalles": [
       "Visualizador - DJ Sustancia"
     ],
-    "img": "assets/img/portadas/fumando-mi-musica-videoclips.png",
+    "img": "assets/img/portadas/fumando-mi-musica-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["lhL_RIbqMEU"]
   },
@@ -308,7 +308,7 @@
     "detalles": [
       "Videoclip - Spivi"
     ],
-    "img": "assets/img/portadas/jean-con-jean-videoclips.png",
+    "img": "assets/img/portadas/jean-con-jean-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["sRXkiASt35M"]
   },
@@ -319,7 +319,7 @@
     "detalles": [
       "Videoclip - VBV (Varias Bandas a la Vez)"
     ],
-    "img": "assets/img/portadas/planificacion-estatal-videoclips.png",
+    "img": "assets/img/portadas/planificacion-estatal-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["RiTcFBSvPCc"]
   },
@@ -331,7 +331,7 @@
       "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
-    "img": "assets/img/portadas/dona-y-las-sombras-videoclips.png",
+    "img": "assets/img/portadas/dona-y-las-sombras-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["vH29fX3i2j4"]
   },
@@ -342,7 +342,7 @@
     "detalles": [
       "Videoclip - Anda Calabaza"
     ],
-    "img": "assets/img/portadas/el-monstruo-sos-vos-videoclips.png",
+    "img": "assets/img/portadas/el-monstruo-sos-vos-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["zXbc-fPHNug"]
   },
@@ -354,7 +354,7 @@
       "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
-    "img": "assets/img/portadas/soy-videoclips.png",
+    "img": "assets/img/portadas/soy-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["51lLWtdAVDE"]
   },
@@ -366,7 +366,7 @@
       "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
-    "img": "assets/img/portadas/ruedan-videoclips.png",
+    "img": "assets/img/portadas/ruedan-videoclips.jpg",
     "tipo_enlace": "popup",
     "videos": ["VwwmhywuuZk"]
   }
