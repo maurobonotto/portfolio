@@ -17,12 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let proyectoActual = null;
     let indiceVideoActual = 0;
-    
-    // Variables para reproductores personalizados
     let currentYouTubePlayer = null;
-    let currentVimeoPlayer = null;
     let progressInterval = null;
-    let currentPlatform = null;
 
     const reelProyecto = {
         tipo_enlace: 'popup',
@@ -153,14 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         modalContent.innerHTML = '';
-        // Destruir reproductores activos
         if (currentYouTubePlayer) {
             currentYouTubePlayer.destroy();
             currentYouTubePlayer = null;
-        }
-        if (currentVimeoPlayer) {
-            currentVimeoPlayer.destroy();
-            currentVimeoPlayer = null;
         }
         if (progressInterval) {
             clearInterval(progressInterval);
@@ -168,142 +159,62 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         proyectoActual = null;
         indiceVideoActual = 0;
-        currentPlatform = null;
     }
 
-    async function actualizarModal() {
+    function actualizarModal() {
         if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
         
         const videos = proyectoActual.videos;
         const videoId = videos[indiceVideoActual];
         const plataforma = proyectoActual.plataforma || 'youtube';
-        currentPlatform = plataforma;
         
-        // Limpiar reproductores anteriores
-        if (currentYouTubePlayer) {
-            currentYouTubePlayer.destroy();
-            currentYouTubePlayer = null;
-        }
-        if (currentVimeoPlayer) {
-            currentVimeoPlayer.destroy();
-            currentVimeoPlayer = null;
-        }
-        if (progressInterval) {
-            clearInterval(progressInterval);
-            progressInterval = null;
-        }
+        modalContent.innerHTML = `
+            <div class="iframe-container">
+                <div id="player-container"></div>
+                <div class="custom-controls">
+                    <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
+                    <div class="progress-bar-container" id="progress-bar-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        `;
         
         if (plataforma === 'vimeo') {
-            // Contenedor para Vimeo
-            modalContent.innerHTML = `
-                <div class="iframe-container">
-                    <div class="vimeo-player" id="vimeo-player-${videoId}"></div>
-                    <div class="custom-controls">
-                        <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
-                        <div class="progress-bar-container" id="progress-bar-container">
-                            <div class="progress-bar" id="progress-bar"></div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            // Vimeo: usar iframe simple con controles desactivados
+            const container = document.getElementById('player-container');
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&controls=0&title=0&byline=0&portrait=0`;
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.style.width = '100%';
+            iframe.style.aspectRatio = '16/9';
+            container.appendChild(iframe);
             
-            // Cargar Vimeo Player
-            const Vimeo = await import('https://player.vimeo.com/api/player.js');
-            const playerDiv = document.getElementById(`vimeo-player-${videoId}`);
-            currentVimeoPlayer = new Vimeo.Player(playerDiv, {
-                id: videoId,
-                autoplay: true,
-                controls: false,
-                muted: false,
-                loop: false
-            });
-            
-            // Botón play/pause
+            // Botón personalizado para Vimeo (simulación simple: recargar con play)
             const playPauseBtn = document.getElementById('custom-play-pause');
-            const progressBar = document.getElementById('progress-bar');
-            const progressContainer = document.getElementById('progress-bar-container');
-            
-            currentVimeoPlayer.on('play', () => {
-                playPauseBtn.textContent = '❚❚';
-                startProgressUpdatesVimeo();
-            });
-            currentVimeoPlayer.on('pause', () => {
-                playPauseBtn.textContent = '►';
-                if (progressInterval) clearInterval(progressInterval);
-            });
-            currentVimeoPlayer.on('ended', () => {
-                playPauseBtn.textContent = '►';
-                if (progressInterval) clearInterval(progressInterval);
-            });
-            currentVimeoPlayer.on('timeupdate', (data) => {
-                const percent = (data.seconds / data.duration) * 100;
-                if (progressBar) progressBar.style.width = percent + '%';
-            });
-            
             playPauseBtn.addEventListener('click', () => {
-                currentVimeoPlayer.getPaused().then(paused => {
-                    if (paused) {
-                        currentVimeoPlayer.play();
-                    } else {
-                        currentVimeoPlayer.pause();
-                    }
-                });
+                // Vimeo no permite control programático fácil sin API, así que recargamos con parámetro play
+                iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&controls=0&title=0&byline=0&portrait=0`;
             });
-            
-            // Barra clickeable
-            progressContainer.addEventListener('click', async (e) => {
-                const rect = progressContainer.getBoundingClientRect();
-                const clickX = e.clientX - rect.left;
-                const width = rect.width;
-                const percent = clickX / width;
-                const duration = await currentVimeoPlayer.getDuration();
-                currentVimeoPlayer.setCurrentTime(percent * duration);
-            });
-            
-            function startProgressUpdatesVimeo() {
-                if (progressInterval) clearInterval(progressInterval);
-                progressInterval = setInterval(async () => {
-                    if (currentVimeoPlayer) {
-                        const currentTime = await currentVimeoPlayer.getCurrentTime();
-                        const duration = await currentVimeoPlayer.getDuration();
-                        if (duration && !isNaN(duration)) {
-                            const percent = (currentTime / duration) * 100;
-                            if (progressBar) progressBar.style.width = percent + '%';
-                        }
-                    }
-                }, 500);
-            }
-            
+            // Ocultar barra de progreso para Vimeo (opcional)
+            document.getElementById('progress-bar-container').style.display = 'none';
         } else {
-            // YouTube
-            modalContent.innerHTML = `
-                <div class="iframe-container">
-                    <div id="youtube-player-container"></div>
-                    <div class="custom-controls">
-                        <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
-                        <div class="progress-bar-container" id="progress-bar-container">
-                            <div class="progress-bar" id="progress-bar"></div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Cargar API de YouTube si no está
+            // YouTube: API para controles personalizados
             if (typeof YT === 'undefined') {
                 const tag = document.createElement('script');
                 tag.src = 'https://www.youtube.com/iframe_api';
-                const firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                document.head.appendChild(tag);
             }
             
             window.onYouTubeIframeAPIReady = () => {
-                currentYouTubePlayer = new YT.Player('youtube-player-container', {
+                if (currentYouTubePlayer) currentYouTubePlayer.destroy();
+                currentYouTubePlayer = new YT.Player('player-container', {
                     videoId: videoId,
                     playerVars: {
                         autoplay: 1,
                         controls: 0,
                         disablekb: 1,
-                        fs: 1,
                         modestbranding: 1,
                         rel: 0
                     },
@@ -348,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         function onPlayerStateChange(event) {
             const playPauseBtn = document.getElementById('custom-play-pause');
+            const progressBar = document.getElementById('progress-bar');
             if (event.data === YT.PlayerState.PLAYING) {
                 playPauseBtn.textContent = '❚❚';
                 startProgressUpdates();
@@ -357,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (event.data === YT.PlayerState.ENDED) {
                 playPauseBtn.textContent = '►';
                 if (progressInterval) clearInterval(progressInterval);
-                progressBar.style.width = '0%';
+                if (progressBar) progressBar.style.width = '0%';
             }
         }
         
@@ -376,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }
         
-        // Mostrar/ocultar flechas según cantidad de videos
+        // Flechas de navegación
         if (videos.length > 1) {
             btnPrev.style.display = 'flex';
             btnNext.style.display = 'flex';
@@ -428,15 +340,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnClose.addEventListener('click', cerrarModal);
     btnPrev.addEventListener('click', () => navegarVideo('prev'));
     btnNext.addEventListener('click', () => navegarVideo('next'));
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) cerrarModal();
-    });
-    
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal();
-    });
-    
+    modal.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal(); });
     menuToggle.addEventListener('click', alternarMenu);
     if (overlay) overlay.addEventListener('click', cerrarMenu);
     
@@ -446,33 +351,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const href = link.getAttribute('href');
             if (href && href.startsWith('#')) {
-                const targetId = href.substring(1);
-                scrollASeccion(targetId);
+                scrollASeccion(href.substring(1));
             }
         });
     });
     
-    if (sidebarReel) {
-        sidebarReel.addEventListener('click', (e) => {
-            e.preventDefault();
-            abrirReel();
-            cerrarMenu();
-        });
-    }
-    
-    if (sidebarContacto) {
-        sidebarContacto.addEventListener('click', (e) => {
-            e.preventDefault();
-            scrollASeccion('contacto');
-        });
-    }
-    
-    if (btnReel) {
-        btnReel.addEventListener('click', (e) => {
-            e.preventDefault();
-            abrirReel();
-        });
-    }
+    if (sidebarReel) sidebarReel.addEventListener('click', (e) => { e.preventDefault(); abrirReel(); cerrarMenu(); });
+    if (sidebarContacto) sidebarContacto.addEventListener('click', (e) => { e.preventDefault(); scrollASeccion('contacto'); });
+    if (btnReel) btnReel.addEventListener('click', (e) => { e.preventDefault(); abrirReel(); });
     
     cargarProyectos();
 });
