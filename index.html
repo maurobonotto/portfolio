@@ -9,10 +9,8 @@
 <body>
     <header class="navbar">
         <div class="navbar-container">
-            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <button class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
             </button>
             <h1 class="brand-title">MAURO BONOTTO / Editor</h1>
             <nav class="nav-links">
@@ -25,46 +23,18 @@
     <div class="menu-overlay" id="menu-overlay"></div>
     <div class="sidebar-menu" id="sidebar-menu">
         <nav class="sidebar-nav">
-            <a href="#documentales" class="sidebar-link">DOCUMENTALES</a>
-            <a href="#ficcion" class="sidebar-link">FICCIÓN</a>
-            <a href="#trailers" class="sidebar-link">TRAILERS</a>
-            <a href="#comerciales" class="sidebar-link">COMERCIALES</a>
-            <a href="#asistencia" class="sidebar-link">ASISTENCIA DE EDICIÓN</a>
-            <a href="#videoclips" class="sidebar-link">VIDEOCLIPS</a>
-            <a href="#contacto" class="sidebar-link">CONTACTO</a>
+            <a href="#" data-category="todos" class="sidebar-link">TODOS</a>
+            <a href="#" data-category="documentales" class="sidebar-link">DOCUMENTALES</a>
+            <a href="#" data-category="ficcion" class="sidebar-link">FICCIÓN</a>
+            <a href="#" data-category="trailers" class="sidebar-link">TRAILERS</a>
+            <a href="#" data-category="comerciales" class="sidebar-link">COMERCIALES</a>
+            <a href="#" data-category="asistencia" class="sidebar-link">ASISTENCIA DE EDICIÓN</a>
+            <a href="#" data-category="videoclips" class="sidebar-link">VIDEOCLIPS</a>
         </nav>
     </div>
 
     <main id="portfolio" class="portfolio-container">
-        <section id="documentales" class="category-section">
-            <h2 class="category-title">DOCUMENTALES</h2>
-            <div class="projects-grid" id="grid-documentales"></div>
-        </section>
-
-        <section id="ficcion" class="category-section">
-            <h2 class="category-title">FICCIÓN</h2>
-            <div class="projects-grid" id="grid-ficcion"></div>
-        </section>
-
-        <section id="trailers" class="category-section">
-            <h2 class="category-title">TRAILERS</h2>
-            <div class="projects-grid" id="grid-trailers"></div>
-        </section>
-
-        <section id="comerciales" class="category-section">
-            <h2 class="category-title">COMERCIALES</h2>
-            <div class="projects-grid" id="grid-comerciales"></div>
-        </section>
-
-        <section id="asistencia" class="category-section">
-            <h2 class="category-title">ASISTENCIA DE EDICIÓN</h2>
-            <div class="projects-grid" id="grid-asistencia"></div>
-        </section>
-
-        <section id="videoclips" class="category-section">
-            <h2 class="category-title">VIDEOCLIPS</h2>
-            <div class="projects-grid" id="grid-videoclips"></div>
-        </section>
+        <div class="projects-grid" id="projects-grid"></div>
     </main>
 
     <footer id="contacto" class="contact-section">
@@ -76,15 +46,10 @@
     </footer>
 
     <div class="video-modal" id="video-modal">
-        <div class="modal-backdrop" id="modal-backdrop"></div>
-        <div class="modal-wrapper">
-            <button class="modal-close" id="modal-close" aria-label="Cerrar modal">&times;</button>
-            <div class="modal-media-container">
-                <button class="nav-btn prev" id="btn-prev" aria-label="Anterior">&#10094;</button>
-                <div class="modal-media-content" id="modal-media-content"></div>
-                <button class="nav-btn next" id="btn-next" aria-label="Siguiente">&#10095;</button>
-            </div>
-        </div>
+        <button class="modal-close" id="modal-close">×</button>
+        <div class="modal-content" id="modal-media-content"></div>
+        <button id="btn-prev" class="nav-btn prev">❮</button>
+        <button id="btn-next" class="nav-btn next">❯</button>
     </div>
 
     <script src="script.js"></script>
