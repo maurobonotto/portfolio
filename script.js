@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let proyectoActual = null;
     let indiceVideoActual = 0;
+    
+    // Variables para reproductores personalizados
+    let currentYouTubePlayer = null;
+    let currentVimeoPlayer = null;
+    let progressInterval = null;
+    let currentPlatform = null;
 
     const reelProyecto = {
         tipo_enlace: 'popup',
@@ -147,79 +153,239 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         modalContent.innerHTML = '';
+        // Destruir reproductores activos
+        if (currentYouTubePlayer) {
+            currentYouTubePlayer.destroy();
+            currentYouTubePlayer = null;
+        }
+        if (currentVimeoPlayer) {
+            currentVimeoPlayer.destroy();
+            currentVimeoPlayer = null;
+        }
+        if (progressInterval) {
+            clearInterval(progressInterval);
+            progressInterval = null;
+        }
         proyectoActual = null;
         indiceVideoActual = 0;
+        currentPlatform = null;
     }
 
-    function actualizarModal() {
-    if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
-    
-    const videos = proyectoActual.videos;
-    const videoId = videos[indiceVideoActual];
-    const plataforma = proyectoActual.plataforma || 'youtube';
-    
-    let iframeSrc = '';
-    if (plataforma === 'vimeo') {
-        iframeSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1&controls=0`;
-    } else {
-        // YouTube: Controles desactivados y API habilitada
-        iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&enablejsapi=1&rel=0&modestbranding=1`;
-    }
-    
-    modalContent.innerHTML = `
-        <div class="iframe-container">
-            <iframe id="youtube-player" src="${iframeSrc}" 
-                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
-    `;
-    
-    // --- Lógica para el botón personalizado (solo en YouTube) ---
-    if (plataforma !== 'vimeo') {
-        const iframe = document.getElementById('youtube-player');
-        const customBtn = document.getElementById('custom-play-pause');
+    async function actualizarModal() {
+        if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
         
-        // Cargar la API de YouTube
-        if (typeof YT === 'undefined') {
-            const tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        const videos = proyectoActual.videos;
+        const videoId = videos[indiceVideoActual];
+        const plataforma = proyectoActual.plataforma || 'youtube';
+        currentPlatform = plataforma;
+        
+        // Limpiar reproductores anteriores
+        if (currentYouTubePlayer) {
+            currentYouTubePlayer.destroy();
+            currentYouTubePlayer = null;
+        }
+        if (currentVimeoPlayer) {
+            currentVimeoPlayer.destroy();
+            currentVimeoPlayer = null;
+        }
+        if (progressInterval) {
+            clearInterval(progressInterval);
+            progressInterval = null;
         }
         
-        // Inicializar el player cuando la API esté lista
-        let player;
-        window.onYouTubeIframeAPIReady = function() {
-            player = new YT.Player('youtube-player', {
-                events: {
-                    'onReady': onPlayerReady
-                }
+        if (plataforma === 'vimeo') {
+            // Contenedor para Vimeo
+            modalContent.innerHTML = `
+                <div class="iframe-container">
+                    <div class="vimeo-player" id="vimeo-player-${videoId}"></div>
+                    <div class="custom-controls">
+                        <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
+                        <div class="progress-bar-container" id="progress-bar-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Cargar Vimeo Player
+            const Vimeo = await import('https://player.vimeo.com/api/player.js');
+            const playerDiv = document.getElementById(`vimeo-player-${videoId}`);
+            currentVimeoPlayer = new Vimeo.Player(playerDiv, {
+                id: videoId,
+                autoplay: true,
+                controls: false,
+                muted: false,
+                loop: false
             });
-        };
+            
+            // Botón play/pause
+            const playPauseBtn = document.getElementById('custom-play-pause');
+            const progressBar = document.getElementById('progress-bar');
+            const progressContainer = document.getElementById('progress-bar-container');
+            
+            currentVimeoPlayer.on('play', () => {
+                playPauseBtn.textContent = '❚❚';
+                startProgressUpdatesVimeo();
+            });
+            currentVimeoPlayer.on('pause', () => {
+                playPauseBtn.textContent = '►';
+                if (progressInterval) clearInterval(progressInterval);
+            });
+            currentVimeoPlayer.on('ended', () => {
+                playPauseBtn.textContent = '►';
+                if (progressInterval) clearInterval(progressInterval);
+            });
+            currentVimeoPlayer.on('timeupdate', (data) => {
+                const percent = (data.seconds / data.duration) * 100;
+                if (progressBar) progressBar.style.width = percent + '%';
+            });
+            
+            playPauseBtn.addEventListener('click', () => {
+                currentVimeoPlayer.getPaused().then(paused => {
+                    if (paused) {
+                        currentVimeoPlayer.play();
+                    } else {
+                        currentVimeoPlayer.pause();
+                    }
+                });
+            });
+            
+            // Barra clickeable
+            progressContainer.addEventListener('click', async (e) => {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const percent = clickX / width;
+                const duration = await currentVimeoPlayer.getDuration();
+                currentVimeoPlayer.setCurrentTime(percent * duration);
+            });
+            
+            function startProgressUpdatesVimeo() {
+                if (progressInterval) clearInterval(progressInterval);
+                progressInterval = setInterval(async () => {
+                    if (currentVimeoPlayer) {
+                        const currentTime = await currentVimeoPlayer.getCurrentTime();
+                        const duration = await currentVimeoPlayer.getDuration();
+                        if (duration && !isNaN(duration)) {
+                            const percent = (currentTime / duration) * 100;
+                            if (progressBar) progressBar.style.width = percent + '%';
+                        }
+                    }
+                }, 500);
+            }
+            
+        } else {
+            // YouTube
+            modalContent.innerHTML = `
+                <div class="iframe-container">
+                    <div id="youtube-player-container"></div>
+                    <div class="custom-controls">
+                        <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
+                        <div class="progress-bar-container" id="progress-bar-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Cargar API de YouTube si no está
+            if (typeof YT === 'undefined') {
+                const tag = document.createElement('script');
+                tag.src = 'https://www.youtube.com/iframe_api';
+                const firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            }
+            
+            window.onYouTubeIframeAPIReady = () => {
+                currentYouTubePlayer = new YT.Player('youtube-player-container', {
+                    videoId: videoId,
+                    playerVars: {
+                        autoplay: 1,
+                        controls: 0,
+                        disablekb: 1,
+                        fs: 1,
+                        modestbranding: 1,
+                        rel: 0
+                    },
+                    events: {
+                        onReady: onPlayerReady,
+                        onStateChange: onPlayerStateChange
+                    }
+                });
+            };
+            
+            if (typeof YT !== 'undefined' && YT.loaded) {
+                window.onYouTubeIframeAPIReady();
+            }
+        }
         
         function onPlayerReady(event) {
-            customBtn.addEventListener('click', () => {
-                if (player.getPlayerState() === 1) {
-                    player.pauseVideo();
-                    customBtn.textContent = '►';
+            const playPauseBtn = document.getElementById('custom-play-pause');
+            const progressContainer = document.getElementById('progress-bar-container');
+            const progressBar = document.getElementById('progress-bar');
+            
+            playPauseBtn.addEventListener('click', () => {
+                if (currentYouTubePlayer.getPlayerState() === 1) {
+                    currentYouTubePlayer.pauseVideo();
+                    playPauseBtn.textContent = '►';
                 } else {
-                    player.playVideo();
-                    customBtn.textContent = '❚❚';
+                    currentYouTubePlayer.playVideo();
+                    playPauseBtn.textContent = '❚❚';
                 }
             });
+            
+            progressContainer.addEventListener('click', (e) => {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = rect.width;
+                const percent = clickX / width;
+                const duration = currentYouTubePlayer.getDuration();
+                currentYouTubePlayer.seekTo(percent * duration, true);
+            });
+            
+            startProgressUpdates();
+        }
+        
+        function onPlayerStateChange(event) {
+            const playPauseBtn = document.getElementById('custom-play-pause');
+            if (event.data === YT.PlayerState.PLAYING) {
+                playPauseBtn.textContent = '❚❚';
+                startProgressUpdates();
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                playPauseBtn.textContent = '►';
+                if (progressInterval) clearInterval(progressInterval);
+            } else if (event.data === YT.PlayerState.ENDED) {
+                playPauseBtn.textContent = '►';
+                if (progressInterval) clearInterval(progressInterval);
+                progressBar.style.width = '0%';
+            }
+        }
+        
+        function startProgressUpdates() {
+            if (progressInterval) clearInterval(progressInterval);
+            progressInterval = setInterval(() => {
+                if (currentYouTubePlayer && currentYouTubePlayer.getCurrentTime) {
+                    const current = currentYouTubePlayer.getCurrentTime();
+                    const duration = currentYouTubePlayer.getDuration();
+                    if (duration && !isNaN(duration)) {
+                        const percent = (current / duration) * 100;
+                        const progressBar = document.getElementById('progress-bar');
+                        if (progressBar) progressBar.style.width = percent + '%';
+                    }
+                }
+            }, 500);
+        }
+        
+        // Mostrar/ocultar flechas según cantidad de videos
+        if (videos.length > 1) {
+            btnPrev.style.display = 'flex';
+            btnNext.style.display = 'flex';
+        } else {
+            btnPrev.style.display = 'none';
+            btnNext.style.display = 'none';
         }
     }
     
-    // Controles de navegación (flechas) para múltiples videos
-    if (videos.length > 1) {
-        btnPrev.style.display = 'flex';
-        btnNext.style.display = 'flex';
-    } else {
-        btnPrev.style.display = 'none';
-        btnNext.style.display = 'none';
-    }
-}
-
     function navegarVideo(direccion) {
         if (!proyectoActual || !proyectoActual.videos) return;
         const videos = proyectoActual.videos;
