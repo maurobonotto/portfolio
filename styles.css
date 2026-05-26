@@ -1,18 +1,5 @@
 /* ==========================================================================
-   1. VARIABLES DE SISTEMA Y MODO OSCURO
-   ========================================================================== */
-:root {
-    --bg-primary: #0a0a0a;
-    --bg-surface: #121212;
-    --bg-card: #1c1c1e;
-    --text-main: #ffffff;
-    --text-muted: #8e8e93;
-    --header-height: 70px;
-    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-}
-
-/* ==========================================================================
-   2. CONFIGURACIÓN GENERAL / RESET
+   1. RESET Y VARIABLES DE DISEÑO
    ========================================================================== */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -23,93 +10,70 @@
 html {
     scroll-behavior: smooth;
     text-size-adjust: 100%;
-    background-color: var(--bg-primary);
+    background-color: #0a0a0a;
 }
 
 body {
-    background-color: var(--bg-primary);
-    color: var(--text-main);
-    font-family: var(--font-base);
-    line-height: 1.5;
-    padding-top: var(--header-height);
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: 'Helvetica LT Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    padding-top: 90px;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 /* ==========================================================================
-   3. ENCABEZADO / NAVBAR
+   2. CABECERA (NAVBAR)
    ========================================================================== */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--header-height);
-    background-color: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
+    height: 90px;
+    background-color: #0a0a0a;
     z-index: 1000;
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid #1a1a1a;
 }
 
 .navbar-container {
+    width: 100%;
     max-width: 1400px;
-    height: 100%;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.brand-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-left: 15px;
-    flex-grow: 1;
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: var(--text-main);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--text-muted);
-}
-
-/* BOTÓN DE MENÚ HAMBURGUESA */
 .menu-toggle {
     background: none;
     border: none;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    width: 24px;
-    z-index: 1200;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    z-index: 1100;
 }
 
 .menu-toggle .bar {
     width: 100%;
     height: 2px;
-    background-color: var(--text-main);
-    transition: transform 0.3s, opacity 0.3s;
+    background-color: #ffffff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .menu-toggle.open .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg);
 }
 
 .menu-toggle.open .bar:nth-child(2) {
@@ -117,36 +81,44 @@ body {
 }
 
 .menu-toggle.open .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.brand-title {
+    font-size: 28px; /* Helvetica LT Pro Bold 21pt */
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-left: 20px;
+    flex-grow: 1;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 28px; /* Helvetica LT Pro Roman 21pt */
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #8e8e93;
 }
 
 /* ==========================================================================
-   4. MENU LATERAL (SIDEBAR)
+   3. MENÚ LATERAL (SIDEBAR) Y OVERLAY
    ========================================================================== */
-.sidebar-menu {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    width: 300px;
-    height: 100vh;
-    background-color: var(--bg-surface);
-    z-index: 1100;
-    padding: 100px 40px 40px 40px;
-    transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    border-right: 1px solid #1a1a1a;
-}
-
-.sidebar-menu.active {
-    left: 0;
-}
-
 .menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1050;
     opacity: 0;
     pointer-events: none;
@@ -158,198 +130,255 @@ body {
     pointer-events: auto;
 }
 
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100%;
+    background-color: #121212;
+    z-index: 1060;
+    padding-top: 120px;
+    transition: left 0.3s ease;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+}
+
+.sidebar-menu.active {
+    left: 0;
+}
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
+    padding: 0 40px;
     gap: 25px;
 }
 
 .sidebar-link {
-    color: var(--text-main);
+    color: #ffffff;
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 700;
     letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.2s;
+    transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
 .sidebar-link:hover {
-    color: var(--text-muted);
+    color: #8e8e93;
+    padding-left: 8px;
 }
 
 /* ==========================================================================
-   5. SECCIONES Y REJILLA DE PROYECTOS
+   4. CONTENEDOR DE PORTAFOLIO Y SECCIONES
    ========================================================================== */
 .portfolio-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 20px 30px;
+    padding: 40px;
 }
 
-.portfolio-section {
-    padding: 60px 0 40px 0;
-    border-bottom: 1px solid #161616;
-    scroll-margin-top: var(--header-height);
+.category-section {
+    padding-top: 40px;
+    margin-bottom: 80px;
 }
 
-.section-title {
-    font-size: 1.35rem;
+.category-title {
+    font-size: 28px; /* 21pt Bold */
     font-weight: 700;
-    letter-spacing: 3px;
-    margin-bottom: 35px;
-    text-transform: uppercase;
-    color: var(--text-main);
+    letter-spacing: 2px;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    color: #ffffff;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px 40px;
 }
 
-/* TARJETAS DE PORTADA */
+/* ==========================================================================
+   5. TARJETAS DE PROYECTOS (CARDS)
+   ========================================================================== */
 .project-card {
     display: flex;
     flex-direction: column;
-    background-color: transparent;
 }
 
-.project-img-container {
+.project-thumbnail-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    background-color: #000;
+    padding-top: 56.25%; /* Relación 16:9 */
+    background-color: #181818;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 2px;
 }
 
-.project-img {
+.project-thumbnail-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
-.project-card:hover .project-img {
+.project-card:hover .project-thumbnail-wrapper img {
     transform: scale(1.02);
 }
 
-/* CAPA SUPERPUESTA SÓLO EN HOVER */
 .project-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 5;
+    z-index: 2;
 }
 
-.project-card:hover .project-overlay {
+.project-thumbnail-wrapper:hover .project-overlay {
     opacity: 1;
 }
 
-.overlay-icon {
-    width: 48px;
-    height: 48px;
+.icon-action {
+    width: 55px;
+    height: 55px;
     fill: #ffffff;
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
 }
 
-/* BLOQUE DE TEXTO DEL PROYECTO */
+.project-thumbnail-wrapper:hover .icon-action {
+    transform: scale(1.1);
+}
+
 .project-info {
-    padding: 15px 0 5px 0;
+    margin-top: 20px;
 }
 
 .project-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-    text-transform: uppercase;
+    font-size: 28px; /* Helvetica LT Pro Bold 21pt */
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #ffffff;
 }
 
-.project-desc {
+.project-title.title-small {
+    font-size: 22px; /* Reducción para títulos largos de Anda Calabaza */
+}
+
+.project-details {
+    font-size: 24px; /* Helvetica LT Pro Roman 18pt */
+    font-weight: 400;
+    color: #8e8e93;
     list-style: none;
-    font-size: 0.82rem;
-    color: var(--text-muted);
 }
 
-.project-desc li {
-    margin-bottom: 3px;
+.project-details li {
+    margin-bottom: 6px;
 }
 
 /* ==========================================================================
    6. SECCIÓN DE CONTACTO
    ========================================================================== */
 .contact-section {
-    background-color: var(--bg-surface);
-    padding: 90px 30px;
-    text-align: center;
+    background-color: #0a0a0a;
+    padding: 80px 40px;
     border-top: 1px solid #1a1a1a;
+    text-align: center;
 }
 
-.contact-content h2 {
-    font-size: 1.5rem;
-    letter-spacing: 4px;
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-content p {
+    font-size: 24px; /* 18pt */
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #8e8e93;
+}
+
+.contact-content p:first-child {
+    font-size: 28px; /* 21pt Bold */
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 2px;
     margin-bottom: 25px;
 }
 
-.contact-email, .contact-phone {
-    font-size: 1.05rem;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-}
-
-.contact-email {
-    color: var(--text-main);
-    font-weight: 500;
-}
-
-.contact-phone {
-    color: var(--text-muted);
-}
-
 /* ==========================================================================
-   7. REPRODUCTOR POPUP (MODAL)
+   7. MODAL EMERGENTE (POPUP VIDEO)
    ========================================================================== */
 .video-modal {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.96);
+    width: 100%;
+    height: 100%;
     z-index: 2000;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
 }
 
 .video-modal.active {
-    opacity: 1;
-    pointer-events: auto;
+    display: flex;
 }
 
-.modal-content-wrapper {
-    width: 85%;
-    max-width: 960px;
-    aspect-ratio: 16 / 9;
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.modal-wrapper {
     position: relative;
-    background-color: #000;
+    width: 90%;
+    max-width: 1100px;
+    z-index: 2100;
+}
+
+.modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 40px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #8e8e93;
+}
+
+.modal-media-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    background: #000000;
 }
 
 .modal-media-content {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
 }
@@ -360,70 +389,46 @@ body {
     border: none;
 }
 
-/* BOTÓN X CERRAR */
-.modal-close {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 38px;
-    cursor: pointer;
-    line-height: 1;
-    z-index: 2200;
-    opacity: 0.6;
-    transition: opacity 0.2s, color 0.2s;
-}
-
-.modal-close:hover {
-    color: #ff4a4a;
-    opacity: 1;
-}
-
-/* CONTROLES MULTI-VIDEO (FLECHAS) */
 .nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(20, 20, 20, 0.7);
-    border: 1px solid #333;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
     color: #ffffff;
-    font-size: 20px;
-    width: 50px;
-    height: 50px;
+    font-size: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     cursor: pointer;
-    display: none; /* Inyectado condicionalmente por JS */
+    display: none;
     align-items: center;
     justify-content: center;
-    z-index: 2100;
-    transition: background 0.2s, color 0.2s;
+    z-index: 2200;
+    transition: background 0.3s ease;
 }
 
 .nav-btn:hover {
-    background: #ffffff;
-    color: #000000;
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.nav-btn.prev { left: 40px; }
-.nav-btn.next { right: 40px; }
+.nav-btn.prev { left: -80px; }
+.nav-btn.next { right: -80px; }
 
 /* ==========================================================================
-   8. AJUSTES DISPOSITIVOS MÓVILES
+   8. RESPONSIVE
    ========================================================================== */
-@media (max-width: 1024px) {
-    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    .nav-btn.prev { left: 15px; }
-    .nav-btn.next { right: 15px; }
-    .modal-close { top: 20px; right: 20px; }
+@media (max-width: 1200px) {
+    .nav-btn.prev { left: 20px; }
+    .nav-btn.next { right: 20px; }
+    .modal-close { right: 10px; top: -45px; }
 }
 
-@media (max-width: 680px) {
-    .projects-grid { grid-template-columns: 1fr; gap: 30px; }
-    .brand-title { font-size: 0.95rem; letter-spacing: 1px; }
-    .nav-links { gap: 15px; }
-    .nav-links a { font-size: 0.8rem; }
-    .modal-close { top: 15px; right: 15px; font-size: 32px; }
-    .modal-content-wrapper { width: 95%; }
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .navbar-container { padding: 0 20px; }
+    .portfolio-container { padding: 20px; }
 }
