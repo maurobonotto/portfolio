@@ -293,7 +293,7 @@
   {
     "id": "fumando-mi-musica",
     "categoria": "videoclips",
-    "titulo": "FUMANDO MI MÚSICA (...) (2023)",
+    "titulo": "FUMANDO MI MÚSICA (2023)",
     "detalles": [
       "Visualizador - DJ Sustancia"
     ],
@@ -326,9 +326,8 @@
   {
     "id": "dona-y-las-sombras",
     "categoria": "videoclips",
-    "titulo": "DOÑA Y LAS SOMBRAS (2018)",
+    "titulo": "DOÑA Y LAS SOMBRAS (2018) - Edición + animación",
     "detalles": [
-      "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/dona-y-las-sombras-videoclip.jpg",
@@ -349,9 +348,8 @@
   {
     "id": "soy",
     "categoria": "videoclips",
-    "titulo": "SOY (2018)",
+    "titulo": "SOY (2018) - Edición + animación",
     "detalles": [
-      "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/soy-videoclip.jpg",
@@ -361,9 +359,8 @@
   {
     "id": "ruedan",
     "categoria": "videoclips",
-    "titulo": "RUEDAN (2018)",
+    "titulo": "RUEDAN (2018) - Edición + animación",
     "detalles": [
-      "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/ruedan-videoclip.jpg",
