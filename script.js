@@ -154,27 +154,29 @@ document.addEventListener('DOMContentLoaded', () => {
         indiceVideoActual = 0;
     }
 
-    function actualizarModal() {
-        if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
-        
-        const videos = proyectoActual.videos;
-        const videoId = videos[indiceVideoActual];
-        
-        modalContent.innerHTML = `
-            <div class="iframe-container">
-                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
-                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        `;
-        
-        if (videos.length > 1) {
-            btnPrev.style.display = 'flex';
-            btnNext.style.display = 'flex';
-        } else {
-            btnPrev.style.display = 'none';
-            btnNext.style.display = 'none';
-        }
+   function actualizarModal() {
+    if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
+    
+    const videos = proyectoActual.videos;
+    const videoId = videos[indiceVideoActual];
+    
+    modalContent.innerHTML = `
+        <div class="iframe-container">
+            <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="autoplay; fullscreen; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+        </div>
+    `;
+    
+    if (videos.length > 1) {
+        btnPrev.style.display = 'flex';
+        btnNext.style.display = 'flex';
+    } else {
+        btnPrev.style.display = 'none';
+        btnNext.style.display = 'none';
     }
+}
 
     function navegarVideo(direccion) {
         if (!proyectoActual || !proyectoActual.videos) return;
