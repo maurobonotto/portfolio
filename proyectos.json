@@ -3,50 +3,99 @@
     "id": "el-farmer",
     "categoria": "documentales",
     "titulo": "EL FARMER (2016)",
-    "img": "assets/img/portadas/el-farmer-documentales.jpg",
-    "videos": ["glywlnkOWK4"]
+    "detalles": ["Película para televisión - 56 min.", "Editor principal", "Dir.: Leandro Ipiña", "Prod.: AONEK Cine / Canal Encuentro"],
+    "img": "assets/img/portadas/el-farmer-documentales.png",
+    "tipo_enlace": "popup",
+    "videos": ["glywinkOWK4"]
   },
   {
-    "id": "ejemplo-ficcion",
-    "categoria": "ficcion",
-    "titulo": "PROYECTO FICCIÓN 1",
-    "img": "assets/img/portadas/ejemplo.jpg",
-    "videos": ["tu_id_de_video_ficcion"]
+    "id": "equilibrios",
+    "categoria": "documentales",
+    "titulo": "EQUILIBRIOS (2015) - Co-editor",
+    "detalles": ["Serie - 13 caps. x 30 min.", "Dir.: Leandro Ipiña - Martín Subirá", "Prod.: AONEK Cine / Canal Encuentro"],
+    "img": "assets/img/portadas/equilibrios-documentales.png",
+    "tipo_enlace": "popup",
+    "videos": ["tnhR2NZowRQ"]
   },
   {
-    "id": "proyecto-externo",
-    "categoria": "ficcion",
-    "titulo": "PROYECTO EXTERNO",
-    "img": "assets/img/portadas/ejemplo.jpg",
-    "videos": [],
-    "link": "https://www.imdb.com"
+    "id": "una-de-amor",
+    "categoria": "documentales",
+    "titulo": "UNA DE AMOR (2014) - Co-editor",
+    "detalles": ["Serie - 13 caps. x 30 min.", "Dir.: Leandro Ipiña - Martín Subirá", "Prod.: AONEK Cine / Canal ACUA Mayor"],
+    "img": "assets/img/portadas/una-de-amor-documentales.png",
+    "tipo_enlace": "popup",
+    "videos": ["JhRz7wJUsHI"]
   },
   {
-    "id": "trailers-1",
-    "categoria": "trailers",
-    "titulo": "TRAILER EJEMPLO",
-    "img": "assets/img/portadas/ejemplo.jpg",
-    "videos": ["tu_id_de_video"]
+    "id": "cuatro-dias-berlin",
+    "categoria": "documentales",
+    "titulo": "CUATRO DÍAS EN BERLÍN (2019)",
+    "detalles": ["Cortometraje - 15 min.", "Dir.: Andrea Schellemberg"],
+    "img": "assets/img/portadas/cuatro-dias-berlin-documentales.png",
+    "tipo_enlace": "popup",
+    "videos": ["nqgFi4pGKak"]
   },
   {
-    "id": "comerciales-1",
-    "categoria": "comerciales",
-    "titulo": "COMERCIAL EJEMPLO",
-    "img": "assets/img/portadas/ejemplo.jpg",
-    "videos": ["tu_id_de_video"]
-  },
-  {
-    "id": "asistencia-1",
+    "id": "la-virgen",
     "categoria": "asistencia",
-    "titulo": "ASISTENCIA EJEMPLO",
-    "img": "assets/img/portadas/ejemplo.jpg",
-    "videos": ["tu_id_de_video"]
+    "titulo": "LA VÍRGEN DE LA TOSQUERA (2025)",
+    "detalles": ["Largometraje de ficción", "Dir.: Laura Casabé", "Prod.: Mostra Cine"],
+    "img": "assets/img/portadas/la-virgen-asistencia.png",
+    "tipo_enlace": "externo",
+    "link": "https://www.imdb.com/es/title/tt15460036/"
   },
   {
-    "id": "videoclips-1",
+    "id": "el-principe",
+    "categoria": "asistencia",
+    "titulo": "EL PRÍNCIPE DE NANAWA (2025)",
+    "detalles": ["Largometraje documental", "Dir.: Clarisa Navas", "Prod.: Gentil Cine"],
+    "img": "assets/img/portadas/el-principe-asistencia.png",
+    "tipo_enlace": "externo",
+    "link": "https://www.imdb.com/es/title/tt30006845/?ref_=fn_t_1"
+  },
+  {
+    "id": "fumando-mi-musica",
     "categoria": "videoclips",
-    "titulo": "VIDEOCLIP EJEMPLO",
-    "img": "assets/img/portadas/ejemplo.jpg",
-    "videos": ["tu_id_de_video"]
+    "titulo": "FUMANDO MI MÚSICA (2023)",
+    "detalles": ["Visualizador - DJ Sustancia"],
+    "img": "assets/img/portadas/fumando-mi-musica-videoclips.png",
+    "tipo_enlace": "popup",
+    "videos": ["lhL_RibqMEU"]
+  },
+  {
+    "id": "jean-con-jean",
+    "categoria": "videoclips",
+    "titulo": "JEAN CON JEAN (2022)",
+    "detalles": ["Videoclip - Spivi"],
+    "img": "assets/img/portadas/jean-con-jean-videoclips.png",
+    "tipo_enlace": "popup",
+    "videos": ["sRXkiASt35M"]
+  },
+  {
+    "id": "planificacion-estatal",
+    "categoria": "videoclips",
+    "titulo": "PLANIFICACIÓN ESTATAL (2018)",
+    "detalles": ["Videoclip - VBV (Varias Bandas a la Vez)"],
+    "img": "assets/img/portadas/planificacion-estatal-videoclips.png",
+    "tipo_enlace": "popup",
+    "videos": ["RiTcFBSvPCc"]
+  },
+  {
+    "id": "dona-y-las-sombras",
+    "categoria": "videoclips",
+    "titulo": "DOÑA Y LAS SOMBRAS (2018)",
+    "detalles": ["Edición + animación", "Videoclip - Anda Calabaza"],
+    "img": "assets/img/portadas/dona-y-las-sombras-videoclips.png",
+    "tipo_enlace": "popup",
+    "videos": ["vH29fX3i2j4"]
+  },
+  {
+    "id": "el-monstruo-sos-vos",
+    "categoria": "videoclips",
+    "titulo": "EL MONSTRUO SOS VOS (2018)",
+    "detalles": ["Videoclip - Anda Calabaza"],
+    "img": "assets/img/portadas/el-monstruo-sos-vos-videoclips.png",
+    "tipo_enlace": "popup",
+    "videos": ["zXbc-fPHNug"]
   }
 ]
