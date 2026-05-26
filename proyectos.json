@@ -1,18 +1,18 @@
 [
-  {
-    "id": "el-farmer",
-    "categoria": "documentales",
-    "titulo": "EL FARMER (2016)",
-    "detalles": [
-      "Película para televisión - 56 min.",
-      "Editor principal",
-      "Dir.: Leandro Ipiña",
-      "Prod.: AONEK Cine / Canal Encuentro"
-    ],
-    "img": "assets/img/portadas/el-farmer-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["glywlNkOWK4"]
-  },
+ {
+  "id": "el-farmer",
+  "categoria": "documentales",
+  "titulo": "EL FARMER (2016)",
+  "detalles": [
+    "Película para televisión - 56 min.",
+    "Editor principal",
+    "Dir.: Leandro Ipiña",
+    "Prod.: AONEK Cine / Canal Encuentro"
+  ],
+  "img": "assets/img/portadas/el-farmer-documentales.jpg",
+  "tipo_enlace": "externo",
+  "url_externa": "https://www.youtube.com/watch?v=glywlNkOWK4"
+},
   {
     "id": "equilibrios",
     "categoria": "documentales",
