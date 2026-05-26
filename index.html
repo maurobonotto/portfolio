@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAURO BONOTTO / Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <h1 class="brand-title">MAURO BONOTTO / Editor</h1>
+            <nav class="nav-links">
+                <a href="#" id="btnReel">Reel</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="menu-overlay" id="menu-overlay"></div>
+    <div class="sidebar-menu" id="sidebar-menu">
+        <nav class="sidebar-nav">
+            <a href="#" data-category="todos" class="sidebar-link">TODOS</a>
+            <a href="#" data-category="documentales" class="sidebar-link">DOCUMENTALES</a>
+            <a href="#" data-category="ficcion" class="sidebar-link">FICCIÓN</a>
+            <a href="#" data-category="trailers" class="sidebar-link">TRAILERS</a>
+            <a href="#" data-category="comerciales" class="sidebar-link">COMERCIALES</a>
+            <a href="#" data-category="asistencia" class="sidebar-link">ASISTENCIA DE EDICIÓN</a>
+            <a href="#" data-category="videoclips" class="sidebar-link">VIDEOCLIPS</a>
+        </nav>
+    </div>
+
+    <main id="portfolio" class="portfolio-container">
+        <div class="projects-grid" id="projects-grid">
+            </div>
+    </main>
+
+    <footer id="contacto" class="contact-section">
+        <div class="contact-content">
+            <p>CONTACTO</p>
+            <p>maurobonotto@gmail.com</p>
+            <p>(+54) 11 4090 8258</p>
+        </div>
+    </footer>
+
+    <div class="video-modal" id="video-modal">
+        <button class="modal-close" id="modal-close" aria-label="Cerrar modal"></button>
+        <button class="nav-btn prev" id="btn-prev" aria-label="Anterior"></button>
+        <button class="nav-btn next" id="btn-next" aria-label="Siguiente"></button>
+        <div class="modal-content" id="modal-media-content">
+            </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
