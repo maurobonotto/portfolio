@@ -1,153 +1,541 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let todosLosProyectos = [];
-    let proyectosFiltrados = [];
-    let indiceActual = 0;
+/* ==========================================================================
+   1. RESET MODERNO Y OPTIMIZACIONES TIPOGRÁFICAS
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    const grid = document.getElementById('projects-grid');
-    const modal = document.getElementById('video-modal');
-    const modalContent = document.getElementById('modal-media-content');
-    const btnClose = document.getElementById('modal-close');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnNext = document.getElementById('btn-next');
-    const menuToggle = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar-menu');
-    const overlay = document.getElementById('menu-overlay');
-    const sidebarLinks = document.querySelectorAll('.sidebar-link');
-    const btnReel = document.getElementById('btnReel');
+html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+}
 
-    async function cargarProyectos() {
-        try {
-            const respuesta = await fetch('proyectos.json');
-            if (!respuesta.ok) throw new Error('Error al cargar la base de datos JSON');
-            todosLosProyectos = await respuesta.json();
-            filtrarProyectos('todos');
-        } catch (error) {
-            console.error('Error crítico:', error);
-        }
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: var(--font-base);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: var(--header-height);
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================================================================
+   2. VARIABLES DE DISEÑO (SISTEMA DE DISEÑO)
+   ========================================================================== */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-surface: #121212;
+    --bg-card: #181818;
+    --text-main: #ffffff;
+    --text-muted: #8e8e93;
+    --accent: #ffffff;
+    --border-color: #222222;
+    --font-base: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --max-width: 1240px;
+    --header-height: 80px;
+    --transition-smooth: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ==========================================================================
+   3. NAVEGACIÓN Y CABECERA (NAVBAR)
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: var(--max-width);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity var(--transition-smooth);
+}
+
+.nav-links a:hover {
+    opacity: 0.6;
+}
+
+/* Botón Menú Hamburguesa */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 1.5px;
+    background-color: var(--text-main);
+    transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+    transform-origin: left center;
+}
+
+.menu-toggle.open .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(-2px);
+}
+
+.menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.menu-toggle.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(2px);
+}
+
+/* ==========================================================================
+   4. MENÚ LATERAL DESPLEGABLE (SIDEBAR)
+   ========================================================================== */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100%;
+    background-color: var(--bg-surface);
+    border-right: 1px solid var(--border-color);
+    transition: transform var(--transition-smooth);
+    z-index: 1050;
+    padding-top: 110px;
+    will-change: transform;
+}
+
+.sidebar-menu.active {
+    transform: translateX(320px);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 16px 40px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    border-left: 2px solid transparent;
+    transition: color var(--transition-smooth), background-color var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.sidebar-link:hover {
+    color: var(--text-main);
+    background-color: rgba(255, 255, 255, 0.03);
+    border-left-color: var(--accent);
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Asegura que no bloquee clics */
+    transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+    z-index: 1040;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Permite clics solo cuando está abierto */
+}
+
+/* ==========================================================================
+   5. CONTENEDOR PRINCIPAL Y MATRIZ DE PROYECTOS (GRID)
+   ========================================================================== */
+.portfolio-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 50px 30px;
+}
+
+.category-section {
+    margin-bottom: 80px;
+    scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+.category-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    margin-bottom: 35px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+}
+
+/* Tarjetas de Contenido */
+.project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--transition-smooth);
+}
+
+.project-card:hover {
+    border-color: #444444;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.04);
+}
+
+/* Capa de Reproducción Avanzada */
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-smooth);
+}
+
+.image-wrapper:hover .play-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.play-overlay::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid rgba(255, 255, 255, 0.9);
+    margin-left: 4px;
+    transition: transform var(--transition-smooth);
+}
+
+.image-wrapper:hover .play-overlay::after {
+    transform: scale(1.1);
+}
+
+.project-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 20px 20px 6px 20px;
+    line-height: 1.4;
+}
+
+.project-details {
+    padding: 0 20px 20px 20px;
+    flex-grow: 1;
+}
+
+.project-detail-line {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+}
+
+/* Modificadores estéticos específicos */
+.title-shorten .project-title {
+    display: none;
+}
+.title-shorten .project-details {
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   6. INTERFAZ MODAL Y CONTENEDORES DE VIDEO
+   ========================================================================== */
+.video-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(5, 5, 5, 0.98);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Asegura que no bloquee clics cuando está cerrado */
+    transition: opacity var(--transition-smooth), visibility var(--transition-smooth);
+    z-index: 2000;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Permite interacción solo cuando está visible */
+}
+
+.modal-content {
+    width: 92%;
+    max-width: 1000px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+.iframe-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding-bottom: 56.25%; /* Garantiza mantener 16:9 si aspect-ratio falla */
+    height: 0;
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Contenedor diferido con miniatura previa */
+.video-trigger-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.modal-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 76px;
+    height: 76px;
+    background-color: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-smooth), background-color var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.video-trigger-container:hover .modal-play-btn {
+    transform: translate(-50%, -50%) scale(1.05);
+    background-color: #000000;
+    border-color: #ffffff;
+}
+
+.modal-play-btn::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 18px solid #fff;
+    margin-left: 5px;
+}
+
+/* Interfaz de Control Modal */
+.modal-close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--transition-smooth);
+}
+
+.modal-close:hover {
+    color: var(--text-main);
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 20px;
+    padding: 16px 20px;
+    cursor: pointer;
+    z-index: 2100;
+    display: none;
+    border-radius: 6px;
+    transition: background var(--transition-smooth), border-color var(--transition-smooth);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.prev { left: -80px; }
+.next { right: -80px; }
+
+/* ==========================================================================
+   7. SECCIÓN DE CONTACTO (FOOTER)
+   ========================================================================== */
+.contact-section {
+    border-top: 1px solid var(--border-color);
+    padding: 80px 30px;
+    text-align: center;
+    background-color: var(--bg-surface);
+}
+
+.contact-content p {
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+}
+
+.contact-content p:first-child {
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN (BREAKPOINTS)
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .prev { left: 20px; }
+    .next { right: 20px; }
+    .modal-close {
+        top: 20px;
+        right: 20px;
+        z-index: 2200;
+        background: rgba(0,0,0,0.5);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
     }
+}
 
-    function filtrarProyectos(categoria) {
-        proyectosFiltrados = categoria === 'todos' 
-            ? todosLosProyectos 
-            : todosLosProyectos.filter(p => p.categoria === categoria);
-        renderizarGrid();
+@media (max-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
     }
+}
 
-    function renderizarGrid() {
-        grid.innerHTML = '';
-        proyectosFiltrados.forEach((proyecto, indice) => {
-            const card = document.createElement('div');
-            card.className = `project-card ${proyecto.categoria === 'asistencia' ? 'title-shorten' : ''}`;
-            
-            const lineasDetalle = proyecto.detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
-
-            card.innerHTML = `
-                <div class="image-wrapper" data-index="${indice}">
-                    <img src="${proyecto.img}" alt="${proyecto.titulo}" loading="lazy">
-                    ${proyecto.tipo_enlace !== 'estatico' ? '<div class="play-overlay"></div>' : ''}
-                </div>
-                <h3 class="project-title">${proyecto.titulo}</h3>
-                <div class="project-details">${lineasDetalle}</div>
-            `;
-
-            card.querySelector('.image-wrapper').addEventListener('click', () => {
-                ejecutarAccionProyecto(proyecto, indice);
-            });
-
-            grid.appendChild(card);
-        });
+@media (max-width: 768px) {
+    :root {
+        --header-height: 70px;
     }
-
-    function ejecutarAccionProyecto(proyecto, indice) {
-        if (proyecto.tipo_enlace === 'externo') {
-            window.open(proyecto.url_externa, '_blank');
-        } else if (proyecto.tipo_enlace === 'popup' || proyecto.tipo_enlace === 'carrusel') {
-            indiceActual = indice;
-            abrirModal(proyecto);
-        }
+    .portfolio-container {
+        padding: 40px 20px;
     }
-
-    function abrirModal(proyecto) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        actualizarContenidoModal(proyecto);
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
-
-    function cerrarModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        modalContent.innerHTML = ''; 
+    .brand-title {
+        font-size: 0.9rem;
+        letter-spacing: 1.5px;
     }
-
-    function actualizarContenidoModal(proyecto) {
-        modalContent.innerHTML = '';
-        btnPrev.style.display = proyectosFiltrados.length > 1 ? 'block' : 'none';
-        btnNext.style.display = proyectosFiltrados.length > 1 ? 'block' : 'none';
-
-        if (proyecto.videos && proyecto.videos.length > 0) {
-            const idPrincipal = proyecto.videos[0];
-            const restoVideos = proyecto.videos.slice(1).join(',');
-            const playlistQuery = restoVideos ? `&playlist=${restoVideos}` : '';
-            
-            modalContent.innerHTML = `
-                <div class="iframe-container">
-                    <iframe src="https://www.youtube.com/embed/${idPrincipal}?autoplay=1${playlistQuery}&rel=0" 
-                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                </div>`;
-        }
+    .nav-links {
+        display: none;
     }
-
-    function navegarModal(direccion) {
-        if (proyectosFiltrados.length <= 1) return;
-        indiceActual = direccion === 'next' 
-            ? (indiceActual + 1) % proyectosFiltrados.length 
-            : (indiceActual - 1 + proyectosFiltrados.length) % proyectosFiltrados.length;
-        
-        const siguienteProyecto = proyectosFiltrados[indiceActual];
-        if (siguienteProyecto.tipo_enlace === 'externo' || siguienteProyecto.tipo_enlace === 'estatico') {
-            navegarModal(direccion);
-        } else {
-            actualizarContenidoModal(siguienteProyecto);
-        }
+    .sidebar-menu {
+        width: 280px;
+        left: -280px;
     }
-
-    function alternarMenu() {
-        menuToggle.classList.toggle('open');
-        sidebar.classList.toggle('active');
-        if(overlay) overlay.classList.toggle('active');
+    .sidebar-menu.active {
+        transform: translateX(280px);
     }
-
-    function cerrarMenu() {
-        menuToggle.classList.remove('open');
-        sidebar.classList.remove('active');
-        if(overlay) overlay.classList.remove('active');
+    .sidebar-link {
+        padding: 16px 30px;
     }
-
-    menuToggle.addEventListener('click', alternarMenu);
-    if(overlay) overlay.addEventListener('click', cerrarMenu);
-    btnClose.addEventListener('click', cerrarModal);
-    btnPrev.addEventListener('click', () => navegarModal('prev'));
-    btnNext.addEventListener('click', () => navegarModal('next'));
-
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal();
-    });
-
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            filtrarProyectos(link.getAttribute('data-category'));
-            cerrarMenu();
-            document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    if(btnReel) {
-        btnReel.addEventListener('click', (e) => {
-            e.preventDefault();
-            abrirModal({tipo_enlace: 'popup', videos: ['glywlnkOWK4']});
-        });
+    .nav-arrow {
+        padding: 12px 16px;
+        font-size: 16px;
     }
-
-    cargarProyectos();
-});
+}
