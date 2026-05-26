@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const reelProyecto = {
         tipo_enlace: 'popup',
-        videos: ['i9Gemrs27vk']
+        videos: ['i9Gemrs27vk']   // ← ID CORRECTO del REEL
     };
 
     async function cargarProyectos() {
@@ -77,10 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let detalles = [...proyecto.detalles];
         let tituloHTML = proyecto.titulo;
         
-        // Reemplazar " - Co-editor" por span con cursiva
         tituloHTML = tituloHTML.replace(/ - Co-editor/g, '<span class="coeditor"> - Co-editor</span>');
         
-        // Buscar "Edición + animación" en detalles y mover al título con cursiva
         const indexEdicion = detalles.findIndex(d => d.includes("Edición + animación"));
         if (indexEdicion !== -1) {
             detalles.splice(indexEdicion, 1);
@@ -91,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const imageWrapper = document.createElement('div');
         imageWrapper.className = 'image-wrapper';
-        imageWrapper.setAttribute('data-id', proyecto.id);
         
         const img = document.createElement('img');
         img.src = proyecto.img;
@@ -132,11 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function ejecutarAccion(proyecto) {
         if (proyecto.tipo_enlace === 'externo') {
-          const a = document.createElement('a');
-a.href = proyecto.url_externa;
-a.target = '_blank';
-a.rel = 'noopener noreferrer';
-a.click();
+            // Enlace externo sin proxy, se abre en nueva pestaña
+            window.open(proyecto.url_externa, '_blank');
         } else if (proyecto.tipo_enlace === 'popup' || proyecto.tipo_enlace === 'carrusel') {
             proyectoActual = proyecto;
             indiceVideoActual = 0;
@@ -158,29 +152,27 @@ a.click();
         indiceVideoActual = 0;
     }
 
-   function actualizarModal() {
-    if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
-    
-    const videos = proyectoActual.videos;
-    const videoId = videos[indiceVideoActual];
-    
-    modalContent.innerHTML = `
-        <div class="iframe-container">
-            <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allow="autoplay; fullscreen; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-        </div>
-    `;
-    
-    if (videos.length > 1) {
-        btnPrev.style.display = 'flex';
-        btnNext.style.display = 'flex';
-    } else {
-        btnPrev.style.display = 'none';
-        btnNext.style.display = 'none';
+    function actualizarModal() {
+        if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
+        
+        const videos = proyectoActual.videos;
+        const videoId = videos[indiceVideoActual];
+        
+        modalContent.innerHTML = `
+            <div class="iframe-container">
+                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        `;
+        
+        if (videos.length > 1) {
+            btnPrev.style.display = 'flex';
+            btnNext.style.display = 'flex';
+        } else {
+            btnPrev.style.display = 'none';
+            btnNext.style.display = 'none';
+        }
     }
-}
 
     function navegarVideo(direccion) {
         if (!proyectoActual || !proyectoActual.videos) return;
@@ -236,7 +228,6 @@ a.click();
     menuToggle.addEventListener('click', alternarMenu);
     if (overlay) overlay.addEventListener('click', cerrarMenu);
     
-    // Links del menú lateral (categorías)
     sidebarLinks.forEach(link => {
         if (link.id === 'sidebarReel' || link.id === 'sidebarContacto') return;
         link.addEventListener('click', (e) => {
