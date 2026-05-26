@@ -152,34 +152,73 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function actualizarModal() {
-        if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
+    if (!proyectoActual || !proyectoActual.videos || proyectoActual.videos.length === 0) return;
+    
+    const videos = proyectoActual.videos;
+    const videoId = videos[indiceVideoActual];
+    const plataforma = proyectoActual.plataforma || 'youtube';
+    
+    let iframeSrc = '';
+    if (plataforma === 'vimeo') {
+        iframeSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1&controls=0`;
+    } else {
+        // YouTube: Controles desactivados y API habilitada
+        iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&enablejsapi=1&rel=0&modestbranding=1`;
+    }
+    
+    modalContent.innerHTML = `
+        <div class="iframe-container">
+            <iframe id="youtube-player" src="${iframeSrc}" 
+                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <button class="custom-play-pause" id="custom-play-pause">❚❚</button>
+    `;
+    
+    // --- Lógica para el botón personalizado (solo en YouTube) ---
+    if (plataforma !== 'vimeo') {
+        const iframe = document.getElementById('youtube-player');
+        const customBtn = document.getElementById('custom-play-pause');
         
-        const videos = proyectoActual.videos;
-        const videoId = videos[indiceVideoActual];
-        const plataforma = proyectoActual.plataforma || 'youtube';
-        
-        let iframeSrc = '';
-        if (plataforma === 'vimeo') {
-            iframeSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
-        } else {
-            iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        // Cargar la API de YouTube
+        if (typeof YT === 'undefined') {
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
         
-        modalContent.innerHTML = `
-            <div class="iframe-container">
-                <iframe src="${iframeSrc}" 
-                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        `;
+        // Inicializar el player cuando la API esté lista
+        let player;
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        };
         
-        if (videos.length > 1) {
-            btnPrev.style.display = 'flex';
-            btnNext.style.display = 'flex';
-        } else {
-            btnPrev.style.display = 'none';
-            btnNext.style.display = 'none';
+        function onPlayerReady(event) {
+            customBtn.addEventListener('click', () => {
+                if (player.getPlayerState() === 1) {
+                    player.pauseVideo();
+                    customBtn.textContent = '►';
+                } else {
+                    player.playVideo();
+                    customBtn.textContent = '❚❚';
+                }
+            });
         }
     }
+    
+    // Controles de navegación (flechas) para múltiples videos
+    if (videos.length > 1) {
+        btnPrev.style.display = 'flex';
+        btnNext.style.display = 'flex';
+    } else {
+        btnPrev.style.display = 'none';
+        btnNext.style.display = 'none';
+    }
+}
 
     function navegarVideo(direccion) {
         if (!proyectoActual || !proyectoActual.videos) return;
