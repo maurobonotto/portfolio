@@ -137,7 +137,8 @@
       "Dir.: Martín Subirá"
     ],
     "img": "assets/img/portadas/variaciones-en-blanco-trailer.jpg",
-    "tipo_enlace": "estatico"
+      "tipo_enlace": "popup",
+    "videos": ["XMHNUzoH9Ho"]
   },
   {
     "id": "una-de-amor-trailer",
