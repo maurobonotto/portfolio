@@ -77,6 +77,17 @@
     "tipo_enlace": "popup",
     "videos": ["ZUfHmM2n7bQ"]
   },
+   {
+    "id": "26-planeta-plasticos",
+    "categoria": "documentales",
+    "titulo": "26 PLANETA (2023)",
+    "detalles": [
+      "Episodio piloto: "Plásticos" - 33 min."
+    ],
+    "img": "assets/img/portadas/plasticos-documentales.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["VTsJnXI00uQ"]
+  },
   {
     "id": "anda-calabaza-ficcion",
     "categoria": "ficcion",
