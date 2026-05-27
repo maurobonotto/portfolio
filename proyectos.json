@@ -211,8 +211,8 @@
       "Dir.: Pascui Rivas"
     ],
     "img": "assets/img/portadas/bruha-comerciales.jpg",
-    "tipo_enlace": "carrusel",
-    "videos": ["qjsjeU0kOPY", "sUpLVuaQ-xE"]
+    "tipo_enlace": "popup",
+    "videos": ["qjsjeU0kOPY"]
   },
   {
     "id": "propymes",
