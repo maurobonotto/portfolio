@@ -36,8 +36,8 @@
       "Prod.: AONEK Cine / Canal ACUA Mayor"
     ],
     "img": "assets/img/portadas/una-de-amor-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["JhRz7wJUsHI"]
+    "tipo_enlace": "carrusel",
+    "videos": ["V0H9l3q8FrY", "bUySkMEJG-c"]
   },
   {
     "id": "cuatro-dias-en-berlin",
