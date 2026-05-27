@@ -74,8 +74,8 @@
       "Duro de domar (C5N - 2023 a 2025)"
     ],
     "img": "assets/img/portadas/informes-periodisticos-documentales.jpg",
-    "tipo_enlace": "popup",
-    "videos": ["ZUfHmM2n7bQ"]
+    "tipo_enlace": "carrusel",
+    "videos": ["ZUfHmM2n7bQ", "aV14Eq-3jDw"]
   },
    {
     "id": "id-26-planeta-plasticos",
