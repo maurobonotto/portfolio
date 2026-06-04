@@ -70,12 +70,20 @@ img {
     font-weight: 600;
     letter-spacing: 2.5px;
     text-transform: none;
+    margin-right: 0;
+}
+
+/* Language switch junto al título */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto; /* empuja REEL y CONTACTO a la derecha */
 }
 
 .nav-links {
     display: flex;
     gap: 30px;
-    margin-left: auto;
 }
 
 .nav-links a {
@@ -469,8 +477,65 @@ img {
     .modal-container { padding: 0 10px; }
     .nav-btn { font-size: 40px; }
     .modal-close { top: -40px; font-size: 28px; }
+    .lang-switch {
+        margin-right: 10px;
+    }
 }
 
 @media (max-width: 480px) {
     .nav-btn { font-size: 36px; }
+}
+
+/* ========== LANGUAGE SWITCH ========== */
+/* Estilos adicionales para el toggle (ya incluidos arriba, se mantienen) */
+.lang-option {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    transition: color var(--transition-smooth);
+}
+
+.lang-option.active-lang {
+    color: var(--text-main);
+}
+
+.toggle-slider {
+    width: 40px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toggle-knob {
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s ease;
+}
+
+.toggle-slider[data-lang="en"] .toggle-knob {
+    transform: translateX(20px);
+}
+
+@media (max-width: 768px) {
+    .lang-switch {
+        margin-right: 10px;
+        gap: 5px;
+    }
+    .toggle-slider {
+        width: 36px;
+        height: 18px;
+    }
+    .toggle-knob {
+        width: 14px;
+        height: 14px;
+    }
 }

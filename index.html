@@ -33,7 +33,17 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
-            <h1 class="brand-title">MAURO BONOTTO - Editor</h1>
+            <h1 class="brand-title">MAURO BONOTTO / Editor</h1>
+            
+            <!-- Language toggle switch -->
+            <div class="lang-switch" id="lang-switch">
+                <span class="lang-option" data-lang="es">ESP</span>
+                <div class="toggle-slider" id="toggle-slider">
+                    <div class="toggle-knob"></div>
+                </div>
+                <span class="lang-option" data-lang="en">ENG</span>
+            </div>
+
             <nav class="nav-links">
                 <a href="#" id="btnReel">Reel</a>
                 <a href="#contacto">Contacto</a>
@@ -44,15 +54,15 @@
     <div class="menu-overlay" id="menu-overlay"></div>
     <div class="sidebar-menu" id="sidebar-menu">
         <nav class="sidebar-nav">
-            <a href="#documentales" class="sidebar-link">DOCUMENTALES</a>
-            <a href="#ficcion" class="sidebar-link">FICCIÓN</a>
-            <a href="#trailers" class="sidebar-link">TRAILERS</a>
-            <a href="#comerciales" class="sidebar-link">COMERCIALES</a>
-            <a href="#asistencia" class="sidebar-link">ASISTENCIA DE EDICIÓN</a>
-            <a href="#videoclips" class="sidebar-link">VIDEOCLIPS</a>
+            <a href="#documentales" class="sidebar-link" data-key="doc">DOCUMENTALES</a>
+            <a href="#ficcion" class="sidebar-link" data-key="fic">FICCIÓN</a>
+            <a href="#trailers" class="sidebar-link" data-key="tra">TRAILERS</a>
+            <a href="#comerciales" class="sidebar-link" data-key="cor">COMERCIALES</a>
+            <a href="#asistencia" class="sidebar-link" data-key="asi">ASISTENCIA DE EDICIÓN</a>
+            <a href="#videoclips" class="sidebar-link" data-key="vid">VIDEOCLIPS</a>
             <div class="sidebar-divider"></div>
             <a href="#" id="sidebarReel" class="sidebar-link">REEL</a>
-            <a href="#contacto" id="sidebarContacto" class="sidebar-link">CONTACTO</a>
+            <a href="#contacto" id="sidebarContacto" class="sidebar-link" data-key="con">CONTACTO</a>
         </nav>
     </div>
 
@@ -60,7 +70,7 @@
 
     <footer id="contacto" class="contact-section">
         <div class="contact-content">
-            <p>CONTACTO</p>
+            <p data-key="contact_title">CONTACTO</p>
             <p>maurobonotto@gmail.com</p>
             <p>(+54) 11 4090 8258</p>
         </div>
