@@ -324,6 +324,13 @@ img {
     margin-bottom: 3px;
 }
 
+.project-rol {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-style: italic;
+    font-weight: normal;
+}
 /* ========== MODAL ========== */
 .video-modal {
     position: fixed;

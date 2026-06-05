@@ -3,9 +3,9 @@
     "id": "el-farmer",
     "categoria": "documentales",
     "titulo": "EL FARMER (2016)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Película para televisión - 56 min.",
-      "Editor principal",
       "Dir.: Leandro Ipiña",
       "Prod.: AONEK Cine / Canal Encuentro"
     ],
@@ -16,7 +16,8 @@
   {
     "id": "equilibrios",
     "categoria": "documentales",
-    "titulo": "EQUILIBRIOS (2015) - Co-editor",
+    "titulo": "EQUILIBRIOS (2015)",
+    "rol": "Co-edición + Guion de montaje",
     "detalles": [
       "Serie documental - 13 caps. x 30 min.",
       "Dir.: Leandro Ipiña - Martín Subirá",
@@ -29,7 +30,8 @@
   {
     "id": "una-de-amor",
     "categoria": "documentales",
-    "titulo": "UNA DE AMOR (2014) - Co-editor",
+    "titulo": "UNA DE AMOR (2014)",
+    "rol": "Co-edición + Guion de montaje",
     "detalles": [
       "Serie documental - 13 caps. x 30 min.",
       "Dir.: Leandro Ipiña - Martín Subirá",
@@ -43,6 +45,7 @@
     "id": "cuatro-dias-en-berlin",
     "categoria": "documentales",
     "titulo": "CUATRO DÍAS EN BERLÍN (2019)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Cortometraje - 15 min.",
       "Dir.: Andrea Schellemberg"
@@ -55,6 +58,7 @@
     "id": "homenaje-leonardo-favio",
     "categoria": "documentales",
     "titulo": "HOMENAJE A LEONARDO FAVIO (2022)",
+    "rol": "Edición + Asistencia de dirección",
     "detalles": [
       "Proyecto 360° - 10 min.",
       "Sala Inmersiva del CCK"
@@ -67,8 +71,9 @@
     "id": "informes-periodisticos",
     "categoria": "documentales",
     "titulo": "INFORMES PERIODÍSTICOS",
+    "rol": "Co-edición + Guion de montaje",
     "detalles": [
-      "Notas e informes especiales para:",
+      "Notas periodísticas e informes especiales para:",
       "Telefe Noticias (Telefe - 2018 a 2022)",
       "La Divina Noche de Dante (Canal 9 - 2022)",
       "Duro de domar (C5N - 2023 a 2025)"
@@ -81,6 +86,7 @@
     "id": "id-26-planeta-plasticos",
     "categoria": "documentales",
     "titulo": "26 PLANETA (2023)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Episodio piloto: Plásticos - 33 min.",
       "Canal 26"
@@ -93,6 +99,7 @@
     "id": "anda-calabaza-ficcion",
     "categoria": "ficcion",
     "titulo": "ANDA CALABAZA Y EL SHOW DE LO NUEVO (2018)",
+    "rol": "Edición + Animaciones AFX",
     "detalles": [
       "Serie web infantil - 8 caps. x 5-10 min.",
       "Dir.: Leandro Ipiña",
@@ -106,6 +113,7 @@
     "id": "unos-dias-ficcion",
     "categoria": "ficcion",
     "titulo": "UNOS DÍAS (2025)",
+    "rol": "Edición",
     "detalles": [
       "Cortometraje",
       "Dir.: Brenda y Mauro Bonotto"
@@ -118,6 +126,7 @@
     "id": "el-principe-de-nanawa-trailer",
     "categoria": "trailers",
     "titulo": "EL PRÍNCIPE DE NANAWA (2025)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para largometraje documental",
       "Dir.: Clarisa Navas",
@@ -131,6 +140,7 @@
     "id": "el-siervo-inutil",
     "categoria": "trailers",
     "titulo": "EL SIERVO INÚTIL (2023)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para largometraje de ficción",
       "Dir.: Fernando Lacolla",
@@ -144,6 +154,7 @@
     "id": "variaciones-en-blanco",
     "categoria": "trailers",
     "titulo": "VARIACIONES EN BLANCO (2018)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para largometraje documental",
       "Dir.: Martín Subirá"
@@ -156,6 +167,7 @@
     "id": "una-de-amor-trailer",
     "categoria": "trailers",
     "titulo": "UNA DE AMOR (2014)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para serie documental",
       "Dir.: Leandro Ipiña - Martín Subirá",
@@ -169,6 +181,7 @@
     "id": "unos-dias-trailer",
     "categoria": "trailers",
     "titulo": "UNOS DÍAS (2025)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para cortometraje",
       "Dir.: Brenda y Mauro Bonotto"
@@ -181,6 +194,7 @@
     "id": "anda-calabaza-trailer",
     "categoria": "trailers",
     "titulo": "ANDA CALABAZA Y EL SHOW DE LO NUEVO (2018)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para serie web infantil",
       "Dir.: Leandro Ipiña",
@@ -194,6 +208,7 @@
     "id": "la-terminal",
     "categoria": "trailers",
     "titulo": "LA TERMINAL (2023)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para película documental",
       "Dir.: Gustavo Fontán",
@@ -207,6 +222,7 @@
     "id": "dinamogramas",
     "categoria": "trailers",
     "titulo": "DINAMOGRAMAS (2025)",
+    "rol": "Edición",
     "detalles": [
       "Trailer para película documental",
       "Dir.: Andrea Schellemberg"
@@ -219,6 +235,7 @@
     "id": "bruha",
     "categoria": "comerciales",
     "titulo": "BRUHA - ART COLLECTION (2024)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Documental Web - 3 caps. x 4min",
       "Dir.: Pascui Rivas"
@@ -231,6 +248,7 @@
     "id": "propymes",
     "categoria": "comerciales",
     "titulo": "PROPYMES (2024)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Institucional para proyección en evento",
       "Dir.: Leandro Ipiña",
@@ -244,6 +262,7 @@
     "id": "surmax",
     "categoria": "comerciales",
     "titulo": "SURMAX (2022)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Serie Web - 2 caps. x 15 min.",
       "Dir.: Mariano García"
@@ -256,6 +275,7 @@
     "id": "ba-lgtb",
     "categoria": "comerciales",
     "titulo": "BA LGTB (2017)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Documental publicitario - 7 min.",
       "Prod.: AONEK Cine / Turismo - Ciudad de Buenos Aires"
@@ -268,6 +288,7 @@
     "id": "fundacion-la-base",
     "categoria": "comerciales",
     "titulo": "FUNDACIÓN LA BASE (2014)",
+    "rol": "Edición + Guion de montaje",
     "detalles": [
       "Instructivos - 2 videos x 10min."
     ],
@@ -280,8 +301,8 @@
     "id": "la-virgen-de-la-tosquera",
     "categoria": "asistencia",
     "titulo": "LA VÍRGEN DE LA TOSQUERA (2025)",
+    "rol": "Asistencia de edición",
     "detalles": [
-      "Asistente de edición",
       "Largometraje de ficción",
       "Dir.: Laura Casabé",
       "Prod.: Mostra Cine"
@@ -294,8 +315,8 @@
     "id": "el-principe-de-nanawa-asistencia",
     "categoria": "asistencia",
     "titulo": "EL PRÍNCIPE DE NANAWA (2025)",
+    "rol": "Asistencia de edición",
     "detalles": [
-      "Asistente de edición",
       "Largometraje documental",
       "Dir.: Clarisa Navas",
       "Prod.: Gentil Cine"
@@ -308,6 +329,7 @@
     "id": "fumando-mi-musica",
     "categoria": "videoclips",
     "titulo": "FUMANDO MI MÚSICA (2023)",
+    "rol": "Edición",
     "detalles": [
       "Visualizador - DJ Sustancia"
     ],
@@ -319,6 +341,7 @@
     "id": "jean-con-jean",
     "categoria": "videoclips",
     "titulo": "JEAN CON JEAN (2022)",
+    "rol": "Edición",
     "detalles": [
       "Videoclip - Spivi"
     ],
@@ -330,6 +353,7 @@
     "id": "planificacion-estatal",
     "categoria": "videoclips",
     "titulo": "PLANIFICACIÓN ESTATAL (2018)",
+    "rol": "Edición",
     "detalles": [
       "Videoclip - VBV (Varias Bandas a la Vez)"
     ],
@@ -341,8 +365,8 @@
     "id": "dona-y-las-sombras",
     "categoria": "videoclips",
     "titulo": "DOÑA Y LAS SOMBRAS (2018)",
+    "rol": "Edición + Animaciones AFX",
     "detalles": [
-      "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/dona-y-las-sombras-videoclip.jpg",
@@ -353,6 +377,7 @@
     "id": "el-monstruo-sos-vos",
     "categoria": "videoclips",
     "titulo": "EL MONSTRUO SOS VOS (2018)",
+    "rol": "Edición",
     "detalles": [
       "Videoclip - Anda Calabaza"
     ],
@@ -364,8 +389,8 @@
     "id": "soy",
     "categoria": "videoclips",
     "titulo": "SOY (2018)",
+    "rol": "Edición + Animaciones AFX",
     "detalles": [
-      "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/soy-videoclip.jpg",
@@ -375,8 +400,8 @@
     "id": "ruedan",
     "categoria": "videoclips",
     "titulo": "RUEDAN (2018)",
+    "rol": "Edición + Animaciones AFX",
     "detalles": [
-      "Edición + animación",
       "Videoclip - Anda Calabaza"
     ],
     "img": "assets/img/portadas/ruedan-videoclip.jpg",

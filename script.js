@@ -259,85 +259,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function crearCard(proyecto) {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        
-        let detalles = [...proyecto.detalles];
-        let tituloHTML = proyecto.titulo;
-        
-        // Eliminar "Editor principal" solo para el proyecto "el-farmer"
-        if (proyecto.id === 'el-farmer') {
-            detalles = detalles.filter(linea => linea !== 'Editor principal');
-        }
-        
-        // Manejo de " - Co-editor" en el título
-        let tieneCoeditor = false;
-        if (tituloHTML.includes(' - Co-editor')) {
-            tieneCoeditor = true;
-            tituloHTML = tituloHTML.replace(' - Co-editor', '');
-        }
-        
-        if (idiomaActual === 'en') {
-            detalles = detalles.map(linea => traducirDetalle(linea, 'en'));
-            tituloHTML = traducirTitulo(tituloHTML, 'en');
-        } else {
-            tituloHTML = traducirTitulo(tituloHTML, 'es');
-        }
-        
-        // Si tenía Co-editor, agregar la línea correspondiente al principio de detalles
-        if (tieneCoeditor) {
-            const textoCoeditor = (idiomaActual === 'es') ? 'Co-editor' : 'Co-editor';
-            detalles.unshift(textoCoeditor);
-        }
-        
-        tituloHTML = tituloHTML.replace(/ - Co-editor/g, '<span class="coeditor"> - Co-editor</span>');
-        
-        const indexEdicion = detalles.findIndex(d => d.includes("Editing + Animation") || d.includes("Edición + animación"));
-        if (indexEdicion !== -1) {
-            detalles.splice(indexEdicion, 1);
-            const textoEdicion = (idiomaActual === 'es') ? ' - Edición + animación' : ' - Editing + Animation';
-            tituloHTML += `<span class="coeditor">${textoEdicion}</span>`;
-        }
-        
-        const lineasDetalle = detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
-        
-        const imageWrapper = document.createElement('div');
-        imageWrapper.className = 'image-wrapper';
-        
-        const img = document.createElement('img');
-        img.src = proyecto.img;
-        img.alt = proyecto.titulo;
-        img.loading = 'lazy';
-        imageWrapper.appendChild(img);
-        
-        if (proyecto.tipo_enlace !== 'estatico') {
-            const overlayPlay = document.createElement('div');
-            overlayPlay.className = 'play-overlay';
-            imageWrapper.appendChild(overlayPlay);
-            if (proyecto.tipo_enlace === 'externo') {
-                imageWrapper.classList.add('link-externo');
-            }
-            imageWrapper.addEventListener('click', () => {
-                ejecutarAccion(proyecto);
-            });
-        } else {
-            imageWrapper.style.cursor = 'default';
-        }
-        
-        const title = document.createElement('h3');
-        title.className = 'project-title';
-        title.innerHTML = tituloHTML;
-        
-        const detailsDiv = document.createElement('div');
-        detailsDiv.className = 'project-details';
-        detailsDiv.innerHTML = lineasDetalle;
-        
-        card.appendChild(imageWrapper);
-        card.appendChild(title);
-        card.appendChild(detailsDiv);
-        
-        return card;
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    
+    let detalles = [...proyecto.detalles];
+    let tituloHTML = proyecto.titulo;
+    
+    // === MOSTRAR EL ROL (sin traducción, solo español) ===
+    let rolTexto = '';
+    if (proyecto.rol) {
+        rolTexto = `<p class="project-rol">${proyecto.rol}</p>`;
     }
+    
+    // Eliminamos lógica antigua de "Co-editor" en el título y "Editor principal" porque ahora usamos "rol"
+    // Pero mantenemos la traducción de detalles (aunque por ahora está en español, no pasa nada)
+    // Como estamos en español, no aplicamos traducciones a detalles ni título.
+    
+    // (Opcional: si quieres conservar el manejo de "Edición + animación" en el título, lo dejamos)
+    const indexEdicion = detalles.findIndex(d => d.includes("Edición + animación"));
+    if (indexEdicion !== -1) {
+        detalles.splice(indexEdicion, 1);
+        tituloHTML += `<span class="coeditor"> - Edición + animación</span>`;
+    }
+    
+    const lineasDetalle = detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
+    
+    // === Construcción del DOM ===
+    const imageWrapper = document.createElement('div');
+    imageWrapper.className = 'image-wrapper';
+    const img = document.createElement('img');
+    img.src = proyecto.img;
+    img.alt = proyecto.titulo;
+    img.loading = 'lazy';
+    imageWrapper.appendChild(img);
+    
+    if (proyecto.tipo_enlace !== 'estatico') {
+        const overlayPlay = document.createElement('div');
+        overlayPlay.className = 'play-overlay';
+        imageWrapper.appendChild(overlayPlay);
+        if (proyecto.tipo_enlace === 'externo') {
+            imageWrapper.classList.add('link-externo');
+        }
+        imageWrapper.addEventListener('click', () => {
+            ejecutarAccion(proyecto);
+        });
+    } else {
+        imageWrapper.style.cursor = 'default';
+    }
+    
+    const title = document.createElement('h3');
+    title.className = 'project-title';
+    title.innerHTML = tituloHTML;
+    
+    const detailsDiv = document.createElement('div');
+    detailsDiv.className = 'project-details';
+    detailsDiv.innerHTML = rolTexto + lineasDetalle;
+    
+    card.appendChild(imageWrapper);
+    card.appendChild(title);
+    card.appendChild(detailsDiv);
+    
+    return card;
+}
 
     function ejecutarAccion(proyecto) {
         if (proyecto.tipo_enlace === 'externo') {
