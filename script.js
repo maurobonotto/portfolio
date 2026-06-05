@@ -52,61 +52,90 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    function traducirDetalle(texto, idioma) {
-        if (idioma === 'es') return texto;
+   function traducirDetalle(texto, idioma) {
+    if (idioma === 'es') return texto;
 
-        const mapa = [
-            [' - 2018 a 2022', ' - 2018 to 2022'],
-            [' - 2023 a 2025', ' - 2023 to 2025'],
-            ['a 2022', 'to 2022'],
-            ['a 2025', 'to 2025'],
-            ['Canal Encuentro', 'Encuentro Channel, Argentina'],
-            ['Canal ACUA Mayor', 'ACUA Mayor Channel, Argentina'],
-            ['Canal 9', 'Channel 9, Argentina'],
-            ['Canal 26', 'Channel 26, Argentina'],
-            ['C5N', 'C5N Channel, Argentina'],
-            ['Editor principal', 'Lead Editor'],
-            ['Co-editor', 'Co-editor'],
-            ['Edición \\+ animación', 'Editing + Animation'],
-            ['Asistente de edición', 'Assistant Editor'],
-            ['Película para televisión - 56 min.', 'TV Movie - 56 min.'],
-            ['Cortometraje - 15 min.', 'Short Film - 15 min.'],
-            ['Largometraje documental', 'Documentary Feature'],
-            ['Largometraje de ficción', 'Fiction Feature'],
-            ['Serie - 13 caps. x 30 min.', 'Series - 13 eps. x 30 min.'],
-            ['Serie web infantil - 8 caps. x 5-10 min.', 'Kids Web Series - 8 eps. x 5-10 min.'],
-            ['Episodio piloto: Plásticos - 33 min.', 'Pilot Episode: Plastics - 33 min.'],
-            ['Trailer para largometraje documental', 'Trailer for Documentary Feature'],
-            ['Trailer para largometraje de ficción', 'Trailer for Fiction Feature'],
-            ['Trailer para serie documental', 'Trailer for Documentary Series'],
-            ['Trailer para cortometraje', 'Trailer for Short Film'],
-            ['Trailer para serie web infantil', 'Trailer for Kids Web Series'],
-            ['Documental Web - 3 caps. x 4min', 'Web Documentary - 3 eps. x 4 min'],
-            ['Institucional para proyección en evento', 'Corporate Video for Event Screening'],
-            ['Serie Web - 2 caps. x 15 min.', 'Web Series - 2 eps. x 15 min.'],
-            ['Documental publicitario - 7 min.', 'Commercial Documentary - 7 min.'],
-            ['Instructivos - 2 videos x 10min.', 'Tutorials - 2 videos x 10 min.'],
-            ['Visualizador - DJ Sustancia', 'Visualizer - DJ Sustancia'],
-            ['Videoclip - Spivi', 'Music Video - Spivi'],
-            ['Videoclip - VBV', 'Music Video - VBV'],
-            ['Proyecto 360° - 10 min.', '360° Screening - 10 min.'],
-            ['Sala Inmersiva del CCK', 'Immersive Room - CCK'],
-            ['Telefe Noticias', 'Telefe News'],
-            ['Telefe', 'Telefe'],
-            ['La Divina Noche de Dante', 'La Divina Noche de Dante'],
-            ['Duro de domar', 'Duro de domar'],
-            ['Turismo - Ciudad de Buenos Aires', 'Tourism - Buenos Aires City'],
-            ['Brenda y Mauro Bonotto', 'Brenda & Mauro Bonotto'],
-            ['Notas e informes especiales para:', 'Special reports and segments for:']
-        ];
+    const reglas = [
+        // === TELEFE (casos concretos, sin duplicación) ===
+        [/Telefe Noticias \(Telefe - (\d{4} a \d{4})\)/i, 'Telefe News (Telefe Channel, Argentina - $1)'],
+        [/Telefe - (\d{4} a \d{4})/i, 'Telefe Channel, Argentina - $1'],
+        [/\(Telefe\)/i, '(Telefe Channel, Argentina)'],
 
-        for (let [es, en] of mapa) {
-            if (texto.includes(es)) {
-                return texto.replace(new RegExp(es.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), en);
-            }
+        // === TRAILERS (frases completas, ANTES de que se traduzcan sus partes) ===
+        ['Trailer para largometraje documental', 'Trailer for Documentary Feature'],
+        ['Trailer para largometraje de ficción', 'Trailer for Fiction Feature'],
+        ['Trailer para serie documental', 'Trailer for Documentary Series'],
+        ['Trailer para cortometraje', 'Trailer for Short Film'],
+        ['Trailer para película documental', 'Trailer for Documentary Feature'],
+        ['Trailer para serie web infantil', 'Trailer for Kids Web Series'],
+
+        // === FRASES CON NÚMEROS (documentales, series, comerciales) ===
+        [/Episodio piloto: Plásticos - (\d+) min\.?/i, 'Pilot Episode: Plastics - $1 min'],
+        [/Documental publicitario - (\d+) min\.?/i, 'Commercial Documentary - $1 min'],
+        [/Película para televisión - (\d+) min\.?/i, 'TV Movie - $1 min'],
+        [/Cortometraje - (\d+) min\.?/i, 'Short Film - $1 min'],
+        [/Proyecto 360° - (\d+) min\.?/i, '360° Screening - $1 min'],
+        [/Instructivos - (\d+) videos x (\d+)min\.?/i, 'Tutorials - $1 videos x $2 min'],
+        [/Documental Web - (\d+) caps\. x (\d+)min/i, 'Web Documentary - $1 eps. x $2 min'],
+        [/Serie Web - (\d+) caps\. x (\d+) min\.?/i, 'Web Series - $1 eps. x $2 min'],
+        [/Serie documental - (\d+) caps\. x (\d+) min\.?/i, 'Documentary Series - $1 eps. x $2 min'],
+        [/Serie web infantil - (\d+) caps\. x ([\d\-]+) min\.?/i, 'Kids Web Series - $1 eps. x $2 min'],
+
+        // === OTRAS FRASES COMPLETAS (sin números) ===
+        ['Institucional para proyección en evento', 'Corporate Video for Event Screening'],
+        ['Notas e informes especiales para:', 'Special reports and news segments for:'],
+        ['Sala Inmersiva del CCK', 'Immersive Room - CCK (Argentina)'],
+        ['Turismo - Ciudad de Buenos Aires', 'Tourism - Buenos Aires City'],
+        ['Largometraje documental', 'Documentary Feature'],
+        ['Largometraje de ficción', 'Fiction Feature'],
+        ['Película documental', 'Documentary Feature'],
+        ['Serie web infantil', 'Kids Web Series'],
+        ['Serie documental', 'Documentary Series'],
+        ['Documental Web', 'Web Documentary'],
+        ['Proyecto 360°', '360° Screening'],
+        ['Brenda y Mauro Bonotto', 'Brenda & Mauro Bonotto'],
+        ['Edición + animación', 'Editing + Animation'],
+        ['Asistente de edición', 'Assistant Editor'],
+        ['Editor principal', 'Lead Editor'],
+        ['Documental publicitario', 'Commercial Documentary'],
+        ['Película para televisión', 'TV Movie'],
+        ['Instructivos', 'Tutorials'],
+        ['Visualizador', 'Visualizer'],
+        ['Videoclip', 'Music Video'],
+        ['Cortometraje', 'Short Film'],
+
+        // === CANALES Y PRODUCTORAS (sin duplicación de país) ===
+        ['Canal Encuentro', 'Encuentro Channel, Argentina'],
+        ['Canal ACUA Mayor', 'ACUA Mayor Channel, Argentina'],
+        ['Canal 9', 'Channel 9, Argentina'],
+        ['Canal 26', 'Channel 26, Argentina'],
+        ['C5N', 'C5N Channel, Argentina'],
+
+        // === RANGOS DE AÑOS ===
+        [/(\d{4}) a (\d{4})/i, '$1 to $2'],
+        [/(\d{4}) a /i, '$1 to '],
+        [/ a (\d{4})/i, ' to $1'],
+
+        // === UNIDADES (siempre al final) ===
+        ['caps\\.', 'eps.'],
+        ['min\\.', 'min'],
+        [/(\d+)min/i, '$1 min'],
+    ];
+
+    let resultado = texto;
+    for (let [buscar, reemplazar] of reglas) {
+        if (typeof buscar === 'string') {
+            const escapado = buscar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(escapado, 'gi');
+            resultado = resultado.replace(regex, reemplazar);
+        } else if (buscar instanceof RegExp) {
+            resultado = resultado.replace(buscar, reemplazar);
         }
-        return texto;
     }
+    // Limpiar espacios dobles
+    resultado = resultado.replace(/\s+/g, ' ').trim();
+    return resultado;
+}
 
     function traducirTitulo(titulo, idioma) {
         if (idioma === 'es') {
