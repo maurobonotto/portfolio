@@ -52,90 +52,113 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-   function traducirDetalle(texto, idioma) {
-    if (idioma === 'es') return texto;
-
-    const reglas = [
-        // === TELEFE (casos concretos, sin duplicación) ===
-        [/Telefe Noticias \(Telefe - (\d{4} a \d{4})\)/i, 'Telefe News (Telefe Channel, Argentina - $1)'],
-        [/Telefe - (\d{4} a \d{4})/i, 'Telefe Channel, Argentina - $1'],
-        [/\(Telefe\)/i, '(Telefe Channel, Argentina)'],
-
-        // === TRAILERS (frases completas, ANTES de que se traduzcan sus partes) ===
-        ['Trailer para largometraje documental', 'Trailer for Documentary Feature'],
-        ['Trailer para largometraje de ficción', 'Trailer for Fiction Feature'],
-        ['Trailer para serie documental', 'Trailer for Documentary Series'],
-        ['Trailer para cortometraje', 'Trailer for Short Film'],
-        ['Trailer para película documental', 'Trailer for Documentary Feature'],
-        ['Trailer para serie web infantil', 'Trailer for Kids Web Series'],
-
-        // === FRASES CON NÚMEROS (documentales, series, comerciales) ===
-        [/Episodio piloto: Plásticos - (\d+) min\.?/i, 'Pilot Episode: Plastics - $1 min'],
-        [/Documental publicitario - (\d+) min\.?/i, 'Commercial Documentary - $1 min'],
-        [/Película para televisión - (\d+) min\.?/i, 'TV Movie - $1 min'],
-        [/Cortometraje - (\d+) min\.?/i, 'Short Film - $1 min'],
-        [/Proyecto 360° - (\d+) min\.?/i, '360° Screening - $1 min'],
-        [/Instructivos - (\d+) videos x (\d+)min\.?/i, 'Tutorials - $1 videos x $2 min'],
-        [/Documental Web - (\d+) caps\. x (\d+)min/i, 'Web Documentary - $1 eps. x $2 min'],
-        [/Serie Web - (\d+) caps\. x (\d+) min\.?/i, 'Web Series - $1 eps. x $2 min'],
-        [/Serie documental - (\d+) caps\. x (\d+) min\.?/i, 'Documentary Series - $1 eps. x $2 min'],
-        [/Serie web infantil - (\d+) caps\. x ([\d\-]+) min\.?/i, 'Kids Web Series - $1 eps. x $2 min'],
-
-        // === OTRAS FRASES COMPLETAS (sin números) ===
-        ['Institucional para proyección en evento', 'Corporate Video for Event Screening'],
-        ['Notas e informes especiales para:', 'Special reports and news segments for:'],
-        ['Sala Inmersiva del CCK', 'Immersive Room - CCK (Argentina)'],
-        ['Turismo - Ciudad de Buenos Aires', 'Tourism - Buenos Aires City'],
-        ['Largometraje documental', 'Documentary Feature'],
-        ['Largometraje de ficción', 'Fiction Feature'],
-        ['Película documental', 'Documentary Feature'],
-        ['Serie web infantil', 'Kids Web Series'],
-        ['Serie documental', 'Documentary Series'],
-        ['Documental Web', 'Web Documentary'],
-        ['Proyecto 360°', '360° Screening'],
-        ['Brenda y Mauro Bonotto', 'Brenda & Mauro Bonotto'],
-        ['Edición + animación', 'Editing + Animation'],
-        ['Asistente de edición', 'Assistant Editor'],
-        ['Editor principal', 'Lead Editor'],
-        ['Documental publicitario', 'Commercial Documentary'],
-        ['Película para televisión', 'TV Movie'],
-        ['Instructivos', 'Tutorials'],
-        ['Visualizador', 'Visualizer'],
-        ['Videoclip', 'Music Video'],
-        ['Cortometraje', 'Short Film'],
-
-        // === CANALES Y PRODUCTORAS (sin duplicación de país) ===
-        ['Canal Encuentro', 'Encuentro Channel, Argentina'],
-        ['Canal ACUA Mayor', 'ACUA Mayor Channel, Argentina'],
-        ['Canal 9', 'Channel 9, Argentina'],
-        ['Canal 26', 'Channel 26, Argentina'],
-        ['C5N', 'C5N Channel, Argentina'],
-
-        // === RANGOS DE AÑOS ===
-        [/(\d{4}) a (\d{4})/i, '$1 to $2'],
-        [/(\d{4}) a /i, '$1 to '],
-        [/ a (\d{4})/i, ' to $1'],
-
-        // === UNIDADES (siempre al final) ===
-        ['caps\\.', 'eps.'],
-        ['min\\.', 'min'],
-        [/(\d+)min/i, '$1 min'],
-    ];
-
-    let resultado = texto;
-    for (let [buscar, reemplazar] of reglas) {
-        if (typeof buscar === 'string') {
-            const escapado = buscar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(escapado, 'gi');
-            resultado = resultado.replace(regex, reemplazar);
-        } else if (buscar instanceof RegExp) {
-            resultado = resultado.replace(buscar, reemplazar);
+    // ========== DICCIONARIO DE TRADUCCIÓN DE ROLES ==========
+    const rolTraducciones = {
+        es: {
+            'Edición': 'Edición',
+            'Co-edición': 'Co-edición',
+            'Asistencia de edición': 'Asistencia de edición',
+            'Edición + Guion de montaje': 'Edición + Guion de montaje',
+            'Co-edición + Guion de montaje': 'Co-edición + Guion de montaje',
+            'Edición + Animaciones AFX': 'Edición + Animaciones AFX',
+            'Edición + Asistencia de dirección': 'Edición + Asistencia de dirección'
+        },
+        en: {
+            'Edición': 'Lead Editor',
+            'Co-edición': 'Co-editing',
+            'Asistencia de edición': 'Assistant Editor',
+            'Edición + Guion de montaje': 'Lead Editor + Story Editor',
+            'Co-edición + Guion de montaje': 'Co-editing + Story Editor',
+            'Edición + Animaciones AFX': 'Lead Editor + AFX Animation',
+            'Edición + Asistencia de dirección': 'Lead Editor + Assistant Director'
         }
+    };
+
+    // ========== TRADUCCIÓN DE DETALLES ==========
+    function traducirDetalle(texto, idioma) {
+        if (idioma === 'es') return texto;
+
+        const reglas = [
+            // TELEFE
+            [/Telefe Noticias \(Telefe - (\d{4} a \d{4})\)/i, 'Telefe News (Telefe Channel, Argentina - $1)'],
+            [/Telefe - (\d{4} a \d{4})/i, 'Telefe Channel, Argentina - $1'],
+            [/\(Telefe\)/i, '(Telefe Channel, Argentina)'],
+
+            // TRAILERS
+            ['Trailer para largometraje documental', 'Trailer for Documentary Feature'],
+            ['Trailer para largometraje de ficción', 'Trailer for Fiction Feature'],
+            ['Trailer para serie documental', 'Trailer for Documentary Series'],
+            ['Trailer para cortometraje', 'Trailer for Short Film'],
+            ['Trailer para película documental', 'Trailer for Documentary Feature'],
+            ['Trailer para serie web infantil', 'Trailer for Kids Web Series'],
+
+            // FRASES CON NÚMEROS
+            [/Episodio piloto: Plásticos - (\d+) min\.?/i, 'Pilot Episode: Plastics - $1 min'],
+            [/Documental publicitario - (\d+) min\.?/i, 'Commercial Documentary - $1 min'],
+            [/Película para televisión - (\d+) min\.?/i, 'TV Movie - $1 min'],
+            [/Cortometraje - (\d+) min\.?/i, 'Short Film - $1 min'],
+            [/Proyecto 360° - (\d+) min\.?/i, '360° Screening - $1 min'],
+            [/Instructivos - (\d+) videos x (\d+)min\.?/i, 'Tutorials - $1 videos x $2 min'],
+            [/Documental Web - (\d+) caps\. x (\d+)min/i, 'Web Documentary - $1 eps. x $2 min'],
+            [/Serie Web - (\d+) caps\. x (\d+) min\.?/i, 'Web Series - $1 eps. x $2 min'],
+            [/Serie documental - (\d+) caps\. x (\d+) min\.?/i, 'Documentary Series - $1 eps. x $2 min'],
+            [/Serie web infantil - (\d+) caps\. x ([\d\-]+) min\.?/i, 'Kids Web Series - $1 eps. x $2 min'],
+
+            // OTRAS FRASES
+            ['Institucional para proyección en evento', 'Corporate Video for Event Screening'],
+            ['Notas e informes especiales para:', 'Special reports and news segments for:'],
+            ['Notas periodísticas e informes especiales para:', 'Special reports and news segments for:'],
+            ['Sala Inmersiva del CCK', 'Immersive Room - CCK (Argentina)'],
+            ['Turismo - Ciudad de Buenos Aires', 'Tourism - Buenos Aires City'],
+            ['Largometraje documental', 'Documentary Feature'],
+            ['Largometraje de ficción', 'Fiction Feature'],
+            ['Película documental', 'Documentary Feature'],
+            ['Serie web infantil', 'Kids Web Series'],
+            ['Serie documental', 'Documentary Series'],
+            ['Documental Web', 'Web Documentary'],
+            ['Proyecto 360°', '360° Screening'],
+            ['Brenda y Mauro Bonotto', 'Brenda & Mauro Bonotto'],
+            ['Edición + animación', 'Editing + Animation'],
+            ['Asistente de edición', 'Assistant Editor'],
+            ['Editor principal', 'Lead Editor'],
+            ['Documental publicitario', 'Commercial Documentary'],
+            ['Película para televisión', 'TV Movie'],
+            ['Instructivos', 'Tutorials'],
+            ['Visualizador', 'Visualizer'],
+            ['Videoclip', 'Music Video'],
+            ['Cortometraje', 'Short Film'],
+
+            // CANALES
+            ['Canal Encuentro', 'Encuentro Channel, Argentina'],
+            ['Canal ACUA Mayor', 'ACUA Mayor Channel, Argentina'],
+            ['Canal 9', 'Channel 9, Argentina'],
+            ['Canal 26', 'Channel 26, Argentina'],
+            ['C5N', 'C5N Channel, Argentina'],
+
+            // AÑOS
+            [/(\d{4}) a (\d{4})/i, '$1 to $2'],
+            [/(\d{4}) a /i, '$1 to '],
+            [/ a (\d{4})/i, ' to $1'],
+
+            // UNIDADES
+            ['caps\\.', 'eps.'],
+            ['min\\.', 'min'],
+            [/(\d+)min/i, '$1 min'],
+        ];
+
+        let resultado = texto;
+        for (let [buscar, reemplazar] of reglas) {
+            if (typeof buscar === 'string') {
+                const escapado = buscar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(escapado, 'gi');
+                resultado = resultado.replace(regex, reemplazar);
+            } else if (buscar instanceof RegExp) {
+                resultado = resultado.replace(buscar, reemplazar);
+            }
+        }
+        resultado = resultado.replace(/\s+/g, ' ').trim();
+        return resultado;
     }
-    // Limpiar espacios dobles
-    resultado = resultado.replace(/\s+/g, ' ').trim();
-    return resultado;
-}
 
     function traducirTitulo(titulo, idioma) {
         if (idioma === 'es') {
@@ -259,68 +282,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function crearCard(proyecto) {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    
-    let detalles = [...proyecto.detalles];
-    let tituloHTML = proyecto.titulo;
-    
-    // === MOSTRAR EL ROL (sin traducción, solo español) ===
-    let rolTexto = '';
-    if (proyecto.rol) {
-        rolTexto = `<p class="project-rol">${proyecto.rol}</p>`;
-    }
-    
-    // Eliminamos lógica antigua de "Co-editor" en el título y "Editor principal" porque ahora usamos "rol"
-    // Pero mantenemos la traducción de detalles (aunque por ahora está en español, no pasa nada)
-    // Como estamos en español, no aplicamos traducciones a detalles ni título.
-    
-    // (Opcional: si quieres conservar el manejo de "Edición + animación" en el título, lo dejamos)
-    const indexEdicion = detalles.findIndex(d => d.includes("Edición + animación"));
-    if (indexEdicion !== -1) {
-        detalles.splice(indexEdicion, 1);
-        tituloHTML += `<span class="coeditor"> - Edición + animación</span>`;
-    }
-    
-    const lineasDetalle = detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
-    
-    // === Construcción del DOM ===
-    const imageWrapper = document.createElement('div');
-    imageWrapper.className = 'image-wrapper';
-    const img = document.createElement('img');
-    img.src = proyecto.img;
-    img.alt = proyecto.titulo;
-    img.loading = 'lazy';
-    imageWrapper.appendChild(img);
-    
-    if (proyecto.tipo_enlace !== 'estatico') {
-        const overlayPlay = document.createElement('div');
-        overlayPlay.className = 'play-overlay';
-        imageWrapper.appendChild(overlayPlay);
-        if (proyecto.tipo_enlace === 'externo') {
-            imageWrapper.classList.add('link-externo');
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        
+        let detalles = [...proyecto.detalles];
+        let tituloHTML = proyecto.titulo;
+        
+        // TRADUCCIÓN DEL ROL
+        let rolTexto = '';
+        if (proyecto.rol) {
+            let rolMostrado = proyecto.rol;
+            if (idiomaActual === 'en') {
+                rolMostrado = rolTraducciones.en[proyecto.rol] || proyecto.rol;
+            }
+            rolTexto = `<p class="project-rol">${rolMostrado}</p>`;
         }
-        imageWrapper.addEventListener('click', () => {
-            ejecutarAccion(proyecto);
-        });
-    } else {
-        imageWrapper.style.cursor = 'default';
+        
+        // Traducción de detalles y título si es inglés
+        if (idiomaActual === 'en') {
+            detalles = detalles.map(linea => traducirDetalle(linea, 'en'));
+            tituloHTML = traducirTitulo(tituloHTML, 'en');
+        } else {
+            tituloHTML = traducirTitulo(tituloHTML, 'es');
+        }
+        
+        // Manejo especial de "Edición + animación"
+        const indexEdicion = detalles.findIndex(d => d.includes("Editing + Animation") || d.includes("Edición + animación"));
+        if (indexEdicion !== -1) {
+            detalles.splice(indexEdicion, 1);
+            const textoEdicion = (idiomaActual === 'es') ? ' - Edición + animación' : ' - Editing + Animation';
+            tituloHTML += `<span class="coeditor">${textoEdicion}</span>`;
+        }
+        
+        const lineasDetalle = detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
+        
+        const imageWrapper = document.createElement('div');
+        imageWrapper.className = 'image-wrapper';
+        const img = document.createElement('img');
+        img.src = proyecto.img;
+        img.alt = proyecto.titulo;
+        img.loading = 'lazy';
+        imageWrapper.appendChild(img);
+        
+        if (proyecto.tipo_enlace !== 'estatico') {
+            const overlayPlay = document.createElement('div');
+            overlayPlay.className = 'play-overlay';
+            imageWrapper.appendChild(overlayPlay);
+            if (proyecto.tipo_enlace === 'externo') {
+                imageWrapper.classList.add('link-externo');
+            }
+            imageWrapper.addEventListener('click', () => {
+                ejecutarAccion(proyecto);
+            });
+        } else {
+            imageWrapper.style.cursor = 'default';
+        }
+        
+        const title = document.createElement('h3');
+        title.className = 'project-title';
+        title.innerHTML = tituloHTML;
+        
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'project-details';
+        detailsDiv.innerHTML = rolTexto + lineasDetalle;
+        
+        card.appendChild(imageWrapper);
+        card.appendChild(title);
+        card.appendChild(detailsDiv);
+        
+        return card;
     }
-    
-    const title = document.createElement('h3');
-    title.className = 'project-title';
-    title.innerHTML = tituloHTML;
-    
-    const detailsDiv = document.createElement('div');
-    detailsDiv.className = 'project-details';
-    detailsDiv.innerHTML = rolTexto + lineasDetalle;
-    
-    card.appendChild(imageWrapper);
-    card.appendChild(title);
-    card.appendChild(detailsDiv);
-    
-    return card;
-}
 
     function ejecutarAccion(proyecto) {
         if (proyecto.tipo_enlace === 'externo') {
