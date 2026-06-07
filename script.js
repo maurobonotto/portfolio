@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cor: 'CORPORATE',
             asi: 'EDITING ASSISTANCE',
             vid: 'MUSIC VIDEOS',
-            red: 'SOCIAL NETWORKS',
+            red: 'SOCIAL MEDIA',
             con: 'CONTACT',
             contact_title: 'CONTACT',
             reel: 'REEL',
