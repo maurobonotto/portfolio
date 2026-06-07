@@ -416,7 +416,7 @@
     "Adaptación de la serie en formato vertical corto.",
     "Plataforma: Snips / YouTube Shorts."
   ],
-  "img": "xxxxx",
+  "img": "assets/img/portadas/portada-snips.jpg",
   "tipo_enlace": "carrusel",
   "videos": ["x1FzwtOz_HM", "D5gmmyBGzio", "_JLPGkgJ4jU"]
 },
@@ -430,7 +430,7 @@
     "Marca: Plim Plim - Spiritum Entertainment",
     "Plataforma: Instagram / TikTok / LinkedIn"
   ],
-  "img": "xxxxx",
+  "img": "assets/img/portadas/portada-plim-plim-eventos.jpg",
   "tipo_enlace": "carrusel",
   "videos": ["HJMSCEr14Vg", "vqaSMLHW9T8"]
 },
@@ -444,12 +444,12 @@
     "Marca: DeWalt.",
     "Plataforma: Mercado Libre Clips."
   ],
-  "img": "xxxxx",
+  "img": "assets/img/portadas/portada-de-walt.jpg",
   "tipo_enlace": "carrusel",
   "videos": ["aNlW-3zRnyM", "WwZzslU7Yv8", "ru_do6sHiVM", "ZBUsrLnKG24"]
 },
   {
-  "id": "seleccio-redes",
+  "id": "varios-redes",
   "categoria": "redes-sociales",
   "titulo": "VARIOS",
   "rol": "Edición + Animaciones AFX",
@@ -457,7 +457,7 @@
     "Compilado de otros trabajos relevantes para redes.",
     "Plataforma: Instagram / TikTok / YouTube Shorts"
   ],
-  "img": "xxxxx",
+  "img": "assets/img/portadas/portada-varios-redes.jpg",
   "tipo_enlace": "carrusel",
   "videos": ["SnAa9JuQ7cE"]
 }
