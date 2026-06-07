@@ -411,7 +411,7 @@
   "id": "snips",
   "categoria": "redes-sociales",
   "titulo": "SNIPS - BRIDGERTON",
-  "rol": "Edición",
+  "rol": "Co-edición",
   "detalles": [
     "Adaptación de la serie en formato vertical corto.",
     "Plataforma: Snips / YouTube Shorts."
@@ -459,6 +459,6 @@
   ],
   "img": "assets/img/portadas/portada-varios-redes.jpg",
   "tipo_enlace": "carrusel",
-  "videos": ["SnAa9JuQ7cE"]
+  "videos": ["SnAa9JuQ7cE", "https://www.instagram.com/reel/CwZM0UbB9lX/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="]
 }
 ]

@@ -175,24 +175,33 @@ document.addEventListener('DOMContentLoaded', () => {
         return resultado;
     }
 
-    function traducirTitulo(titulo, idioma) {
-        if (idioma === 'es') {
-            if (titulo === 'HOMENAJE A LEONARDO FAVIO (2022)') {
-                return 'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)';
-            }
-            return titulo;
+   function traducirTitulo(titulo, idioma) {
+    if (idioma === 'es') {
+        // Caso especial solo en español
+        if (titulo === 'HOMENAJE A LEONARDO FAVIO (2022)') {
+            return 'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)';
         }
-        let nuevo = titulo;
-        if (nuevo === 'INFORMES PERIODÍSTICOS') {
-            nuevo = 'NEWS REPORTS';
-        } else if (nuevo === 'HOMENAJE A LEONARDO FAVIO (2022)' || nuevo === 'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)') {
-            nuevo = 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)';
-        } else {
-            nuevo = nuevo.replace(' - Co-editor', '');
-            nuevo = nuevo.replace('Edición + animación', 'Editing + Animation');
-        }
-        return nuevo.trim();
+        return titulo;
     }
+    
+    const traducciones = {
+        'VARIOS': 'MISCELLANY',
+        'PLIM PLIM - EVENTOS': 'PLIM PLIM - EVENTS',
+        'INFORMES PERIODÍSTICOS': 'NEWS REPORTS',
+        'HOMENAJE A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
+        'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
+    };
+    
+    if (traducciones[titulo]) {
+        return traducciones[titulo];
+    }
+    
+    // Para el resto: solo limpieza de sufijos (sin traducción)
+    let nuevo = titulo;
+    nuevo = nuevo.replace(' - Co-editor', '');
+    nuevo = nuevo.replace('Edición + animación', 'Editing + Animation');
+    return nuevo.trim();
+}
 
     function aplicarTraduccionInterfaz() {
         document.querySelectorAll('.sidebar-link[data-key]').forEach(link => {
