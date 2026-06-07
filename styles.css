@@ -78,7 +78,7 @@ img {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-right: auto; /* empuja REEL y CONTACTO a la derecha */
+    margin-right: auto;
 }
 
 .nav-links {
@@ -301,6 +301,11 @@ img {
     justify-content: center;
 }
 
+/* Versión vertical para la sección Redes Sociales */
+.image-wrapper.vertical {
+    aspect-ratio: 9 / 16;
+}
+
 .project-title {
     font-size: 0.9rem;
     font-weight: 600;
@@ -331,6 +336,7 @@ img {
     font-style: italic;
     font-weight: normal;
 }
+
 /* ========== MODAL ========== */
 .video-modal {
     position: fixed;
@@ -384,6 +390,50 @@ img {
     width: 100%;
     height: 100%;
     border: 0;
+}
+
+/* Estilo para videos verticales dentro del modal */
+.iframe-container.vertical .video-wrapper {
+    aspect-ratio: 9 / 16;
+}
+
+/* Modal en modo vertical: centrado dinámico */
+.modal-container.vertical-mode {
+    max-width: none;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container.vertical-mode .modal-content {
+    width: auto;
+    max-width: 95vw;
+    background: transparent;
+    box-shadow: none;
+}
+
+.modal-container.vertical-mode .iframe-container {
+    height: 80vh;
+    width: auto;
+    max-width: 95vw;
+}
+
+.modal-container.vertical-mode .video-wrapper {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 9 / 16;
+}
+
+.modal-container.vertical-mode .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .modal-container.vertical-mode .iframe-container {
+        height: 70vh;
+    }
 }
 
 .modal-close {
@@ -484,9 +534,7 @@ img {
     .modal-container { padding: 0 10px; }
     .nav-btn { font-size: 40px; }
     .modal-close { top: -40px; font-size: 28px; }
-    .lang-switch {
-        margin-right: 10px;
-    }
+    .lang-switch { margin-right: 10px; }
 }
 
 @media (max-width: 480px) {
@@ -494,7 +542,6 @@ img {
 }
 
 /* ========== LANGUAGE SWITCH ========== */
-/* Estilos adicionales para el toggle (ya incluidos arriba, se mantienen) */
 .lang-option {
     font-size: 0.7rem;
     font-weight: 500;

@@ -406,5 +406,59 @@
     ],
     "img": "assets/img/portadas/ruedan-videoclip.jpg",
     "tipo_enlace": "estatico"
-  }
+  },
+    {
+  "id": "snips",
+  "categoria": "redes-sociales",
+  "titulo": "SNIPS - BRIDGERTON",
+  "rol": "Edición",
+  "detalles": [
+    "Adaptación de la serie en formato vertical corto.",
+    "Plataforma: Snips / YouTube Shorts."
+  ],
+  "img": "xxxxx",
+  "tipo_enlace": "carrusel",
+  "videos": ["x1FzwtOz_HM", "D5gmmyBGzio", "_JLPGkgJ4jU"]
+},
+ {
+  "id": "plim-plim",
+  "categoria": "redes-sociales",
+  "titulo": "PLIM PLIM - EVENTOS",
+  "rol": "Edición",
+  "detalles": [
+    "Reeles sobre la participación de la franquicia en eventos.",
+    "Marca: Plim Plim - Spiritum Entertainment",
+    "Plataforma: Instagram / TikTok / LinkedIn"
+  ],
+  "img": "xxxxx",
+  "tipo_enlace": "carrusel",
+  "videos": ["HJMSCEr14Vg", "vqaSMLHW9T8"]
+},
+  {
+  "id": "de-walt-meli-clips",
+  "categoria": "redes-sociales",
+  "titulo": "DE WALT - MERCADO LIBRE CLIPS",
+  "rol": "Edición",
+  "detalles": [
+    "E-commerce unboxing.",
+    "Marca: DeWalt.",
+    "Plataforma: Mercado Libre Clips."
+  ],
+  "img": "xxxxx",
+  "tipo_enlace": "carrusel",
+  "videos": ["aNlW-3zRnyM", "WwZzslU7Yv8", "ru_do6sHiVM", "ZBUsrLnKG24"]
+},
+  {
+  "id": "seleccio-redes",
+  "categoria": "redes-sociales",
+  "titulo": "VARIOS",
+  "rol": "Edición + Animaciones AFX",
+  "detalles": [
+    "Compilado de otros trabajos relevantes para redes.",
+    "Plataforma: Instagram / TikTok / YouTube Shorts"
+  ],
+  "img": "xxxxx",
+  "tipo_enlace": "carrusel",
+  "videos": ["SnAa9JuQ7cE"]
+}
 ]

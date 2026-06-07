@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cor: 'COMERCIALES',
             asi: 'ASISTENCIA DE EDICIÓN',
             vid: 'VIDEOCLIPS',
+            red: 'REDES SOCIALES',
             con: 'CONTACTO',
             contact_title: 'CONTACTO',
             reel: 'REEL',
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cor: 'CORPORATE',
             asi: 'EDITING ASSISTANCE',
             vid: 'MUSIC VIDEOS',
+            red: 'SOCIAL NETWORKS',
             con: 'CONTACT',
             contact_title: 'CONTACT',
             reel: 'REEL',
@@ -108,6 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ['Institucional para proyección en evento', 'Corporate Video for Event Screening'],
             ['Notas e informes especiales para:', 'Special reports and news segments for:'],
             ['Notas periodísticas e informes especiales para:', 'Special reports and news segments for:'],
+            
+            // ===== NUEVAS REGLAS PARA REDES SOCIALES =====
+            ['Adaptación de la serie en formato vertical corto.', 'Series adaptation in short vertical format.'],
+            ['E-commerce unboxing.', 'E-commerce unboxing.'],
+            ['Compilado de otros trabajos relevantes para redes.', 'Compilation of other relevant work for social media.'],
+            ['Reeles sobre la participación de la franquicia en eventos.', 'Reels about the franchise\'s presence at events.'],
+            ['Marca: Plim Plim - Spiritum Entertainment', 'Brand: Plim Plim - Spiritum Entertainment'],
+            ['Plataforma: Snips / YouTube Shorts.', 'Platform: Snips / YouTube Shorts.'],
+            ['Plataforma: Instagram / TikTok / YouTube Shorts', 'Platform: Instagram / TikTok / YouTube Shorts'],
+            ['Plataforma: Mercado Libre Clips.', 'Platform: Mercado Libre Clips.'],
+            ['Plataforma: Instagram / TikTok / LinkedIn', 'Platform: Instagram / TikTok / LinkedIn'],
+            // ===== FIN NUEVAS REGLAS =====
+            
             ['Sala Inmersiva del CCK', 'Immersive Room - CCK (Argentina)'],
             ['Turismo - Ciudad de Buenos Aires', 'Tourism - Buenos Aires City'],
             ['Largometraje documental', 'Documentary Feature'],
@@ -239,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generarSecciones() {
-        const ordenCategorias = ['documentales', 'ficcion', 'trailers', 'comerciales', 'asistencia', 'videoclips'];
+        const ordenCategorias = ['documentales', 'ficcion', 'trailers', 'comerciales', 'asistencia', 'videoclips', 'redes-sociales'];
         const categoriasExistentes = [...new Set(todosLosProyectos.map(p => p.categoria))];
         const categoriasOrdenadas = ordenCategorias.filter(cat => categoriasExistentes.includes(cat));
         
@@ -263,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'comerciales': nombreCategoria = traducciones[idiomaActual].cor; break;
                 case 'asistencia': nombreCategoria = traducciones[idiomaActual].asi; break;
                 case 'videoclips': nombreCategoria = traducciones[idiomaActual].vid; break;
+                case 'redes-sociales': nombreCategoria = traducciones[idiomaActual].red; break;
                 default: nombreCategoria = categoria.toUpperCase();
             }
             titulo.textContent = nombreCategoria;
@@ -317,7 +333,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const lineasDetalle = detalles.map(linea => `<p class="project-detail-line">${linea}</p>`).join('');
         
         const imageWrapper = document.createElement('div');
-        imageWrapper.className = 'image-wrapper';
+        let imageWrapperClass = 'image-wrapper';
+        if (proyecto.categoria === 'redes-sociales') {
+            imageWrapperClass += ' vertical';
+        }
+        imageWrapper.className = imageWrapperClass;
+        
         const img = document.createElement('img');
         img.src = proyecto.img;
         img.alt = proyecto.titulo;
@@ -375,6 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
         modalContent.innerHTML = '';
         proyectoActual = null;
         indiceVideoActual = 0;
+        // Remover la clase vertical del modal-container
+        const modalContainer = document.querySelector('.modal-container');
+        if (modalContainer) modalContainer.classList.remove('vertical-mode');
     }
 
     function actualizarModal() {
@@ -391,8 +415,16 @@ document.addEventListener('DOMContentLoaded', () => {
             iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
         }
         
+        const modalContainer = document.querySelector('.modal-container');
+        if (proyectoActual.categoria === 'redes-sociales') {
+            modalContainer.classList.add('vertical-mode');
+        } else {
+            modalContainer.classList.remove('vertical-mode');
+        }
+        
+        // Crear el contenido del modal con la clase vertical si corresponde
         modalContent.innerHTML = `
-            <div class="iframe-container">
+            <div class="iframe-container ${proyectoActual.categoria === 'redes-sociales' ? 'vertical' : ''}">
                 <div class="video-wrapper">
                     <iframe src="${iframeSrc}" 
                             allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
