@@ -1,3 +1,13 @@
+// --- ESPÍA LA URL PARA FORZAR EL IDIOMA ---
+function obtenerIdiomaDeURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam === 'en' || langParam === 'es') {
+        return langParam;
+    }
+    return null;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     let todosLosProyectos = [];
     let idiomaActual = 'es';
@@ -67,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         en: {
             'Edición': 'Lead Editor',
-            'Co-edición': 'Co-editor',
+            'Co-edición': 'Co-editing',
             'Asistencia de edición': 'Assistant Editor',
             'Edición + Guion de montaje': 'Lead Editor + Story Editor',
-            'Co-edición + Guion de montaje': 'Co-editor + Story Editor',
+            'Co-edición + Guion de montaje': 'Co-editing + Story Editor',
             'Edición + Animaciones AFX': 'Lead Editor + AFX Animation',
             'Edición + Asistencia de dirección': 'Lead Editor + Assistant Director'
         }
@@ -175,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return resultado;
     }
 
-   function traducirTitulo(titulo, idioma) {
+    function traducirTitulo(titulo, idioma) {
         if (idioma === 'es') {
             if (titulo === 'HOMENAJE A LEONARDO FAVIO (2022)') {
                 return 'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)';
@@ -234,10 +244,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function inicializarIdioma() {
+        // Prioridad 1: parámetro lang en URL
+        const idiomaDeURL = obtenerIdiomaDeURL();
+        if (idiomaDeURL) {
+            idiomaActual = idiomaDeURL;
+            localStorage.setItem('lang', idiomaActual);
+            cambiarIdioma(idiomaActual);
+            return; // importa: no seguir con la lógica de localStorage o navegador
+        }
+        // Prioridad 2: almacenamiento local
         const guardado = localStorage.getItem('lang');
         if (guardado === 'es' || guardado === 'en') {
             idiomaActual = guardado;
         } else {
+            // Prioridad 3: idioma del navegador
             const navLang = navigator.language || navigator.userLanguage;
             if (navLang && navLang.toLowerCase().startsWith('es')) {
                 idiomaActual = 'es';
@@ -254,6 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!respuesta.ok) throw new Error('Error al cargar proyectos.json');
             todosLosProyectos = await respuesta.json();
             generarSecciones();
+            // Ahora que las secciones existen, manejamos el hash de la URL (desplazamiento)
+            handleInitialHash();
         } catch (error) {
             console.error('Error:', error);
             portfolioContainer.innerHTML = '<p>Error loading projects.</p>';
@@ -311,7 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let detalles = [...proyecto.detalles];
         let tituloHTML = proyecto.titulo;
         
-        // TRADUCCIÓN DEL ROL
         let rolTexto = '';
         if (proyecto.rol) {
             let rolMostrado = proyecto.rol;
@@ -321,7 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
             rolTexto = `<p class="project-rol">${rolMostrado}</p>`;
         }
         
-        // Traducción de detalles y título si es inglés
         if (idiomaActual === 'en') {
             detalles = detalles.map(linea => traducirDetalle(linea, 'en'));
             tituloHTML = traducirTitulo(tituloHTML, 'en');
@@ -329,7 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tituloHTML = traducirTitulo(tituloHTML, 'es');
         }
         
-        // Manejo especial de "Edición + animación"
         const indexEdicion = detalles.findIndex(d => d.includes("Editing + Animation") || d.includes("Edición + animación"));
         if (indexEdicion !== -1) {
             detalles.splice(indexEdicion, 1);
@@ -450,7 +469,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!proyectoActual || !proyectoActual.videos) return;
         const videos = proyectoActual.videos;
         if (videos.length <= 1) return;
-        
         if (direccion === 'next') {
             indiceVideoActual = (indiceVideoActual + 1) % videos.length;
         } else if (direccion === 'prev') {
@@ -539,12 +557,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cambiarIdioma(nuevoIdioma);
     });
 
-    inicializarIdioma();
-    cargarProyectos();
-    handleInitialHash();  // ✅ Corregido: sin la 's' sobrante
+    // INICIO: ejecutar en orden
+    inicializarIdioma();   // Lee URL y setea idioma
+    cargarProyectos();     // Carga JSON, genera secciones, y luego hace scroll
 });
 
-// Función para manejar el hash de la URL y desplazar a la sección
+// Función para manejar el hash de la URL después de que el contenido existe
 function handleInitialHash() {
     setTimeout(() => {
         const hashId = window.location.hash.substring(1);
@@ -557,5 +575,5 @@ function handleInitialHash() {
                 });
             }
         }
-    }, 300);
+    }, 150); // reducido a 150ms porque las secciones ya están generadas
 }
