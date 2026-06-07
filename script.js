@@ -176,32 +176,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    function traducirTitulo(titulo, idioma) {
-    if (idioma === 'es') {
-        // Caso especial solo en español
-        if (titulo === 'HOMENAJE A LEONARDO FAVIO (2022)') {
-            return 'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)';
+        if (idioma === 'es') {
+            if (titulo === 'HOMENAJE A LEONARDO FAVIO (2022)') {
+                return 'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)';
+            }
+            return titulo;
         }
-        return titulo;
+        
+        const traduccionesTitulo = {
+            'VARIOS': 'MISCELLANY',
+            'PLIM PLIM - EVENTOS': 'PLIM PLIM - EVENTS',
+            'INFORMES PERIODÍSTICOS': 'NEWS REPORTS',
+            'HOMENAJE A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
+            'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
+        };
+        
+        if (traduccionesTitulo[titulo]) {
+            return traduccionesTitulo[titulo];
+        }
+        
+        let nuevo = titulo;
+        nuevo = nuevo.replace(' - Co-editor', '');
+        nuevo = nuevo.replace('Edición + animación', 'Editing + Animation');
+        return nuevo.trim();
     }
-    
-    const traducciones = {
-        'VARIOS': 'MISCELLANY',
-        'PLIM PLIM - EVENTOS': 'PLIM PLIM - EVENTS',
-        'INFORMES PERIODÍSTICOS': 'NEWS REPORTS',
-        'HOMENAJE A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
-        'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
-    };
-    
-    if (traducciones[titulo]) {
-        return traducciones[titulo];
-    }
-    
-    // Para el resto: solo limpieza de sufijos (sin traducción)
-    let nuevo = titulo;
-    nuevo = nuevo.replace(' - Co-editor', '');
-    nuevo = nuevo.replace('Edición + animación', 'Editing + Animation');
-    return nuevo.trim();
-}
 
     function aplicarTraduccionInterfaz() {
         document.querySelectorAll('.sidebar-link[data-key]').forEach(link => {
@@ -405,7 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modalContent.innerHTML = '';
         proyectoActual = null;
         indiceVideoActual = 0;
-        // Remover la clase vertical del modal-container
         const modalContainer = document.querySelector('.modal-container');
         if (modalContainer) modalContainer.classList.remove('vertical-mode');
     }
@@ -431,7 +428,6 @@ document.addEventListener('DOMContentLoaded', () => {
             modalContainer.classList.remove('vertical-mode');
         }
         
-        // Crear el contenido del modal con la clase vertical si corresponde
         modalContent.innerHTML = `
             <div class="iframe-container ${proyectoActual.categoria === 'redes-sociales' ? 'vertical' : ''}">
                 <div class="video-wrapper">
@@ -545,4 +541,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inicializarIdioma();
     cargarProyectos();
+    handleInitialHash();  // ✅ Corregido: sin la 's' sobrante
 });
+
+// Función para manejar el hash de la URL y desplazar a la sección
+function handleInitialHash() {
+    setTimeout(() => {
+        const hashId = window.location.hash.substring(1);
+        if (hashId) {
+            const targetSection = document.getElementById(hashId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    }, 300);
+}
