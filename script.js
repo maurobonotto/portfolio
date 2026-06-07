@@ -67,10 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         en: {
             'Edición': 'Lead Editor',
-            'Co-edición': 'Co-editing',
+            'Co-edición': 'Co-editor',
             'Asistencia de edición': 'Assistant Editor',
             'Edición + Guion de montaje': 'Lead Editor + Story Editor',
-            'Co-edición + Guion de montaje': 'Co-editing + Story Editor',
+            'Co-edición + Guion de montaje': 'Co-editor + Story Editor',
             'Edición + Animaciones AFX': 'Lead Editor + AFX Animation',
             'Edición + Asistencia de dirección': 'Lead Editor + Assistant Director'
         }
