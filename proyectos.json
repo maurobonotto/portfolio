@@ -285,6 +285,19 @@
     "videos": ["n6lu2ohpW2c"]
   },
   {
+    "id": "study-ba",
+    "categoria": "comerciales",
+    "titulo": "Study Buenos Aires (2017)",
+    "rol": "Edición + Guion de montaje",
+    "detalles": [
+      "Documental publicitario - 7 min.",
+      "Prod.: AONEK Cine / Turismo - Ciudad de Buenos Aires"
+    ],
+    "img": "assets/img/portadas/study-ba.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["f230KpQLy1w"]
+  },
+  {
     "id": "fundacion-la-base",
     "categoria": "comerciales",
     "titulo": "FUNDACIÓN LA BASE (2014)",
