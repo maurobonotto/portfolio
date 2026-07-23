@@ -297,6 +297,19 @@
     "tipo_enlace": "popup",
     "videos": ["f230KpQLy1w"]
   },
+   {
+    "id": "somos-portenos",
+    "categoria": "comerciales",
+    "titulo": "Somos porteños (2017)",
+    "rol": "Edición + Guion de montaje",
+    "detalles": [
+      "Publicidad - 1 min.",
+      "Prod.: AONEK Cine / Turismo - Ciudad de Buenos Aires"
+    ],
+    "img": "assets/img/portadas/somos-portenos.jpg",
+    "tipo_enlace": "popup",
+    "videos": ["VoYShl2uh-s"]
+  },
   {
     "id": "fundacion-la-base",
     "categoria": "comerciales",
