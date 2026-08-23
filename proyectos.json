@@ -449,16 +449,16 @@
  {
   "id": "plim-plim",
   "categoria": "redes-sociales",
-  "titulo": "PLIM PLIM - EVENTOS",
+  "titulo": "PLIM PLIM - REDES",
   "rol": "Edición",
   "detalles": [
-    "Reeles sobre la participación de la franquicia en eventos.",
+    "Edición y GFX para RRSS .",
     "Marca: Plim Plim - Spiritum Entertainment",
     "Plataforma: Instagram / TikTok / LinkedIn"
   ],
   "img": "assets/img/portadas/portada-plim-plim-eventos.jpg",
   "tipo_enlace": "carrusel",
-  "videos": ["HJMSCEr14Vg", "WkCEWHtWFYo", "UPEhAen_uf4", "vqaSMLHW9T8"]
+  "videos": [ "dU4PUe9-ce0", "HJMSCEr14Vg", "WkCEWHtWFYo"]
 },
   {
   "id": "de-walt-meli-clips",
@@ -485,6 +485,6 @@
   ],
   "img": "assets/img/portadas/portada-varios-redes.jpg",
   "tipo_enlace": "carrusel",
-  "videos": ["SnAa9JuQ7cE", "dU4PUe9-ce0", "p8NGsAndkm8"]
+  "videos": ["SnAa9JuQ7cE", "p8NGsAndkm8"]
 }
 ]
