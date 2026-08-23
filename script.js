@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['Plataforma: Instagram / TikTok / YouTube Shorts', 'Platform: Instagram / TikTok / YouTube Shorts'],
             ['Plataforma: Mercado Libre Clips.', 'Platform: Mercado Libre Clips.'],
             ['Plataforma: Instagram / TikTok / LinkedIn', 'Platform: Instagram / TikTok / LinkedIn'],
+            ['Publicidad', 'Spot'],
             // ===== FIN NUEVAS REGLAS =====
             
             ['Sala Inmersiva del CCK', 'Immersive Room - CCK (Argentina)'],
