@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             contact_title: 'CONTACTO',
             reel: 'REEL',
             contacto_nav: 'Contacto'
+            spo: 'PUBLICIDAD'
         },
         en: {
             doc: 'DOCUMENTARIES',
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             contact_title: 'CONTACT',
             reel: 'REEL',
             contacto_nav: 'Contact'
+            spo: 'SPOTS'
         }
     };
 
@@ -283,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generarSecciones() {
-        const ordenCategorias = ['documentales', 'ficcion', 'trailers', 'comerciales', 'asistencia', 'videoclips', 'redes-sociales'];
+        const ordenCategorias = ['documentales', 'ficcion', 'trailers', 'comerciales', 'spots', 'asistencia', 'videoclips', 'redes-sociales'];
         const categoriasExistentes = [...new Set(todosLosProyectos.map(p => p.categoria))];
         const categoriasOrdenadas = ordenCategorias.filter(cat => categoriasExistentes.includes(cat));
         
@@ -308,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'asistencia': nombreCategoria = traducciones[idiomaActual].asi; break;
                 case 'videoclips': nombreCategoria = traducciones[idiomaActual].vid; break;
                 case 'redes-sociales': nombreCategoria = traducciones[idiomaActual].red; break;
+                case 'spots': nombreCategoria = traducciones[idiomaActual].spo; break;
                 default: nombreCategoria = categoria.toUpperCase();
             }
             titulo.textContent = nombreCategoria;
