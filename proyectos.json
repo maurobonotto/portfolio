@@ -433,6 +433,19 @@
     "img": "assets/img/portadas/ruedan-videoclip.jpg",
     "tipo_enlace": "estatico"
   },
+  {
+  "id": "varios-redes",
+  "categoria": "redes-sociales",
+  "titulo": "VARIOS",
+  "rol": "Edición + Animaciones AFX",
+  "detalles": [
+    "Compilado de otros trabajos relevantes para redes.",
+    "Plataforma: Instagram / TikTok / YouTube Shorts"
+  ],
+  "img": "assets/img/portadas/portada-varios-redes.jpg",
+  "tipo_enlace": "carrusel",
+  "videos": ["SnAa9JuQ7cE", "p8NGsAndkm8"]
+},
     {
   "id": "snips",
   "categoria": "redes-sociales",
@@ -473,18 +486,5 @@
   "img": "assets/img/portadas/portada-de-walt.jpg",
   "tipo_enlace": "carrusel",
   "videos": ["aNlW-3zRnyM", "WwZzslU7Yv8", "ru_do6sHiVM", "ZBUsrLnKG24"]
-},
-  {
-  "id": "varios-redes",
-  "categoria": "redes-sociales",
-  "titulo": "VARIOS",
-  "rol": "Edición + Animaciones AFX",
-  "detalles": [
-    "Compilado de otros trabajos relevantes para redes.",
-    "Plataforma: Instagram / TikTok / YouTube Shorts"
-  ],
-  "img": "assets/img/portadas/portada-varios-redes.jpg",
-  "tipo_enlace": "carrusel",
-  "videos": ["SnAa9JuQ7cE", "p8NGsAndkm8"]
 }
 ]
