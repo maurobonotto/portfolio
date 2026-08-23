@@ -196,8 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const traduccionesTitulo = {
-            'VARIOS': 'MISCELLANY',
-            'PLIM PLIM - EVENTOS': 'PLIM PLIM - EVENTS',
+            'VARIOS - RRSS': 'MISCELLANY',
+            'PLIM PLIM - RRSS': 'PLIM PLIM',
             'INFORMES PERIODÍSTICOS': 'NEWS REPORTS',
             'HOMENAJE A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
             'HOMENAJE INMERSIVO A LEONARDO FAVIO (2022)': 'IMMERSIVE HOMAGE TO LEONARDO FAVIO (2022)',
