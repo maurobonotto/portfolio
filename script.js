@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             con: 'CONTACTO',
             contact_title: 'CONTACTO',
             reel: 'REEL',
-            contacto_nav: 'Contacto'
+            contacto_nav: 'Contacto',
             spo: 'PUBLICIDAD'
         },
         en: {
